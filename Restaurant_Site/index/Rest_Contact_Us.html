@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    label{
+        display: inline-block;
+        width: 45%;
+        text-align: right;
+    }
+    .center {
+    text-align: center;
+    }
+    .bg{
+    background-color: lightseagreen;
+    }
+    </style>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/restaurantStyles.css">
+    <title>Faves Bar &amp; Grill</title>
+    </head>
+<body>
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-12 jumbotron"><h2>New location opening in Minneapolis - Fall 2017</h2></div>
+     <div align=center><img style="display:block; width:500px; border:2px solid darkblue;"src="../images/jgfavelogo.JPG" alt="JG Faves Logo"></div>
+    
+    <ul class="list-inline nav nav-tabs">
+        <li><a href="Rest_homepage.html"><span class="glyphicon glyphicon-home"</span></a></li>
+        <li><a href="Rest_Menu.html">Menu</a></li>
+        <li class=active><a href="Rest_Contact_Us.html">Contact Us</a></li>
+    </ul>
+    <hr>
+    <table align="center">
+<div class="bg"><br><form style="margin-left:300px" action="fakePage.html" method= "post" onsubmit="return validate();">
+    <label style="font-weight:bold">Name:</label>&nbsp;&nbsp; <input type="text" name="Name" required/><br><br>
+    <label style="font-weight:bold">Email:</label>&nbsp;&nbsp; <input type="email" name="Email" required/><br><br>
+    <label>Phone:</label>&nbsp;&nbsp; <input type="tel" name="phone" /><br><br>
+    <label>Reason for Inquiry:</label>&nbsp;&nbsp; <select name="reason">
+        <option value="catering">Catering</option>
+        <option value="private party">Private Party</option>
+        <option value="feedback">Feedback</option>
+        <option value="other">Other</option></select>
+        <br><br>        
+    <label>Additional Information:</label>&nbsp;&nbsp; <textarea name="type here" id="additional info" cols="30" rows="10"></textarea><br><br>
+    <label>Have you been to the restaurant?:</label>&nbsp;&nbsp; 
+        <input type="radio" name="answer" value="No" checked/>No
+        <input type="radio" name="answer" value="Yes"/>Yes<br><br>
+    <label>Best days to contact you:</label>&nbsp;&nbsp;
+        <input type="checkbox" name="choice" value="M"/>M
+        <input type="checkbox" name="choice" value="T"/>T
+        <input type="checkbox" name="choice" value="W"/>W
+        <input type="checkbox" name="choice" value="TH"/>TH
+        <input type="checkbox" name="choice" value="F"/>F<br><br>
+        <div class="center"><input type="submit" value="Send Request"></div><br>
+</form></div>
+                <br><hr><br>
+                <div align="center">
+                <address>1234 Main Street, Blaine, MN, 55449</address>
+                <p><i>Phone: (123) 456-7890</i></p>
+            </div> 
+<script>
+    function validate(){
+        alert("Thank you for your inquiry, you will be contacted within 24 hours")
+        return false
+    }
+</script>
+</body>

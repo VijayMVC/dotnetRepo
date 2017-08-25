@@ -1,0 +1,32 @@
+h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 35pt;
+    text-align: center;
+    color: darkblue;
+}
+h2{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 24pt;
+    text-align: center;
+}
+body{
+    background-color: white;   
+}
+a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15pt;
+    color: firebrick;
+    font-weight: lighter
+}
+a:link{
+
+}
+a:visited{
+    color: lightgray;
+}
+a:hover{
+    font-weight: bold
+}
+a:active{
+    text-decoration: none;
+}
