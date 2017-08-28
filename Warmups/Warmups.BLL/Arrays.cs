@@ -83,8 +83,8 @@ namespace Warmups.BLL
         
         public int[] GetMiddle(int[] a, int[] b)
         {
-            int[] jabroni = new int[] { a[1], b[1] };
-            return jabroni;
+            int[] newArray = new int[] { a[1], b[1] };
+            return newArray;
         }
         
         public bool HasEven(int[] numbers)
