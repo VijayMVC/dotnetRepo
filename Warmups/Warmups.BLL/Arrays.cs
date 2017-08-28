@@ -59,7 +59,11 @@ namespace Warmups.BLL
         
         public int[] Reverse(int[] numbers)
         {
-            int[] newArray = new int[] { numbers[2], numbers[1], numbers[0] };
+            int[] newArray = new int[numbers.Length];
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                newArray[i] = numbers[(numbers.Length -1) - i];
+            }
             return newArray;
         }
         
@@ -144,7 +148,15 @@ namespace Warmups.BLL
         
         public bool Unlucky1(int[] numbers)
         {
-            return (true && ((numbers[0] == 1 && numbers[1] == 3) || (numbers[numbers.Length - 2] == 1 && numbers[numbers.Length - 1] == 3)));
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                if ((numbers[0] == 1 && numbers[1] == 3) || (numbers[1] == 1 && numbers[2] == 3)
+                        || (numbers[numbers.Length - 2] == 1) && (numbers[numbers.Length - 1] == 3))
+                {
+                    return true;
+                }
+            }    
+            return false;                    
         }
         
         public int[] Make2(int[] a, int[] b)

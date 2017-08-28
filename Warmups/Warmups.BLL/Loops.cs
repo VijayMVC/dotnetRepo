@@ -131,18 +131,14 @@ namespace Warmups.BLL
 
         public bool Array123(int[] numbers)
         {
-            int[] check = new int[] { 1, 2, 3 };
-            int[] winner = new int[3];
-            bool ans = false;
-            for (int i = 0; i < numbers.Length - 3; i++)
+            for (int i = 0; i < numbers.Length - 2; i++)
             {
-                int[] newArray = new int[] { numbers[i], numbers[i + 1], numbers[i + 2] };
-                if (newArray[0] == 1 && newArray[1] == 2 && newArray[2] == 3)
+                if (numbers[i] == 1 && numbers[i+1] == 2 && numbers[i+2] == 3)
                 {
-                    ans = true;
+                    return true;
                 }
             }
-            return ans;
+            return false;
         }
 
         public int SubStringMatch(string a, string b)
@@ -210,20 +206,15 @@ namespace Warmups.BLL
 
         public int Array667(int[] numbers)
         {
-            int count66 = 0;
-            int count67 = 0;
+            int count = 0;
             for (int i = 0; i < numbers.Length - 1; i++)
             {
-                if (numbers[i] == 6 && numbers[i + 1] == 6)
+                if ((numbers[i] == 6 && numbers[i + 1] == 6) || (numbers[i] == 6 && numbers[i + 1] == 7))
                 {
-                    count66++;
-                }
-                else if (numbers[i] == 6 && numbers[i + 1] == 7)
-                {
-                    count67++;
+                count++;
                 }
             }
-            return count66;
+            return count;
         } 
 
         public bool NoTriples(int[] numbers)
@@ -241,16 +232,15 @@ namespace Warmups.BLL
 
         public bool Pattern51(int[] numbers)
         {
-            bool ans = false;
-                for (int i = 0; i <= numbers.Length - 3; i++)
+            for (int i = 0; i <= numbers.Length - 3; i++)
+            {
+                if ((numbers[i + 1] == numbers[i] + 5) && (numbers[i + 2] == numbers[i] - 1))
                 {
-                    int[] newArray = new int[] { numbers[i], numbers[i + 1], numbers[i + 2] };
-                    if (newArray[0] == 2 && newArray[1] == 7 && newArray[2] == 1)
-                    {
-                        ans = true;
-                    }
+                    return true;
                 }
-            return ans;
+
+            }
+            return false;
         }
 
     }
