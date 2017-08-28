@@ -5,5 +5,5 @@ TwoIsOne(3, 1, 2) → true
 TwoIsOne(3, 2, 2) → false
 
 public boolean TwoIsOne(int a, int b, int c) {
-  
+  return (true &&((a + b == c) || (a + c == b) || (b + c == a))
 }
