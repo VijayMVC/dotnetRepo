@@ -95,7 +95,6 @@ namespace Warmups.BLL
                 {
                     return true;
                 }
-                else return false;
             }
             return false;
         }
