@@ -69,7 +69,7 @@ namespace Warmups.BLL
         public string StringSplosion(string str)
         {
             string track = "";
-            for (int i = 0; i <= str.Length; i++)
+            for (int i = 1; i <= str.Length; i++)
             {
                 track += str.Substring(0, i);
             }

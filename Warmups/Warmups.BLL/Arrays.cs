@@ -19,13 +19,14 @@ namespace Warmups.BLL
         {
             return (true && (numbers.Length >= 1 && numbers[0] == numbers[numbers.Length - 1]));
         }
+
         public int[] MakePi(int n)
         {
             int[] pi = new int[] { 3, 1, 4, 1, 5, 9, 2, 6, 5 };
             int[] answer = new int[n];
             for (int i =0;i<n;i++)
             {
-                answer[i] += pi[i];
+                answer[i] = pi[i];
             }
             return answer;
         }
