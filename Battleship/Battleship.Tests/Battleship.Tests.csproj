@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BattleshipGameFlowTests.cs" />
     <Compile Include="FireShotTests.cs" />
     <Compile Include="ShipPlacementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

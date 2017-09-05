@@ -11,7 +11,7 @@ using BattleShip.BLL.Ships;
 
 namespace BattleShip.UI
 {
-    class ConsoleInput
+    public class ConsoleInput
     {
         internal static string P1EnterName()
         {
@@ -27,8 +27,9 @@ namespace BattleShip.UI
             return p2Name;
         }
 
-        public static Coordinate GetCoordinateFromUser()
+        public static Coordinate GetCoordinateFromUser()//explore setting up to take string input and possibly break method apart to simplify and test
         {
+
             Coordinate toReturn = null;
             while (true)
             {
@@ -60,11 +61,19 @@ namespace BattleShip.UI
         }
 
 
-        public static ShipDirection GetShipDirection()
+        public static ShipDirection GetShipDirection()//explore setting up to take string input and possibly break method apart to simplify and test
         {
             string letter;
-            ConsoleOutput.PromptForDirection();
-            letter = Console.ReadLine();
+            while (true)
+            {
+                ConsoleOutput.PromptForDirection();
+                letter = Console.ReadLine();
+                if (letter == "l" || letter == "L" || letter == "r" || letter == "R" || letter == "u" || letter == "U" || letter == "d" || letter == "D" || letter == "m")
+                {
+                    break;
+                }
+            }
+
             if (letter == "m")
             {
                 ConsoleOutput.DrawBlankBoard();

@@ -15,9 +15,9 @@ namespace BattleShip.UI
         public Board BuildBoard(Board boardname)
         {
             boardname = new Board();
-
             PlaceShipRequest request = new PlaceShipRequest();
             ConsoleOutput.DrawBlankBoard();
+
             for (ShipType s = ShipType.Destroyer; s <= ShipType.Carrier; s++)
             {
                 request.ShipType = s;
@@ -41,11 +41,9 @@ namespace BattleShip.UI
                         ConsoleOutput.ShipSuccessPlaced();
                         break;
                     }
-                }
-                
+                }     
             }
-            return boardname;
-            
+            return boardname;            
         }
     }
 }

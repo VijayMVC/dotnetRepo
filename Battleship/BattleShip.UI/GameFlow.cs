@@ -16,13 +16,15 @@ namespace BattleShip.UI
 
         public GameFlow (Player Attacker, Player Receiver)
         {
-            FireShotResponse RecieveShot = new FireShotResponse();
+            FireShotResponse ShotResponse;
             while (true)
             {
                 ConsoleOutput.PromptPlayerTurn(Attacker);
                 var shot = ConsoleInput.GetCoordinateFromUser();
-                var result = Receiver.PlayerBoard.FireShot(shot).ShotStatus;
-                string ShipHit = RecieveShot.ShipImpacted;
+                ShotResponse = Receiver.PlayerBoard.FireShot(shot);
+                ShotStatus result = ShotResponse.ShotStatus;
+                string ShipHit = ShotResponse.ShipImpacted;
+
                 if (result == ShotStatus.Miss)
                 {
                     ConsoleOutput.Miss(Attacker.Name);

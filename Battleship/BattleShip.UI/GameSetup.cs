@@ -39,7 +39,6 @@ namespace BattleShip.UI
                 Player PlayerOne = new Player(p1Name, p1Board);
                 Player PlayerTwo = new Player(p2Name, p2Board);
 
-
                 //determine who goes first randomly
                 bool IsPlayer1sTurn = DecideWhoGoesFirst();
 

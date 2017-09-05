@@ -81,7 +81,6 @@ namespace BattleShip.UI
 
         internal static void PromptforCoordinate()
         {
-        
             Console.WriteLine("Please enter a coordinate (example: a1 is the top left corner of the board):  ");
         }
 
@@ -158,14 +157,11 @@ namespace BattleShip.UI
 
                 for (int x = 0; x < 11; x++)
                 {
-                    Console.Write("|   ");
-                    
+                    Console.Write("|   ");     
                 }
-
                 Console.WriteLine();
                 Console.WriteLine("----------------------------------------------");
             }
-
         }
 
         internal static void DrawActiveBoard(Board Active)
@@ -213,11 +209,9 @@ namespace BattleShip.UI
                     }
                     Console.Write("|");
                 }
-
                 Console.WriteLine();
                 Console.WriteLine("----------------------------------------------");
             }
-
         }
 
         internal static void PromptForDirection()
