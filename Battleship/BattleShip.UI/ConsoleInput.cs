@@ -27,72 +27,102 @@ namespace BattleShip.UI
             return p2Name;
         }
 
-        public static Coordinate GetCoordinateFromUser()//explore setting up to take string input and possibly break method apart to simplify and test
+        public static Coordinate GetCoordinateFromUser()
         {
-
             Coordinate toReturn = null;
             while (true)
             {
                 ConsoleOutput.PromptforCoordinate();
-                string input = Console.ReadLine(), strX, strY; int x, y;
+                string input = Console.ReadLine(); 
                 if (input == "m")
                 {
                     ConsoleOutput.DrawBlankBoard();
                     ConsoleOutput.PromptforCoordinate();
                     input = Console.ReadLine();
                 }
-
-
-                if (input.Length == 2 || input.Length == 3)
+                bool isValidCoordinate = TryParseCoordinate(input, out toReturn);
+                if(isValidCoordinate)
                 {
-                    strX = input.Substring(0, 1);
-                    x = GetNumberFromLetter(strX);
-                    strY = input.Substring(1);
-                    int.TryParse(strY, out y);
-
-                    toReturn = new Coordinate(x, y);
                     break;
                 }
-                if (toReturn == null)
-                {
-                }
+                
             }
             return toReturn;
         }
 
-
-        public static ShipDirection GetShipDirection()//explore setting up to take string input and possibly break method apart to simplify and test
+        public static bool TryParseCoordinate(string input, out Coordinate toReturn)
         {
-            string letter;
+            input = input.Replace(",","");
+            if (input == "")
+            {
+                toReturn = null;
+                return false;
+            }
+
+            String strX, strY; int x, y;
+            strY = input.Substring(1);
+            strX = input.Substring(0, 1);
+            x = GetNumberFromLetter(strX);
+            
+            if (int.TryParse(strY, out y) == true && x > 0 && x < 11)
+            {
+                if (y > 0 && y < 11)
+                {
+                    toReturn = new Coordinate(x, y);
+                    return true;
+                }
+            }
+            toReturn = null;
+            return false;
+        }
+
+        public static ShipDirection GetShipDirection()
+        {
+            string toReturn;
             while (true)
             {
                 ConsoleOutput.PromptForDirection();
-                letter = Console.ReadLine();
-                if (letter == "l" || letter == "L" || letter == "r" || letter == "R" || letter == "u" || letter == "U" || letter == "d" || letter == "D" || letter == "m")
+                string letter = Console.ReadLine();
+
+                if (letter == "m")
+                {
+                    ConsoleOutput.DrawBlankBoard();
+                    ConsoleOutput.PromptForDirection();
+                    letter = Console.ReadLine();
+                }
+
+                switch (letter.ToLower())
+                {
+                    case "l":
+                        return ShipDirection.Left;
+                    case "r":
+                        return ShipDirection.Right;
+                    case "u":
+                        return ShipDirection.Up;
+                    case "d":
+                        return ShipDirection.Down;
+                    default:
+                        break;
+                }
+                bool ValidateDirection = isValidDirection(letter, out toReturn);
+                if (ValidateDirection)
                 {
                     break;
                 }
             }
+            return ShipDirection.Down;
+        }
 
-            if (letter == "m")
+        public static bool isValidDirection(string direction, out String toReturn)
+        {
+            string letter = direction;
+            if (letter == "l" || letter == "L" || letter == "r" || letter == "R" || letter == "u" || letter == "U" || letter == "d" || letter == "D" || letter == "m")
             {
-                ConsoleOutput.DrawBlankBoard();
-                ConsoleOutput.PromptForDirection();
-                letter = Console.ReadLine();
+                toReturn = letter;
+                return true;
             }
-            switch (letter.ToLower())
-            {
-                case "l":
-                    return ShipDirection.Left;
-                case "r":
-                    return ShipDirection.Right;
-                case "u":
-                    return ShipDirection.Up;
-                case "d":
-                    return ShipDirection.Down;
-                default:
-                    return ShipDirection.Down;
-            }
+            toReturn = null;
+            return false;
         }
         
         static int GetNumberFromLetter(string letter)
