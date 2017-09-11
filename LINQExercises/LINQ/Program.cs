@@ -38,7 +38,7 @@ namespace LINQ
             //Exercise25();
             //Exercise26();
             //Exercise27();
-            //Exercise28();
+            Exercise28();
             //Exercise29();
             //Exercise30();
             //Exercise31();
@@ -270,11 +270,11 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise9()
         {
-            var Nums = from number in DataLoader.NumbersA
+            var nums = from number in DataLoader.NumbersA
                               where number % 2 == 0
                               select number;
 
-            Console.WriteLine(string.Join(",",Nums));
+            Console.WriteLine(string.Join(",",nums));
             Console.ReadLine();
         }
 
@@ -298,9 +298,9 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise11()
         {
-            var Nums = DataLoader.NumbersC.Where(c => c % 2 == 1).Take(3);
+            var nums = DataLoader.NumbersC.Where(c => c % 2 == 1).Take(3);
                       
-            Console.WriteLine(string.Join(",", Nums));
+            Console.WriteLine(string.Join(",", nums));
         }
 
         /// <summary>
@@ -308,9 +308,9 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise12()
         {
-            var Nums = DataLoader.NumbersB.Skip(3);
+            var nums = DataLoader.NumbersB.Skip(3);
 
-            Console.WriteLine(string.Join(",", Nums));
+            Console.WriteLine(string.Join(",", nums));
         }
 
         /// <summary>
@@ -357,9 +357,9 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise15()
         {
-            List<int> numbers = DataLoader.NumbersC.SkipWhile(n => n % 3 != 0).ToList();
-            numbers.RemoveAt(0);
-            foreach(var number in numbers)
+            var numbers = DataLoader.NumbersC.SkipWhile(n => n % 3 != 0);
+            
+            foreach(var number in numbers.Skip(1))
             {
                 Console.WriteLine(number);
             }
@@ -473,10 +473,16 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise23()
         {
-            var prods = DataLoader.LoadProducts().TakeWhile(p => p.ProductID == 789);
+            var prods = DataLoader.LoadProducts();
 
-            PrintProductInformation(prods);
-            
+            foreach (var p in prods)
+            {
+                if(p.ProductID == 789)
+                {
+                    Console.WriteLine("product 789 is: {0}", p.ProductName);
+                }
+            }
+            Console.WriteLine("product 789 does not exist");
         }
 
         /// <summary>
@@ -518,16 +524,9 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise26()
         {
-            int i = 0;
-            var nums = from n in DataLoader.NumbersA
-                       where n % 2 == 1
-                       select n;
-
-            foreach (var number in nums)
-            {
-                i++;
-            }
-            Console.WriteLine(i);
+            var nums = DataLoader.NumbersA.Where(n => n % 2 == 1);
+            int count = nums.Count();
+            Console.WriteLine("There are " + count + " odd numbers in the sequence");
         }
 
         /// <summary>
@@ -554,14 +553,18 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise28()
         {
-            var prods = from products in DataLoader.LoadProducts()
-                        orderby products.Category
-                        group products by products.Category;
+            int prodCount = 0;
+            var groups = DataLoader.LoadProducts().GroupBy(p => p.Category);
 
-            foreach (var group in prods)
+            foreach (var group in groups)
             {
                 Console.WriteLine(group.Key);
-                Console.WriteLine(group.Key.Count() + " products");
+                foreach(var product in group)
+                {
+                    prodCount++;
+                }
+                Console.WriteLine(prodCount + " products exist in this category.\n");
+                prodCount = 0;
             }
 
         }
@@ -575,16 +578,15 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
                          group g by g.Category into newGroup
                          select new
                          {
-                             Category = newGroup.Key,
-                             TotalUnits = newGroup.Sum(g => g.UnitsInStock)
+                             category = newGroup.Key,
+                             totalUnits = newGroup.Sum(g => g.UnitsInStock)
                          };
 
             foreach (var group in groups)
             {
-                Console.WriteLine("Category: {0}", group.Category);
-                Console.WriteLine("Total Units: {0}", group.TotalUnits);
+                Console.WriteLine("Category: {0}", group.category);
+                Console.WriteLine("Total Units: {0}", group.totalUnits);
                 Console.WriteLine();
-
             }
         }
 
@@ -614,20 +616,20 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise31()
         {
-            var groups = (from g in DataLoader.LoadProducts()                
-                         group g by g.Category into newGroup
-                         select new
-                         {
-                             Category = newGroup.Key,
-                             AveragePrice = newGroup.Average(g => g.UnitPrice) 
-                         }).OrderByDescending(g => g.AveragePrice).Take(3);
+            var groups = (from g in DataLoader.LoadProducts()
+                          group g by g.Category into newGroup
+                          select new
+                          {
+                              Category = newGroup.Key,
+                              AveragePrice = newGroup.Average(g => g.UnitPrice)
+                          }).OrderByDescending(g => g.AveragePrice).Take(3);
 
-            
+
             foreach (var group in groups)
             {
-                    Console.WriteLine("Category: {0}", group.Category);
-                    Console.WriteLine("Average Price: {0:c}", group.AveragePrice);
-                    Console.WriteLine();
+                Console.WriteLine("Category: {0}", group.Category);
+                Console.WriteLine("Average Price: {0:c}", group.AveragePrice);
+                Console.WriteLine();
             }
         }
     }
