@@ -38,7 +38,7 @@ namespace LINQ
             //Exercise25();
             //Exercise26();
             //Exercise27();
-            Exercise28();
+            //Exercise28();
             //Exercise29();
             //Exercise30();
             //Exercise31();
