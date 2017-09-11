@@ -39,9 +39,9 @@ namespace LINQ
             //Exercise26();
             //Exercise27();
             //Exercise28();
-            Exercise29();
-            //Exercise30();notdone
-            //Exercise31();notdone
+            //Exercise29();
+            //Exercise30();
+            //Exercise31();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
@@ -484,16 +484,18 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise24()
         {
-            var products = from p in DataLoader.LoadProducts().OrderBy(p => p.Category).Where(p => p.UnitsInStock == 0)
-                           select new
-                           {
-                               Category = p.Category
-                           };
-
-            foreach (var product in products.Distinct())
+            var groups = DataLoader.LoadProducts().OrderBy(p => p.UnitsInStock).GroupBy(p => p.Category);
+                        
+            foreach(var group in groups.Distinct())
             {
-                Console.WriteLine(product.Category);
+                
+                foreach (var product in group.TakeWhile(p => p.UnitsInStock == 0).Take(1))
+                {
+                    Console.WriteLine("{0}", group.Key);
+                    Console.WriteLine("at least one item out of stock\n");  
+                }
             }
+                
 
 
         }
@@ -569,12 +571,20 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise29()
         {
-            var prods = from p in DataLoader.LoadProducts()
-                        group p.Category by p.UnitsInStock += p.UnitsInStock; 
+            var groups = from g in DataLoader.LoadProducts()
+                         group g by g.Category into newGroup
+                         select new
+                         {
+                             Category = newGroup.Key,
+                             TotalUnits = newGroup.Sum(g => g.UnitsInStock)
+                         };
 
-            foreach(IGrouping<string, Product> CategoryGroup in DataLoader.LoadProducts())
+            foreach (var group in groups)
             {
-                Console.WriteLine(CategoryGroup.Key);
+                Console.WriteLine("Category: {0}", group.Category);
+                Console.WriteLine("Total Units: {0}", group.TotalUnits);
+                Console.WriteLine();
+
             }
         }
 
@@ -583,7 +593,20 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise30()
         {
+            var groups = DataLoader.LoadProducts().OrderBy(p => p.UnitPrice).GroupBy(p => p.Category);
 
+            foreach(var group in groups)
+            {
+                Console.WriteLine("Category: {0}", group.Key);
+                Console.WriteLine();
+
+                foreach (var product in group.Take(1))
+                {
+                    Console.WriteLine("Lowest Price Product: {0}", product.ProductName);
+                    Console.WriteLine("Price: {0:c}", product.UnitPrice);
+                    Console.WriteLine("_______________________________________________________");
+                }
+            };
         }
 
         /// <summary>
@@ -591,7 +614,21 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise31()
         {
+            var groups = (from g in DataLoader.LoadProducts()                
+                         group g by g.Category into newGroup
+                         select new
+                         {
+                             Category = newGroup.Key,
+                             AveragePrice = newGroup.Average(g => g.UnitPrice) 
+                         }).OrderByDescending(g => g.AveragePrice).Take(3);
 
+            
+            foreach (var group in groups)
+            {
+                    Console.WriteLine("Category: {0}", group.Category);
+                    Console.WriteLine("Average Price: {0:c}", group.AveragePrice);
+                    Console.WriteLine();
+            }
         }
     }
 }
