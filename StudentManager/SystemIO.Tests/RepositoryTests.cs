@@ -66,5 +66,46 @@ namespace SystemIO.Tests
             Assert.AreEqual("Testing", check.Major);
             Assert.AreEqual(4.0M, check.GPA);
         }
+
+        [Test]
+        public void canDeleteStudent()
+        {
+            StudentRepository repo = new StudentRepository(_filepath);
+            repo.Delete(0);
+
+            List<Student> students = repo.List();
+
+            Assert.AreEqual(3, students.Count);
+
+            Student check = students[0];
+
+            Assert.AreEqual("Mary", check.FirstName);
+            Assert.AreEqual("Jone", check.LastName);
+            Assert.AreEqual("Business", check.Major);
+            Assert.AreEqual(3.0M, check.GPA);
+        }
+
+        [Test]
+        public void canEditStudent()
+        {
+            StudentRepository repo = new StudentRepository(_filepath);
+            List<Student> students = repo.List();
+
+            Student editedStudent = students[0];
+            editedStudent.GPA = 3.0M;
+            repo.Edit(editedStudent,0);
+
+            
+
+            Assert.AreEqual(4, students.Count);
+
+            students = repo.List();
+            Student check = students[0];
+
+            Assert.AreEqual("Joe", check.FirstName);
+            Assert.AreEqual("Smith", check.LastName);
+            Assert.AreEqual("Computer Science", check.Major);
+            Assert.AreEqual(3.0M, check.GPA);
+        }
     }
 }

@@ -473,16 +473,16 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise23()
         {
-            var prods = DataLoader.LoadProducts();
+            var prods = DataLoader.LoadProducts().Any(p => p.ProductID == 789);
 
-            foreach (var p in prods)
+            if (prods)
             {
-                if(p.ProductID == 789)
-                {
-                    Console.WriteLine("product 789 is: {0}", p.ProductName);
-                }
+                Console.WriteLine("product 789 exists");
             }
-            Console.WriteLine("product 789 does not exist");
+            else
+            {
+                Console.WriteLine("product 789 does not exist");
+            }
         }
 
         /// <summary>
@@ -553,20 +553,14 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise28()
         {
-            int prodCount = 0;
-            var groups = DataLoader.LoadProducts().GroupBy(p => p.Category);
+            var groups = from p in DataLoader.LoadProducts()
+                         group p by p.Category;
 
             foreach (var group in groups)
             {
-                Console.WriteLine(group.Key);
-                foreach(var product in group)
-                {
-                    prodCount++;
-                }
-                Console.WriteLine(prodCount + " products exist in this category.\n");
-                prodCount = 0;
+                Console.WriteLine("{0}", group.Key);
+                Console.WriteLine("{0}", group.Count());
             }
-
         }
 
         /// <summary>
@@ -595,20 +589,21 @@ product.ProductID, product.ProductName, product.Category, product.UnitPrice, pro
         /// </summary>
         static void Exercise30()
         {
-            var groups = DataLoader.LoadProducts().OrderBy(p => p.UnitPrice).GroupBy(p => p.Category);
+                var groups = from n in DataLoader.LoadProducts().OrderBy(p => p.UnitPrice).GroupBy(c => c.Category)
+                             select new
+                             {
+                                 Category = n.Key,
+                                 MinUnit = n.First().UnitPrice,
+                                 ProductName = n.First().ProductName,
+                             };
 
-            foreach(var group in groups)
-            {
-                Console.WriteLine("Category: {0}", group.Key);
-                Console.WriteLine();
-
-                foreach (var product in group.Take(1))
+                foreach (var group in groups)
                 {
-                    Console.WriteLine("Lowest Price Product: {0}", product.ProductName);
-                    Console.WriteLine("Price: {0:c}", product.UnitPrice);
-                    Console.WriteLine("_______________________________________________________");
+                    Console.WriteLine("Category: {0}", group.Category);
+                    Console.WriteLine("Product: {0}", group.ProductName);
+                    Console.WriteLine("Total Units: {0}", group.MinUnit);
+                    Console.WriteLine();
                 }
-            };
         }
 
         /// <summary>

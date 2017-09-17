@@ -47,8 +47,7 @@ namespace StudentManager.Data
         {
             using (StreamWriter sw = new StreamWriter(_filepath, true))
             {
-                string line = string.Format("{0},{1},{2},{3}" ,student.FirstName, 
-                    student.LastName, student.Major, student.GPA.ToString());
+                string line = CreatCsvForStudent(student);
 
                 sw.WriteLine(line);
             }
@@ -56,12 +55,37 @@ namespace StudentManager.Data
 
         public void Edit(Student student, int index)
         {
-            throw new NotImplementedException();
+            var students = List();
+            students[index] = student;
+            CreateStudentFile(students);
         }
 
         public void Delete(int index)
         {
-            throw new NotImplementedException();
+            var students = List();
+            students.RemoveAt(index);
+
+            CreateStudentFile(students);
+        }
+
+        private string CreatCsvForStudent(Student student)
+        {
+            return string.Format("{0},{1},{2},{3}", student.FirstName,
+                    student.LastName, student.Major, student.GPA.ToString());
+        }
+
+        private void CreateStudentFile(List<Student> students)
+        {
+            if (File.Exists(_filepath))
+                File.Delete(_filepath);
+            using (StreamWriter sr = new StreamWriter(_filepath))
+            {
+                sr.WriteLine("FirstName,LastName,Major,GPA");
+                foreach(var student in students)
+                {
+                    sr.WriteLine(CreatCsvForStudent(student));
+                }
+            }
         }
     }
 }
