@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8C82F4B6-C11F-4AE5-A49C-A5D77F20A3E2}</ProjectGuid>
+    <ProjectGuid>{17602610-9D3A-4128-AC6C-E372E6D4CCD4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SGFlooring.Data</RootNamespace>
-    <AssemblyName>SGFlooring.Data</AssemblyName>
+    <RootNamespace>SGFlooring.Tests</RootNamespace>
+    <AssemblyName>SGFlooring.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,15 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrderFileRepository.cs" />
-    <Compile Include="OrderTestRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SGFlooring.Models\SGFlooring.Models.csproj">
-      <Project>{26b4d37a-8991-4509-b97f-d227ab3d3cb2}</Project>
-      <Name>SGFlooring.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

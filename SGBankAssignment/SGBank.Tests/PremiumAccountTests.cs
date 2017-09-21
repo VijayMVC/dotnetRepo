@@ -17,10 +17,10 @@ namespace SGBank.Tests
         [TestFixture]
         public class BasicAccountTests
         {
-            [TestCase("33333", "Premium Account", 100, AccountType.Free, 250, false)]
-            [TestCase("33333", "Premium Account", 100, AccountType.Premium, -100, false)]
-            [TestCase("33333", "Premium Account", 100, AccountType.Premium, 250, true)]
-            public void PremiumAccountDepositRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, bool expectedResult)
+            [TestCase("33333", "Premium Account", 100, AccountType.Free, 250, 100, false)]
+            [TestCase("33333", "Premium Account", 100, AccountType.Premium, -100, 100, false)]
+            [TestCase("33333", "Premium Account", 100, AccountType.Premium, 250, 350, true)]
+            public void PremiumAccountDepositRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
             {
                 IDeposit deposit = new NoLimitDepositRule();
                 Account account = new Account();
@@ -32,9 +32,10 @@ namespace SGBank.Tests
                 AccountDepositResponse response = deposit.Deposit(account, amount);
 
                 Assert.AreEqual(expectedResult, response.Success);
+                Assert.AreEqual(account.Balance, newBalance);//testing expected balance accuracy
             }
 
-            [TestCase("55555", "Premium Account", 1500, AccountType.Premium, -2500, -1000, false)]//exceeded -500 overdraft threshold
+            [TestCase("55555", "Premium Account", 1500, AccountType.Premium, -2500, 1500, false)]//exceeded -500 overdraft threshold
             [TestCase("55555", "Premium Account", 100, AccountType.Free, -100, 100, false)]//invalid account type
             [TestCase("55555", "Premium Account", 100, AccountType.Premium, 100, 100, false)]//positive number withrdrawn
             [TestCase("55555", "Premium Account", 150, AccountType.Premium, -50, 100, true)]//valid withdrawal
@@ -50,6 +51,7 @@ namespace SGBank.Tests
 
                 AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
                 Assert.AreEqual(expectedResult, response.Success);
+                Assert.AreEqual(account.Balance, newBalance);//testing expected balance accuracy
             }
         }
     }

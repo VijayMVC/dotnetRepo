@@ -36,6 +36,14 @@ namespace SGBank.BLL.WithdrawRules
                 return response;
             }
 
+            if (amount + account.Balance < -100)
+            {
+                response.Success = false;
+                response.Message = "This amount will overdraft more than your $100 limit!";
+                return response;
+            }
+
+
             response.OldBalance = account.Balance;
             account.Balance += amount;
             response.Account = account;

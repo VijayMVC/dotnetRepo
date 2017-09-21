@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SGFlooring.BLL
+namespace SGFlooring.Models.Interfaces
 {
-    public class Class1
+    public interface IProductRepository
     {
+        Product GetProduct(Product product);
     }
 }

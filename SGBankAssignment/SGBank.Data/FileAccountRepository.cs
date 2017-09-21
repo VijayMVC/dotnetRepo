@@ -16,10 +16,8 @@ namespace SGBank.Data
         private string _filepath;
         public FileAccountRepository(string filepath)
         {
-            {
                 _filepath = filepath;
                 List();
-            }
         }
 
         public void List()
@@ -28,6 +26,7 @@ namespace SGBank.Data
             {
                 using (StreamReader sr = new StreamReader(_filepath))
                 {
+                    decimal balance = 0;
                     sr.ReadLine();
                     string line;
                     while ((line = sr.ReadLine()) != null)
@@ -37,7 +36,8 @@ namespace SGBank.Data
                         string[] columns = line.Split(',');
                         newAccount.AccountNumber = columns[0];
                         newAccount.Name = columns[1];
-                        newAccount.Balance = decimal.Parse(columns[2]);
+                        decimal.TryParse(columns[2], out balance);
+                        newAccount.Balance = balance;
                         newAccount.Type = ConvertToAccountType(columns[3]);
 
                         _allAccounts.Add(newAccount);
@@ -65,14 +65,12 @@ namespace SGBank.Data
             }
         }
 
-        Account _account = new Account();
         public Account LoadAccount(string AccountNumber)
         {
             var Accounts = _allAccounts.SingleOrDefault(a => a.AccountNumber == AccountNumber);
             return Accounts;
         }
 
-        List<Account> updatedList = new List<Account>();
         public void SaveAccount(Account account)
         {
             CreateAccountFile(_allAccounts);

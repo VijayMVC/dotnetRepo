@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SGFlooring.Data
+namespace SGFlooring.Models.Interfaces
 {
-    public class Class1
+    interface ITaxRepository
     {
+        Tax GetTax(Tax tax);
     }
 }

@@ -48,5 +48,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SGFlooring.BLL\SGFlooring.BLL.csproj">
+      <Project>{062f86cc-9625-4e91-a5a0-69a0a525c24c}</Project>
+      <Name>SGFlooring.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGFlooring.Models\SGFlooring.Models.csproj">
+      <Project>{26b4d37a-8991-4509-b97f-d227ab3d3cb2}</Project>
+      <Name>SGFlooring.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

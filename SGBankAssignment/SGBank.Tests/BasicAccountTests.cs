@@ -15,10 +15,10 @@ namespace SGBank.Tests
     [TestFixture]
     public class BasicAccountTests
     {
-        [TestCase("33333","Basic Account",100,AccountType.Free,250,false)]
-        [TestCase("33333","Basic Account",100, AccountType.Basic,-100, false)]
-        [TestCase("33333","Basic Account",100, AccountType.Basic,250, true)]
-        public void BasicAccountDepositRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, bool expectedResult)
+        [TestCase("33333","Basic Account",100,AccountType.Free,250,100,false)]
+        [TestCase("33333","Basic Account",100, AccountType.Basic,-100,100, false)]
+        [TestCase("33333","Basic Account",100, AccountType.Basic,250,350, true)]
+        public void BasicAccountDepositRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount,decimal newBalance, bool expectedResult)
         {
             IDeposit deposit = new NoLimitDepositRule();
             Account account = new Account();
@@ -30,6 +30,7 @@ namespace SGBank.Tests
             AccountDepositResponse response = deposit.Deposit(account,amount);
 
             Assert.AreEqual(expectedResult, response.Success);
+            Assert.AreEqual(account.Balance, newBalance);//testing expected balance accuracy
         }
 
         [TestCase("33333", "Basic Account", 1500, AccountType.Basic, -1000, 1500, false)]
@@ -48,8 +49,7 @@ namespace SGBank.Tests
 
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
             Assert.AreEqual(expectedResult, response.Success);
+            Assert.AreEqual(account.Balance, newBalance);//testing expected balance accuracy
         }
-
-
     }
 }
