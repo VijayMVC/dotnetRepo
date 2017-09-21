@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +44,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SGFlooring.BLL\SGFlooring.BLL.csproj">
+      <Project>{062f86cc-9625-4e91-a5a0-69a0a525c24c}</Project>
+      <Name>SGFlooring.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGFlooring.Data\SGFlooring.Data.csproj">
+      <Project>{8c82f4b6-c11f-4ae5-a49c-a5d77f20a3e2}</Project>
+      <Name>SGFlooring.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGFlooring.Models\SGFlooring.Models.csproj">
+      <Project>{26b4d37a-8991-4509-b97f-d227ab3d3cb2}</Project>
+      <Name>SGFlooring.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

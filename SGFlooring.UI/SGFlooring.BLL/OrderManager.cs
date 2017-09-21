@@ -18,7 +18,7 @@ namespace SGFlooring.BLL
             _orderRepository = orderRepository;
         }
 
-        public OrderLookupResponse LookupResponse(int OrderNumber)
+        public OrderLookupResponse LookupOrder(int OrderNumber)
         {
             OrderLookupResponse response = new OrderLookupResponse();
 
@@ -34,7 +34,6 @@ namespace SGFlooring.BLL
                 response.Success = true;
             }
             return response;
-        }
-            
+        }        
     }
 }

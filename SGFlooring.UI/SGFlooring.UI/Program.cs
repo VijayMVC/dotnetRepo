@@ -10,6 +10,7 @@ namespace SGFlooring.UI
     {
         static void Main(string[] args)
         {
+            Menu.Start();
         }
     }
 }
