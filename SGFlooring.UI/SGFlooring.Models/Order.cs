@@ -15,11 +15,12 @@ namespace SGFlooring.Models
         public string ProductType { get; set; }
         public decimal Area { get; set; }
         public decimal CostPerSquareFoot { get; set; }
-        public decimal MaterialCost { get; set; }
         public decimal LaborCostPerSquareFoot { get; set; }
-        public decimal LaborCost { get; set; }
         public decimal TaxRate { get; set; }
-        public decimal Tax { get; set; }
-        public decimal Total { get; set; }
+
+        public decimal MaterialCost => Area * CostPerSquareFoot;
+        public decimal Tax => (MaterialCost + LaborCost) * (TaxRate / 100.00M);
+        public decimal Total => MaterialCost + LaborCost + Tax;
+        public decimal LaborCost => LaborCostPerSquareFoot * Area;
     }
 }

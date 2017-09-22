@@ -13,5 +13,6 @@ namespace SGFlooring.Models.Responses
         public List<Product> AllProducts { get; set; }
         public Product NewProduct { get; set; }
         public Tax NewTax { get; set; }
+        public List<Tax> AllStates { get; set; }
     }
 }

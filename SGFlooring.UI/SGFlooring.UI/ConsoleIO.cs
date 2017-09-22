@@ -30,11 +30,21 @@ namespace SGFlooring.UI
 
         public static void DisplayProductDetails(List<Product> allProducts)
         {
-            Console.WriteLine("{0, -15}{1,-10}{2,-10}","Product Type","Cost Per Sq Foot","Labor Cost Per Sq Foot");
+            Console.WriteLine("{0, -15}{1,-15}{2,-15}","Product Type","Cost Per Sq Foot","Labor Cost Per Sq Foot");
             foreach (Product product in allProducts)
             {
                 Console.WriteLine("****************************");
-                Console.WriteLine("{0,-15}{1,-5}{2,-5}", product.ProductType, product.CostPerSquareFoot,product.LaborCostPerSquareFoot);
+                Console.WriteLine("{0,-15}{1,-15}{2,-15}", product.ProductType, product.CostPerSquareFoot,product.LaborCostPerSquareFoot);
+            }
+        }
+
+        public static void DisplayStateDetails(List<Tax> allStates)
+        {
+            Console.WriteLine("{0, -15}{1,-15}{2,-15}", "State Abbr.", "State Name", "Tax Rate");
+            foreach (Tax state in allStates)
+            {
+                Console.WriteLine("****************************");
+                Console.WriteLine("{0,-15}{1,-15}{2,-15}", state.StateAbbreviation, state.StateName, state.TaxRate);
             }
         }
     }

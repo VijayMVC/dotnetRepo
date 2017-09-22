@@ -8,8 +8,8 @@ namespace SGFlooring.Models
 {
     public class Tax
     {
-        string StateAbbreviation { get; set; }
-        string StateName { get; set; }
-        decimal TaxRate { get; set; }
+        public string StateAbbreviation { get; set; }
+        public string StateName { get; set; }
+        public decimal TaxRate { get; set; }
     }
 }

@@ -12,16 +12,20 @@ namespace SGFlooring.BLL
     {
         private IOrderRepository _orderRepository;
         private IProductRepository _productRepository;
+        private ITaxRepository _taxRepository;
 
-        public OrderManager (IOrderRepository orderRepository)
+        public OrderManager (IOrderRepository orderRepository, IProductRepository productRepository, ITaxRepository taxRepository)
         {
             _orderRepository = orderRepository;
+            _productRepository = productRepository;
+            _taxRepository = taxRepository;
         }
 
-        public OrderManager (IProductRepository productRepository)
-        {
-            _productRepository = productRepository;
-        }
+        //will need to set up an ordermanager to handle live data package
+        //public OrderManager (IProductRepository productRepository)
+        //{
+        //    _productRepository = productRepository;
+        //}
 
         public OrderCreateResponse ListProducts()
         {
@@ -39,6 +43,25 @@ namespace SGFlooring.BLL
                 response.Success = true;
             }
             return response;            
+        }
+
+        public OrderCreateResponse ListStates()
+        {
+            OrderCreateResponse response = new OrderCreateResponse();
+
+            response.AllStates = _taxRepository.GetList();
+
+            if(response.AllStates == null)
+            {
+                response.Success = false;
+                response.Message = "There was an error locating the state listing";
+            }
+            else
+            {
+                response.Success = true;
+            }
+            return response;
+
         }
 
         public OrderLookupResponse LookupOrders(string ordersID)

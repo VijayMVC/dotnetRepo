@@ -21,10 +21,6 @@ namespace SGFlooring.Data
             Area = 100.00M,
             CostPerSquareFoot = 5.15M,
             LaborCostPerSquareFoot = 4.75M,
-            MaterialCost = 515.00M,
-            LaborCost = 475.00M,
-            Tax = 61.88M,
-            Total = 1051.88M
         };
 
         private static Order _order2 = new Order
@@ -38,10 +34,6 @@ namespace SGFlooring.Data
             Area = 100.00M,
             CostPerSquareFoot = 1.75M,
             LaborCostPerSquareFoot = 2.10M,
-            MaterialCost = 175.00M,
-            LaborCost = 210.00M,
-            Tax = 27.91M,
-            Total = 412.91M
         };
 
         private static Order _order3 = new Order
@@ -55,10 +47,6 @@ namespace SGFlooring.Data
             Area = 250.00M,
             CostPerSquareFoot = 3.50M,
             LaborCostPerSquareFoot = 4.15M,
-            MaterialCost = 875.00M,
-            LaborCost = 1037.50M,
-            Tax = 81.28M,
-            Total = 1993.78M
         };
 
         private static List<Order> _allOrders = new List<Order>()

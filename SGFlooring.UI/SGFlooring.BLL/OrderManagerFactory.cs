@@ -17,7 +17,7 @@ namespace SGFlooring.BLL
             switch(mode)
             {
                 case "TestData":
-                    return new OrderManager(new ProductTestRepository());
+                    return new OrderManager(new OrderTestRepository(), new ProductTestRepository(), new TaxTestRepository());
                 default:
                     throw new Exception("Mode value in app config is not valid");
             }

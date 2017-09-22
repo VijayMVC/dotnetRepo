@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGFlooring.Models.Interfaces
 {
-    interface ITaxRepository
+    public interface ITaxRepository
     {
         Tax GetTax(Tax tax);
         List<Tax> GetList();
