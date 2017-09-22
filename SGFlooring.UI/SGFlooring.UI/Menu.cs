@@ -32,6 +32,8 @@ namespace SGFlooring.UI
                         lookupWorkflow.Execute();
                         break;
                     case "2":
+                        AddNewOrderWorkflow AddOrderWorkflow = new AddNewOrderWorkflow();
+                        AddOrderWorkflow.Execute();
                         break;
                     case "3":
                         break;

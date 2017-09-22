@@ -10,24 +10,47 @@ namespace SGFlooring.BLL
 {
     public class OrderManager
     {
-        //Order manager will be able to lookup, create, update, and delete an order
         private IOrderRepository _orderRepository;
+        private IProductRepository _productRepository;
 
         public OrderManager (IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-        public OrderLookupResponse LookupOrder(int OrderNumber)
+        public OrderManager (IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
+
+        public OrderCreateResponse ListProducts()
+        {
+            OrderCreateResponse response = new OrderCreateResponse();
+
+            response.AllProducts = _productRepository.ListProducts();
+
+            if(response.AllProducts == null)
+            {
+                response.Success = false;
+                response.Message = "There was an error locating the product listing!";
+            }
+            else
+            {
+                response.Success = true;
+            }
+            return response;            
+        }
+
+        public OrderLookupResponse LookupOrders(string ordersID)
         {
             OrderLookupResponse response = new OrderLookupResponse();
 
-            response.Order = _orderRepository.LoadOrder(OrderNumber);
+            response.ListOfOrders = _orderRepository.LoadOrders(ordersID);
 
-            if (response.Order == null)
+            if(response.ListOfOrders == null)
             {
                 response.Success = false;
-                response.Message = $"{OrderNumber} is not a valid order";
+                response.Message = "No orders were made on that date.";
             }
             else
             {
@@ -35,5 +58,18 @@ namespace SGFlooring.BLL
             }
             return response;
         }        
+
+        public static string DateToOrderId(string userInput)
+        {
+            DateTime orderDate = new DateTime(0001, 01, 01);
+            DateTime.TryParse(userInput, out orderDate);
+            string prefix = "Orders_";
+            string dateParse = orderDate.ToString("MMddyyyy");
+            string orderID = $"{prefix}{dateParse}";
+
+            return orderID;
+        }
+
+        
     }
 }

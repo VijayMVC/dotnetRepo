@@ -9,8 +9,9 @@ namespace SGFlooring.Models.Interfaces
     public interface IOrderRepository
     {
         void Create(Order order);
-        Order LoadOrder(int accountNumber);
+        List<Order> LoadOrders(string ordersID);
+        Order SpecificOrder(int orderNumber);//david said you will need a second paramater of date (this may become clear once I implement file repo)
         void Update(Order order);
-        void Delete(int accountNumber);
+        void Delete(int orderNumber);//david said you will need a second paramater of date, other option may be Order parameter by itself
     }
 }

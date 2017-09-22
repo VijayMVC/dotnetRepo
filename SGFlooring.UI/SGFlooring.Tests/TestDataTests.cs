@@ -14,15 +14,15 @@ namespace SGFlooring.Tests
     public class TestDataTests
     {
         [Test]
-        public void CanLoadFreeAccountTestData()
+        public void CanLoadOrderTestData()
         {
             OrderManager manager = OrderManagerFactory.Create();
 
-            OrderLookupResponse response = manager.LookupOrder(1);
+            OrderLookupResponse response = manager.LookupOrders("");
 
-            Assert.IsNotNull(response.Order);
+            Assert.IsNotNull(response.ListOfOrders);
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.Order.OrderNumber);
+            Assert.AreEqual(3, response.ListOfOrders.Count);
         }
     }
 }

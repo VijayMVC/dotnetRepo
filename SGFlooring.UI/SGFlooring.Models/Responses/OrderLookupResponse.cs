@@ -8,6 +8,6 @@ namespace SGFlooring.Models.Responses
 {
     public class OrderLookupResponse : Response
     {   
-        public Order Order { get; set; }
+        public List<Order> ListOfOrders { get; set; }
     }
 }

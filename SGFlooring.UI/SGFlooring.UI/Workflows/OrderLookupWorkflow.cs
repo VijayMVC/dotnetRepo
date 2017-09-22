@@ -15,17 +15,18 @@ namespace SGFlooring.UI.Workflows
             OrderManager manager = OrderManagerFactory.Create();
 
             Console.Clear();
-            Console.WriteLine("Lookup an Order");
+            Console.WriteLine("Lookup Orders");
             Console.WriteLine("*********************************");
-            Console.Write("Enter an order number: ");
-            int orderNumber = 0;
-            int.TryParse(Console.ReadLine(),out orderNumber);
+            Console.Write("Enter the date (mm/dd/yyyy) that you would like to view orders for: ");
 
-            OrderLookupResponse response = manager.LookupOrder(orderNumber);
+            string date = Console.ReadLine();
+            string orderID = OrderManager.DateToOrderId(date);
+            
+            OrderLookupResponse response = manager.LookupOrders(orderID);
 
             if(response.Success)
             {
-                ConsoleIO.DisplayOrderDetails(response.Order);
+                ConsoleIO.DisplayOrderDetails(response.ListOfOrders);
             }
             else
             {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SGFlooring.Models.Interfaces
+namespace SGFlooring.Models
 {
     public class Tax
     {

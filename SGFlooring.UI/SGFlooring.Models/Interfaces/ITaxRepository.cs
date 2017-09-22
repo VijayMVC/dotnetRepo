@@ -9,5 +9,6 @@ namespace SGFlooring.Models.Interfaces
     interface ITaxRepository
     {
         Tax GetTax(Tax tax);
+        List<Tax> GetList();
     }
 }

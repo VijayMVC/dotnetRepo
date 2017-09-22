@@ -10,18 +10,22 @@ namespace SGFlooring.Data
 {
     public class OrderFileRepository : IOrderRepository
     {
-
         public void Create(Order order)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int accountNumber)
+        public void Delete(int orderNumber)
         {
             throw new NotImplementedException();
         }
 
-        public Order LoadOrder(int accountNumber)
+        public List<Order> LoadOrders(string ordersID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order SpecificOrder(int orderNumber)
         {
             throw new NotImplementedException();
         }

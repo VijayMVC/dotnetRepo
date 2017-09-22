@@ -30,7 +30,7 @@ namespace SGFlooring.Data
         private static Order _order2 = new Order
         {
             OrderNumber = 2,
-            OrderDate = new DateTime(2013, 6, 2),
+            OrderDate = new DateTime(2013, 6, 1),
             CustomerName = "Wilson",
             State = "MN",
             TaxRate = 7.25M,
@@ -47,7 +47,7 @@ namespace SGFlooring.Data
         private static Order _order3 = new Order
         {
             OrderNumber = 3,
-            OrderDate = new DateTime(2013, 6, 3),
+            OrderDate = new DateTime(2013, 6, 1),
             CustomerName = "Ganser",
             State = "CO",
             TaxRate = 4.25M,
@@ -76,12 +76,17 @@ namespace SGFlooring.Data
             throw new NotImplementedException();
         }
 
-        public Order LoadOrder(int orderNumber)
+        public List<Order> LoadOrders(string ordersID)
+        {
+            return _allOrders;
+        }
+
+        public Order SpecificOrder(int orderNumber)
         {
             Order toReturn = new Order();
             foreach(Order order in _allOrders)
             {
-                if (order.OrderNumber == orderNumber)
+                if(order.OrderNumber == orderNumber)
                 {
                     toReturn = order;
                 }

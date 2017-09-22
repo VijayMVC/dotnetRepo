@@ -8,6 +8,6 @@ namespace SGFlooring.Models.Interfaces
 {
     public interface IProductRepository
     {
-        Product GetProduct(Product product);
+        List<Product> ListProducts();
     }
 }

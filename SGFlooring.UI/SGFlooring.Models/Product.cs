@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SGFlooring.Models.Interfaces
+namespace SGFlooring.Models
 {
     public class Product
     {
-        string ProductType { get; set; }
-        decimal CostPerSquareFoot { get; set; }
-        decimal LaborCostPerSquareFoot { get; set; }
+        public string ProductType { get; set; }
+        public decimal CostPerSquareFoot { get; set; }
+        public decimal LaborCostPerSquareFoot { get; set; }
     }
 }
