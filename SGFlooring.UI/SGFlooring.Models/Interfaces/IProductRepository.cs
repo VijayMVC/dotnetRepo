@@ -9,5 +9,6 @@ namespace SGFlooring.Models.Interfaces
     public interface IProductRepository
     {
         List<Product> ListProducts();
+        Order GetProduct(Order order);
     }
 }

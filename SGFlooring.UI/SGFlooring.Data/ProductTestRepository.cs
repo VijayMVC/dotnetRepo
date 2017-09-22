@@ -38,10 +38,18 @@ namespace SGFlooring.Data
         private static List<Product> _allProducts = new List<Product>()
         {p1,p2,p3,p4};
 
-
-        public Product GetProduct(Product product)
+        public Order GetProduct(Order order)
         {
-            throw new NotImplementedException();
+            Order toReturn = order;
+            foreach(Product p in _allProducts)
+            {
+                if (toReturn.ProductType == p.ProductType)
+                {
+                    toReturn.CostPerSquareFoot = p.CostPerSquareFoot;
+                    toReturn.LaborCostPerSquareFoot = p.LaborCostPerSquareFoot;
+                }
+            }
+            return toReturn;
         }
 
         public List<Product> ListProducts()

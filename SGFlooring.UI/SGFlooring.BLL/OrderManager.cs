@@ -1,4 +1,5 @@
-﻿using SGFlooring.Models.Interfaces;
+﻿using SGFlooring.Models;
+using SGFlooring.Models.Interfaces;
 using SGFlooring.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -27,41 +28,25 @@ namespace SGFlooring.BLL
         //    _productRepository = productRepository;
         //}
 
-        public OrderCreateResponse ListProducts()
+        public List<Product> ListProducts()
         {
-            OrderCreateResponse response = new OrderCreateResponse();
+            List<Product> allProducts = new List<Product>();
+            allProducts = _productRepository.ListProducts();
 
-            response.AllProducts = _productRepository.ListProducts();
-
-            if(response.AllProducts == null)
-            {
-                response.Success = false;
-                response.Message = "There was an error locating the product listing!";
-            }
-            else
-            {
-                response.Success = true;
-            }
-            return response;            
+            return allProducts;
         }
 
-        public OrderCreateResponse ListStates()
+        public List<Tax> ListStates()
         {
-            OrderCreateResponse response = new OrderCreateResponse();
+            List<Tax> allStates = new List<Tax>();
+            allStates = _taxRepository.GetList();
 
-            response.AllStates = _taxRepository.GetList();
+            return allStates;
+        }
 
-            if(response.AllStates == null)
-            {
-                response.Success = false;
-                response.Message = "There was an error locating the state listing";
-            }
-            else
-            {
-                response.Success = true;
-            }
-            return response;
-
+        public void GetState(Order newOrder)
+        {
+            _taxRepository.GetState(newOrder);
         }
 
         public OrderLookupResponse LookupOrders(string ordersID)
@@ -80,14 +65,35 @@ namespace SGFlooring.BLL
                 response.Success = true;
             }
             return response;
-        }        
+        }
 
-        public static string DateToOrderId(string userInput)
+        public void SaveOrder(Order newOrder)
         {
-            DateTime orderDate = new DateTime(0001, 01, 01);
-            DateTime.TryParse(userInput, out orderDate);
+            newOrder.OrderNumber = 1;
+            string orderId = DateToOrderId(newOrder.OrderDate);
+            List<Order> orders = _orderRepository.LoadOrders(orderId);
+            if (orders.Count == 0)
+            {
+                _orderRepository.Create(newOrder);
+            }
+            else
+            {
+                int order = orders.Max(o => o.OrderNumber);
+
+                newOrder.OrderNumber = order + 1;
+                _orderRepository.Create(newOrder);
+            }
+        }
+
+        public void GetProduct(Order newOrder)
+        {
+            _productRepository.GetProduct(newOrder);
+        }
+
+        public static string DateToOrderId(DateTime date)
+        {
             string prefix = "Orders_";
-            string dateParse = orderDate.ToString("MMddyyyy");
+            string dateParse = date.ToString("MMddyyyy");
             string orderID = $"{prefix}{dateParse}";
 
             return orderID;

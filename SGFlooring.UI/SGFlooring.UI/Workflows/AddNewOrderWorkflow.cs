@@ -28,23 +28,35 @@ namespace SGFlooring.UI.Workflows
             Console.Write("Please enter the customer name: ");
             newOrder.CustomerName = Console.ReadLine();
             
-            OrderCreateResponse response2 = manager.ListStates();
-            ConsoleIO.DisplayStateDetails(response2.AllStates);
+            ConsoleIO.DisplayStateDetails(manager.ListStates());
             Console.WriteLine("From the list above, please enter the state the customer is located in: ");
             newOrder.State = Console.ReadLine();
-            
-            OrderCreateResponse response = manager.ListProducts();
-            ConsoleIO.DisplayProductDetails(response.AllProducts);
+            manager.GetState(newOrder);
+
+            ConsoleIO.DisplayProductDetails(manager.ListProducts());
             Console.WriteLine("From the list above, please enter the name of the product type you would like: ");
             newOrder.ProductType = Console.ReadLine();
+            manager.GetProduct(newOrder);
 
             Console.Write("please enter the area of your project space in sq feet: ");
             int input = 0;
             int.TryParse(Console.ReadLine(),out input);
             newOrder.Area = input;
 
+            ConsoleIO.DisplaySpecificOrder(newOrder);
+            Console.WriteLine("Would you like to place this order? (Y/N)");
+            string answer = Console.ReadLine().ToString();
 
-
+            switch(answer.ToLower())
+            {
+                case "y":
+                    manager.SaveOrder(newOrder);
+                    break;
+                case "n":
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

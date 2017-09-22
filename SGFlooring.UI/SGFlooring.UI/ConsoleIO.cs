@@ -28,6 +28,20 @@ namespace SGFlooring.UI
             }
         }
 
+        public static void DisplaySpecificOrder(Order order)
+        {
+            Console.Clear();
+            Console.WriteLine("****************************");
+            Console.WriteLine($"{order.OrderNumber} | {order.OrderDate:MM/dd/yyyy}");
+            Console.WriteLine($"{order.CustomerName}");
+            Console.WriteLine($"{order.State}");
+            Console.WriteLine($"Product: {order.ProductType}");
+            Console.WriteLine($"Materials: {order.MaterialCost:c}");
+            Console.WriteLine($"Labor: {order.LaborCost:c}");
+            Console.WriteLine($"Tax: {order.Tax:c}");
+            Console.WriteLine($"Total: {order.Total:c}");
+        }
+
         public static void DisplayProductDetails(List<Product> allProducts)
         {
             Console.WriteLine("{0, -15}{1,-15}{2,-15}","Product Type","Cost Per Sq Foot","Labor Cost Per Sq Foot");

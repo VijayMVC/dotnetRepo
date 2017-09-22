@@ -19,7 +19,8 @@ namespace SGFlooring.UI.Workflows
             Console.WriteLine("*********************************");
             Console.Write("Enter the date (mm/dd/yyyy) that you would like to view orders for: ");
 
-            string date = Console.ReadLine();
+            DateTime date;
+            DateTime.TryParse(Console.ReadLine(), out date);
             string orderID = OrderManager.DateToOrderId(date);
             
             OrderLookupResponse response = manager.LookupOrders(orderID);

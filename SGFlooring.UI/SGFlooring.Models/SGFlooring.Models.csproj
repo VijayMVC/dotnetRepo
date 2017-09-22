@@ -44,7 +44,6 @@
     <Compile Include="Interfaces\IOrderRepository.cs" />
     <Compile Include="Interfaces\ITaxRepository.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="Responses\OrderCreateResponse.cs" />
     <Compile Include="Responses\OrderLookupResponse.cs" />
     <Compile Include="Responses\Response.cs" />
     <Compile Include="Tax.cs" />

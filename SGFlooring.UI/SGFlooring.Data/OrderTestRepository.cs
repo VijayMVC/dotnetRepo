@@ -56,7 +56,7 @@ namespace SGFlooring.Data
 
         public void Create(Order order)
         {
-            throw new NotImplementedException();
+            _allOrders.Add(order);
         }
 
         public void Delete(int orderNumber)

@@ -42,9 +42,17 @@ namespace SGFlooring.Data
             return AllStates;
         }
 
-        public Tax GetTax(Tax tax)
+        public Order GetState(Order newOrder)
         {
-            throw new NotImplementedException();
+            Order toReturn = newOrder;
+            foreach (Tax t in AllStates)
+            {
+                if (toReturn.State == t.StateAbbreviation)
+                {
+                    toReturn.TaxRate = t.TaxRate;
+                }
+            }
+            return toReturn;
         }
     }
 }
