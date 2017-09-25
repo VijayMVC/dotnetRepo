@@ -56,35 +56,52 @@ namespace SGFlooring.Data
 
         public void Create(Order order)
         {
-            _allOrders.Add(order);
+            bool newOrder = true;
+            foreach(Order o in _allOrders)
+            {
+                if (o.OrderNumber == order.OrderNumber)
+                {
+                    _allOrders.Remove(o);
+                    _allOrders.Add(order);
+                    newOrder = false;
+                    break;
+                }
+            }
+            if (newOrder == true)
+            {
+                _allOrders.Add(order);
+            }
         }
 
-        public void Delete(int orderNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Order> LoadOrders(string ordersID)
+        public List<Order> LoadOrders(DateTime date)
         {
             return _allOrders;
         }
 
-        public Order SpecificOrder(int orderNumber)
+        public void RemoveSpecificOrder(DateTime date, int orderNumber)
+        {
+            foreach (Order o in _allOrders)
+            {
+                if (o.OrderNumber == orderNumber)
+                {
+                    _allOrders.Remove(o);
+                    break;
+                }
+            }
+        }
+
+        public Order SpecificOrder(DateTime date, int orderNumber)
         {
             Order toReturn = new Order();
-            foreach(Order order in _allOrders)
+            foreach (Order order in _allOrders)
             {
-                if(order.OrderNumber == orderNumber)
+                if (order.OrderNumber == orderNumber)
                 {
                     toReturn = order;
+                    return toReturn;
                 }
             }
             return toReturn;
-        }
-
-        public void Update(Order order)
-        {
-            throw new NotImplementedException();
         }
     }
 }

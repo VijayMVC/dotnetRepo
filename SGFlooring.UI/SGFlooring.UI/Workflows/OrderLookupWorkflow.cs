@@ -21,9 +21,8 @@ namespace SGFlooring.UI.Workflows
 
             DateTime date;
             DateTime.TryParse(Console.ReadLine(), out date);
-            string orderID = OrderManager.DateToOrderId(date);
             
-            OrderLookupResponse response = manager.LookupOrders(orderID);
+            OrderLookupResponse response = manager.LookupOrders(date);
 
             if(response.Success)
             {

@@ -36,6 +36,34 @@ namespace SGFlooring.BLL
             return allProducts;
         }
 
+        public void RemoveOrder(DateTime orderDate, int orderNumber)
+        {
+            string prefix = "Orders_";
+            string dateParse = orderDate.ToString("MMddyyyy");
+            string orderID = $"{prefix}{dateParse}";
+
+            _orderRepository.RemoveSpecificOrder(orderDate, orderNumber);
+        }
+
+        public Order GetSpecificOrder(DateTime orderDate, int orderNumber)
+        {
+            Order order = new Order();
+            string prefix = "Orders_";
+            string dateParse = orderDate.ToString("MMddyyyy");
+            string orderID = $"{prefix}{dateParse}";
+
+            order = _orderRepository.SpecificOrder(orderDate, orderNumber);
+
+            if (order.OrderNumber == 0)
+            {
+                Console.WriteLine("Order does not exist, press any key to return to main menu...");
+                Console.ReadKey();
+                return order;
+            }
+
+            return order;
+        }
+
         public List<Tax> ListStates()
         {
             List<Tax> allStates = new List<Tax>();
@@ -49,11 +77,11 @@ namespace SGFlooring.BLL
             _taxRepository.GetState(newOrder);
         }
 
-        public OrderLookupResponse LookupOrders(string ordersID)
+        public OrderLookupResponse LookupOrders(DateTime date)
         {
             OrderLookupResponse response = new OrderLookupResponse();
 
-            response.ListOfOrders = _orderRepository.LoadOrders(ordersID);
+            response.ListOfOrders = _orderRepository.LoadOrders(date);
 
             if(response.ListOfOrders == null)
             {
@@ -70,8 +98,7 @@ namespace SGFlooring.BLL
         public void SaveOrder(Order newOrder)
         {
             newOrder.OrderNumber = 1;
-            string orderId = DateToOrderId(newOrder.OrderDate);
-            List<Order> orders = _orderRepository.LoadOrders(orderId);
+            List<Order> orders = _orderRepository.LoadOrders(newOrder.OrderDate);
             if (orders.Count == 0)
             {
                 _orderRepository.Create(newOrder);
@@ -83,6 +110,11 @@ namespace SGFlooring.BLL
                 newOrder.OrderNumber = order + 1;
                 _orderRepository.Create(newOrder);
             }
+        }
+
+        public void SaveEditedOrder(Order orderToEdit)
+        {
+            _orderRepository.Create(orderToEdit);
         }
 
         public void GetProduct(Order newOrder)
