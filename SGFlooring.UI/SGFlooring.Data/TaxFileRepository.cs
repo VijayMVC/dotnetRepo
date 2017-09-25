@@ -26,7 +26,6 @@ namespace SGFlooring.Data
             {
                 sr.ReadLine();
                 string line;
-                int Num;
 
                 while ((line = sr.ReadLine()) != null)
                 {
@@ -35,8 +34,7 @@ namespace SGFlooring.Data
                     string[] columns = line.Split(',');
                     newState.StateAbbreviation = columns[0];
                     newState.StateName = columns[1];
-                    int.TryParse(columns[2], out Num);
-                    newState.TaxRate = Num;
+                    newState.TaxRate = decimal.Parse(columns[2]);
 
                     allStates.Add(newState);
                 }

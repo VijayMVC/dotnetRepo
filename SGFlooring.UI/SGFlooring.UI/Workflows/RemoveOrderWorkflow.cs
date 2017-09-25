@@ -22,7 +22,6 @@ namespace SGFlooring.UI.Workflows
 
             Console.Write("Enter the date (mm/dd/yyyy) of the order to be edited: ");
             DateTime.TryParse(Console.ReadLine(), out orderDate);
-            string orderID = OrderManager.DateToOrderId(orderDate);
 
             Console.Write("Enter the order number of the order to be edited: ");
             int.TryParse(Console.ReadLine(), out orderNumber);

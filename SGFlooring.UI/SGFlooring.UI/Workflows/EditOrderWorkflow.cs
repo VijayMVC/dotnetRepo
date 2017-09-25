@@ -32,7 +32,7 @@ namespace SGFlooring.UI.Workflows
 
             Console.Write($"Enter customer name (currently: {orderToEdit.CustomerName}): ");
             string name = Console.ReadLine();
-            if (name != null)
+            if (name != "")
             {
                 orderToEdit.CustomerName = name;
             }
@@ -41,7 +41,7 @@ namespace SGFlooring.UI.Workflows
             ConsoleIO.DisplayStateDetails(stateList);
             Console.Write($"Enter the customer state (currently: {orderToEdit.State}):  ");
             string state = Console.ReadLine();
-            if (state != null)
+            if (state != "")
             {
                 orderToEdit.State = state;
                 manager.GetState(orderToEdit);
@@ -51,7 +51,7 @@ namespace SGFlooring.UI.Workflows
             ConsoleIO.DisplayProductDetails(prodList);
             Console.Write($"Enter the product type (currently: {orderToEdit.ProductType}):  ");
             string productType = Console.ReadLine();
-            if (productType != null)
+            if (productType != "")
             {
                 orderToEdit.ProductType = productType;
                 manager.GetProduct(orderToEdit);

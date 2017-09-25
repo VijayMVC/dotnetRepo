@@ -26,7 +26,6 @@ namespace SGFlooring.Data
             {
                 sr.ReadLine();
                 string line;
-                int Num;
 
                 while ((line = sr.ReadLine()) != null)
                 {
@@ -34,10 +33,8 @@ namespace SGFlooring.Data
 
                     string[] columns = line.Split(',');
                     newProduct.ProductType = columns[0];
-                    int.TryParse(columns[1], out Num);
-                    newProduct.CostPerSquareFoot = Num;
-                    int.TryParse(columns[2], out Num);
-                    newProduct.LaborCostPerSquareFoot = Num;
+                    newProduct.CostPerSquareFoot = decimal.Parse(columns[1]);
+                    newProduct.LaborCostPerSquareFoot = decimal.Parse(columns[2]);
 
                     allProducts.Add(newProduct);
                 }

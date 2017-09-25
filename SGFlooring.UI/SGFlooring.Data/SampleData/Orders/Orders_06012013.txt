@@ -1,2 +1,2 @@
-﻿OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
-1,Wise,OH,6.25,Wood,100.00,5.15,4.75,515.00,475.00,61.88,1051.88
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFootLaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Ganser,PA,6.75,Tile,150,3.50,4.15,525.00,622.50,77.456250,1224.956250

@@ -26,11 +26,9 @@ namespace SGFlooring.Data
         public void Create(Order order)
         {
             bool newOrder = true;
-            List<Order> allOrders = new List<Order>();
             Order toReturn = new Order();
             if (File.Exists(MakeFilePath(order.OrderDate)))
             {
-                allOrders = LoadOrders(order.OrderDate);
                 foreach (Order o in allOrders)
                 {
                     if (o.OrderNumber == order.OrderNumber)
@@ -84,11 +82,9 @@ namespace SGFlooring.Data
 
         public void RemoveSpecificOrder(DateTime orderDate, int orderNumber)
         {
-            List<Order> allOrders = new List<Order>();
             Order toReturn = new Order();
             if (File.Exists(MakeFilePath(orderDate)))
             {
-                allOrders = LoadOrders(orderDate);
                 foreach (Order o in allOrders)
                 {
                     if (o.OrderNumber == orderNumber)
@@ -104,12 +100,10 @@ namespace SGFlooring.Data
 
         public Order SpecificOrder(DateTime orderDate, int orderNumber)
         {
-            List<Order> allOrders = new List<Order>();
             Order toReturn = new Order();
             if (File.Exists(MakeFilePath(orderDate)))
             {
                 allOrders = LoadOrders(orderDate);
-
                 foreach (Order order in allOrders)
                 {
                     if (order.OrderNumber == orderNumber)
@@ -133,8 +127,8 @@ namespace SGFlooring.Data
 
         private void CreateOrdersFile(List<Order> orders)
         {
-            Order order = orders[1];
-            if (File.Exists(MakeFilePath(order.OrderDate)));
+            Order order = orders.FirstOrDefault();
+            if (File.Exists(MakeFilePath(order.OrderDate)))
                 File.Delete(MakeFilePath(order.OrderDate));
             using (StreamWriter sr = new StreamWriter(MakeFilePath(order.OrderDate)))
             {

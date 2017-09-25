@@ -22,12 +22,6 @@ namespace SGFlooring.BLL
             _taxRepository = taxRepository;
         }
 
-        //will need to set up an ordermanager to handle live data package
-        //public OrderManager (IProductRepository productRepository)
-        //{
-        //    _productRepository = productRepository;
-        //}
-
         public List<Product> ListProducts()
         {
             List<Product> allProducts = new List<Product>();
@@ -48,10 +42,6 @@ namespace SGFlooring.BLL
         public Order GetSpecificOrder(DateTime orderDate, int orderNumber)
         {
             Order order = new Order();
-            string prefix = "Orders_";
-            string dateParse = orderDate.ToString("MMddyyyy");
-            string orderID = $"{prefix}{dateParse}";
-
             order = _orderRepository.SpecificOrder(orderDate, orderNumber);
 
             if (order.OrderNumber == 0)
@@ -120,17 +110,6 @@ namespace SGFlooring.BLL
         public void GetProduct(Order newOrder)
         {
             _productRepository.GetProduct(newOrder);
-        }
-
-        public static string DateToOrderId(DateTime date)
-        {
-            string prefix = "Orders_";
-            string dateParse = date.ToString("MMddyyyy");
-            string orderID = $"{prefix}{dateParse}";
-
-            return orderID;
-        }
-
-        
+        }        
     }
 }
