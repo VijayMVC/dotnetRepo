@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Jake,PA,6.75,Wood,350,5.15,4.75,1802.50,1662.50,233.887500,3698.887500

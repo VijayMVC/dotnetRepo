@@ -1,2 +1,0 @@
-OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFootLaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
-1,Ganser,PA,6.75,Tile,150,3.50,4.15,525.00,622.50,77.456250,1224.956250

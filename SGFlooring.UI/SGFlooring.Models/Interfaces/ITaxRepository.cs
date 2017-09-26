@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SGFlooring.Models.Interfaces
 {
     public interface ITaxRepository
     {
         List<Tax> GetList();
-        Order GetState(Order newOrder);
+        Order AddStateToOrder(Order newOrder);
     }
 }

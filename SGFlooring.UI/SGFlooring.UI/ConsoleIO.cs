@@ -1,9 +1,6 @@
 ﻿using SGFlooring.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SGFlooring.UI
 {
@@ -18,7 +15,7 @@ namespace SGFlooring.UI
             {
                 Console.WriteLine("****************************");
                 Console.WriteLine($"{order.OrderNumber} | {order.OrderDate:MM/dd/yyyy}");
-                Console.WriteLine($"{order.CustomerName}");
+                Console.WriteLine($"{order.CustomerName.Replace("^",",")}");
                 Console.WriteLine($"{order.State}");
                 Console.WriteLine($"Product: {order.ProductType}");
                 Console.WriteLine($"Materials: {order.MaterialCost:c}");
@@ -26,6 +23,7 @@ namespace SGFlooring.UI
                 Console.WriteLine($"Tax: {order.Tax:c}");
                 Console.WriteLine($"Total: {order.Total:c}");
             }
+            
         }
 
         public static void DisplaySpecificOrder(Order order)
@@ -33,13 +31,14 @@ namespace SGFlooring.UI
             Console.Clear();
             Console.WriteLine("****************************");
             Console.WriteLine($"{order.OrderNumber} | {order.OrderDate:MM/dd/yyyy}");
-            Console.WriteLine($"{order.CustomerName}");
+            Console.WriteLine($"{order.CustomerName.Replace("^", ",")}");
             Console.WriteLine($"{order.State}");
             Console.WriteLine($"Product: {order.ProductType}");
             Console.WriteLine($"Materials: {order.MaterialCost:c}");
             Console.WriteLine($"Labor: {order.LaborCost:c}");
             Console.WriteLine($"Tax: {order.Tax:c}");
             Console.WriteLine($"Total: {order.Total:c}");
+            order.CustomerName.Replace(",", "^");
         }
 
         public static void DisplayProductDetails(List<Product> allProducts)

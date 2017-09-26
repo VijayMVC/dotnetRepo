@@ -1,0 +1,4 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Ganser,PA,6.75,Tile,150,3.50,4.15,525.00,622.50,77.456250,1224.956250
+2,Acme^ Inc.,OH,6.25,Tile,600,3.50,4.15,2100.00,2490.00,286.875000,4876.875000
+3,Jake,OH,6.25,Tile,700,3.50,4.15,2450.00,2905.00,334.687500,5689.687500

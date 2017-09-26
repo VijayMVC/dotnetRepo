@@ -1,9 +1,5 @@
 ﻿using SGFlooring.Models.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SGFlooring.Models;
 using System.IO;
 
@@ -40,7 +36,7 @@ namespace SGFlooring.Data
                 }
             }
         }
-        public Order GetProduct(Order order)
+        public Order AddProductToOrder(Order order)
         {
             Order toReturn = order;
             foreach (Product p in allProducts)

@@ -4,8 +4,6 @@ using SGFlooring.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SGFlooring.BLL
 {
@@ -62,9 +60,9 @@ namespace SGFlooring.BLL
             return allStates;
         }
 
-        public void GetState(Order newOrder)
+        public void AddStateToOrder(Order newOrder)
         {
-            _taxRepository.GetState(newOrder);
+            _taxRepository.AddStateToOrder(newOrder);
         }
 
         public OrderLookupResponse LookupOrders(DateTime date)
@@ -107,9 +105,9 @@ namespace SGFlooring.BLL
             _orderRepository.Create(orderToEdit);
         }
 
-        public void GetProduct(Order newOrder)
+        public void AddProductToOrder(Order newOrder)
         {
-            _productRepository.GetProduct(newOrder);
-        }        
+            _productRepository.AddProductToOrder(newOrder);
+        }
     }
 }

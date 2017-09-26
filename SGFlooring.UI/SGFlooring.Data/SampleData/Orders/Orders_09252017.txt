@@ -1,4 +1,0 @@
-OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFootLaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
-1,Jake,OH,6.25,Carpet,600,2.25,2.10,1350.00,1260.00,163.125000,2773.125000
-1,Jake,OH,6.25,Carpet,600,2.25,2.10,1350.00,1260.00,163.125000,2773.125000
-2,Ganser,IN,6.00,Tile,100,3.50,4.15,350.00,415.00,45.9000,810.9000

@@ -20,10 +20,10 @@ namespace SGFlooring.UI.Workflows
             Console.WriteLine("Remove an order");
             Console.WriteLine("*********************************");
 
-            Console.Write("Enter the date (mm/dd/yyyy) of the order to be edited: ");
+            Console.Write("Enter the date (mm/dd/yyyy) of the order to be removed: ");
             DateTime.TryParse(Console.ReadLine(), out orderDate);
 
-            Console.Write("Enter the order number of the order to be edited: ");
+            Console.Write("Enter the order number of the order to be removed: ");
             int.TryParse(Console.ReadLine(), out orderNumber);
 
             ConsoleIO.DisplaySpecificOrder(manager.GetSpecificOrder(orderDate, orderNumber));

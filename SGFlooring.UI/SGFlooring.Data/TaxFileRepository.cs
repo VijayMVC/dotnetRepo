@@ -1,10 +1,6 @@
-﻿using SGFlooring.Models.Interfaces;
-using System;
+﻿using SGFlooring.Models;
+using SGFlooring.Models.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SGFlooring.Models;
 using System.IO;
 
 namespace SGFlooring.Data
@@ -45,11 +41,15 @@ namespace SGFlooring.Data
             return allStates;
         }
 
-        public Order GetState(Order newOrder)
+        public Order AddStateToOrder(Order newOrder)
         {
             Order toReturn = newOrder;
             foreach (Tax t in allStates)
             {
+                if (toReturn.State == t.StateName)
+                {
+                    toReturn.State = t.StateAbbreviation;
+                }
                 if (toReturn.State == t.StateAbbreviation)
                 {
                     toReturn.TaxRate = t.TaxRate;

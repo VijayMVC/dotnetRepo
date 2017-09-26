@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SGFlooring.Models;
 using System.IO;
 
@@ -64,7 +62,7 @@ namespace SGFlooring.Data
 
                         newOrder.OrderDate = orderDate;
                         newOrder.OrderNumber = int.Parse(columns[0]);
-                        newOrder.CustomerName = columns[1].Replace(",", " ");
+                        newOrder.CustomerName = columns[1];
                         newOrder.State = columns[2];
                         newOrder.TaxRate = decimal.Parse(columns[3]);
                         newOrder.ProductType = columns[4];
@@ -87,14 +85,19 @@ namespace SGFlooring.Data
             {
                 foreach (Order o in allOrders)
                 {
-                    if (o.OrderNumber == orderNumber)
+                    if (o.OrderNumber == orderNumber && allOrders.Count == 1)
+                    {
+                        File.Delete(MakeFilePath(orderDate));
+                        break;
+                    }
+                    else if (o.OrderNumber == orderNumber)
                     {
                         allOrders.Remove(o);
+                        CreateOrdersFile(allOrders);
                         break;
                     }
                 }
-            }
-            CreateOrdersFile(allOrders);
+            }  
         }
 
 
@@ -132,7 +135,7 @@ namespace SGFlooring.Data
                 File.Delete(MakeFilePath(order.OrderDate));
             using (StreamWriter sr = new StreamWriter(MakeFilePath(order.OrderDate)))
             {
-                sr.WriteLine("OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot" +
+                sr.WriteLine("OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot," +
                     "LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total");
                 foreach (var row in allOrders)
                 {

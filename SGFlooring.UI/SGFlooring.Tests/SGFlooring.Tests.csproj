@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlooringUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestDataTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGFlooring.BLL\SGFlooring.BLL.csproj">
