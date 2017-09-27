@@ -47,32 +47,41 @@ namespace SGFlooring.Data
 
         public List<Order> LoadOrders(DateTime orderDate)
         {
-            if (File.Exists(MakeFilePath(orderDate)))
+            try
             {
-                using (StreamReader sr = new StreamReader(MakeFilePath(orderDate)))
+                if (File.Exists(MakeFilePath(orderDate)))
                 {
-                    sr.ReadLine();
-                    string line;
-
-                    while ((line = sr.ReadLine()) != null)
+                    using (StreamReader sr = new StreamReader(MakeFilePath(orderDate)))
                     {
-                        Order newOrder = new Order();
+                        sr.ReadLine();
+                        string line;
 
-                        string[] columns = line.Split(',');
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            Order newOrder = new Order();
 
-                        newOrder.OrderDate = orderDate;
-                        newOrder.OrderNumber = int.Parse(columns[0]);
-                        newOrder.CustomerName = columns[1];
-                        newOrder.State = columns[2];
-                        newOrder.TaxRate = decimal.Parse(columns[3]);
-                        newOrder.ProductType = columns[4];
-                        newOrder.Area = decimal.Parse(columns[5]);
-                        newOrder.CostPerSquareFoot = decimal.Parse(columns[6]);
-                        newOrder.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
+                            string[] columns = line.Split(',');
 
-                        allOrders.Add(newOrder);
+                            newOrder.OrderDate = orderDate;
+                            newOrder.OrderNumber = int.Parse(columns[0]);
+                            newOrder.CustomerName = columns[1];
+                            newOrder.State = columns[2];
+                            newOrder.TaxRate = decimal.Parse(columns[3]);
+                            newOrder.ProductType = columns[4];
+                            newOrder.Area = decimal.Parse(columns[5]);
+                            newOrder.CostPerSquareFoot = decimal.Parse(columns[6]);
+                            newOrder.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
+
+                            allOrders.Add(newOrder);
+                        }
                     }
                 }
+            }
+            catch
+            {
+                Console.WriteLine($"The file: {(MakeFilePath(orderDate))} was not found.\nVerify file path is correct.");
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
             }
             return allOrders;
         }

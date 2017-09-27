@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SGFlooring.Models;
 using System.IO;
+using System;
 
 namespace SGFlooring.Data
 {
@@ -18,22 +19,31 @@ namespace SGFlooring.Data
 
         public void List()
         {
-            using (StreamReader sr = new StreamReader(_filepath))
+            try
             {
-                sr.ReadLine();
-                string line;
-
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(_filepath))
                 {
-                    Product newProduct = new Product();
+                    sr.ReadLine();
+                    string line;
 
-                    string[] columns = line.Split(',');
-                    newProduct.ProductType = columns[0];
-                    newProduct.CostPerSquareFoot = decimal.Parse(columns[1]);
-                    newProduct.LaborCostPerSquareFoot = decimal.Parse(columns[2]);
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Product newProduct = new Product();
 
-                    allProducts.Add(newProduct);
+                        string[] columns = line.Split(',');
+                        newProduct.ProductType = columns[0];
+                        newProduct.CostPerSquareFoot = decimal.Parse(columns[1]);
+                        newProduct.LaborCostPerSquareFoot = decimal.Parse(columns[2]);
+
+                        allProducts.Add(newProduct);
+                    }
                 }
+            }
+            catch
+            {
+                Console.WriteLine($"The file: {_filepath} was not found.\nVerify file path is correct.");
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
             }
         }
         public Order AddProductToOrder(Order order)

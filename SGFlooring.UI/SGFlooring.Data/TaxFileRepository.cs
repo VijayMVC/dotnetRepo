@@ -1,5 +1,6 @@
 ﻿using SGFlooring.Models;
 using SGFlooring.Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -18,22 +19,31 @@ namespace SGFlooring.Data
 
         public void List()
         {
-            using (StreamReader sr = new StreamReader(_filepath))
+            try
             {
-                sr.ReadLine();
-                string line;
-
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(_filepath))
                 {
-                    Tax newState = new Tax();
+                    sr.ReadLine();
+                    string line;
 
-                    string[] columns = line.Split(',');
-                    newState.StateAbbreviation = columns[0];
-                    newState.StateName = columns[1];
-                    newState.TaxRate = decimal.Parse(columns[2]);
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Tax newState = new Tax();
 
-                    allStates.Add(newState);
+                        string[] columns = line.Split(',');
+                        newState.StateAbbreviation = columns[0];
+                        newState.StateName = columns[1];
+                        newState.TaxRate = decimal.Parse(columns[2]);
+
+                        allStates.Add(newState);
+                    }
                 }
+            }
+            catch
+            {
+                Console.WriteLine($"The file: {_filepath} was not found.\nVerify file path is correct.");
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
             }
         }
         public List<Tax> GetList()
