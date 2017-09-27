@@ -1,0 +1,30 @@
+﻿@model TipCalculator.Models.TipModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tip</title>
+</head>
+<body>
+    <div> 
+        <h1>Tip Calculator</h1>
+        <form action="/home/form1" method="post">
+            <div class="form-group">
+                <label>Bill</label>
+                <input type="text" class="form-control" name="Bill" />
+            </div>
+            <div class="form-group">
+                <label>Percent Tip</label>
+                <input type="text" class="form-control" name="Tip" />
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
+    </div>
+</body>
+</html>
