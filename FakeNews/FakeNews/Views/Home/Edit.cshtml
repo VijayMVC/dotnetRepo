@@ -1,0 +1,19 @@
+﻿@model FakeNews.Models.NewsArticle
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<form action="/home/Edit" method="post">
+    <h3>Headline:</h3>@Html.TextAreaFor(m => m.Headline)
+    <h3>Author:</h3>@Html.TextAreaFor(m => m.Author)
+    <h3>Text:</h3>@Html.TextAreaFor(m => m.BodyText)
+    <div>
+        <br />
+        @Html.CheckBoxFor(m => m.IsPublished) Publish
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

@@ -1,0 +1,20 @@
+﻿@model IEnumerable <FakeNews.Models.NewsArticle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Top Notch Fake News</h1>
+
+@foreach (var article in Model)
+{
+    if (article.IsPublished)
+    {
+    <h3>@article.Headline</h3>
+    <h4>@article.Author - @article.PublishDate.ToShortDateString()</h4>
+    <h6>@article.BodyText</h6>
+
+    @Html.ActionLink("Edit Article", "Edit",
+                new { id = article.Id });
+    }
+}

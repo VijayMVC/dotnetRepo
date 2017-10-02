@@ -1,0 +1,21 @@
+﻿@model SharedLayoutTest.Models.TipModel
+
+@{
+    ViewBag.Title = "Just the tip";
+}
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <h1>Tip Calculator</h1>
+    <p>
+        Bill: @Html.TextBoxFor(m => m.Bill)
+    </p><br />
+    <p>
+        Tip Percent: @Html.TextBoxFor(m => m.TipPercent)
+    </p><br />
+    <button type="submit" class="btn btn-primary">Calculate</button>
+}
+<br />
+@section Total
+{
+Total amount to pay: @Html.ValueFor(m => m.Symbol) @Html.ValueFor(m => m.Total)
+}
