@@ -75,20 +75,36 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult EditStudent(StudentVM aStudent)
         {
-            aStudent.SelectedCourseIds=
-            aStudent.CourseItems.Where(c => c.Selected).Select(c => int.Parse(c.Value)).ToList();
+            if (ModelState.IsValid)
+            {
+                aStudent.SelectedCourseIds =
+                aStudent.CourseItems.Where(c => c.Selected).Select(c => int.Parse(c.Value)).ToList();
 
-            aStudent.Student.Courses = new List<Course>();
+                aStudent.Student.Courses = new List<Course>();
 
-            foreach (var id in aStudent.SelectedCourseIds)
-                aStudent.Student.Courses.Add(CourseRepository.Get(id));
+                foreach (var id in aStudent.SelectedCourseIds)
+                    aStudent.Student.Courses.Add(CourseRepository.Get(id));
 
-            aStudent.Student.Major = MajorRepository.Get(aStudent.Student.Major.MajorId);
-            aStudent.Student.Address.State = StateRepository.Get(aStudent.Student.Address.State.StateName);
+                aStudent.Student.Major = MajorRepository.Get(aStudent.Student.Major.MajorId);
+                aStudent.Student.Address.State = StateRepository.Get(aStudent.Student.Address.State.StateName);
 
-            StudentRepository.Edit(aStudent.Student);
+                StudentRepository.Edit(aStudent.Student);
 
                 return RedirectToAction("List");
+            }
+            else
+            {
+                var s = StudentRepository.Get(aStudent.Student.StudentId);
+                var viewModel = new StudentVM();
+                viewModel.SetCourseItems(CourseRepository.GetAll());
+                viewModel.SetMajorItems(MajorRepository.GetAll());
+                viewModel.SetStateItems(StateRepository.GetAll());
+                viewModel.Student = s;
+
+                return View(viewModel);
+            }
+
+
         }
 
         [HttpGet]
