@@ -103,8 +103,6 @@ namespace Exercises.Controllers
 
                 return View(viewModel);
             }
-
-
         }
 
         [HttpGet]

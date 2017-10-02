@@ -61,6 +61,7 @@
                                     <div class="form-group">
                                         <label>GPA:</label>
                                         @Html.TextBoxFor(m => m.Student.GPA, new { @class = "form-control"})
+                                        @Html.ValidationMessageFor(m => m.Student.GPA)
                                     </div>
                                     <h4>Courses</h4>
                                     <div class="form-group">
