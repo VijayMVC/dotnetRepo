@@ -16,3 +16,12 @@ textarea {
     max-width: 280px;
 }
 
+.validation-summary-enums {
+    color: red;
+    font-weight: bold;
+}
+
+.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
