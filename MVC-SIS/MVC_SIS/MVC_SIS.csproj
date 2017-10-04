@@ -135,7 +135,6 @@
     </Compile>
     <Compile Include="Models\Data\Address.cs" />
     <Compile Include="Models\Data\Course.cs" />
-    <Compile Include="Models\Data\CourseCheckBoxItem.cs" />
     <Compile Include="Models\Data\Major.cs" />
     <Compile Include="Models\Data\State.cs" />
     <Compile Include="Models\Data\Student.cs" />
