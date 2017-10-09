@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Vending Machine</title>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/site.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <h1 style="text-align:center">Vending Machine</h1><br><hr><br>
+            <div class="row">
+                <div class="col-md-12 divMain" >
+                    <div class="row">
+                        <div class="col-sm-3 divMain" id="box1">
+                            <div class="dataBox" id="item1">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain" id="box2">
+                            <div class="dataBox" id="item2">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain" id="box3">
+                            <div class="dataBox" id="item3">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain">
+                            <h3>Total $ In</h3>
+                            <div style="text-align:center">
+                                    <div style="background-color:lightgrey; min-height:40px"> 
+                                    <h3 id="moneyIn"><!--Display Money Here--></h3>
+                                    </div><br> 
+                                <button type="button" id="addDollar-button" class="btn btn-primary">Add Dollar</button>
+                                <button type="button" id="addQuarter-button" class="btn btn-primary">Add Quarter</button> 
+                                <button type="button" id="addDime-button" class="btn btn-primary">Add Dime</button> 
+                                <button type="button" id="addNickel-button" class="btn btn-primary">Add Nickel</button>                                   
+                            </div>
+                        </div>                                                
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 divMain" id="box4">
+                            <div class="dataBox" id="item4">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain" id="box5">
+                            <div class="dataBox" id="item5">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain" id="box6">
+                            <div class="dataBox" id="item6">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain">
+                            <h3>Messages</h3>
+                            <div style="text-align:center">
+                                    <div style="background-color:lightgrey; min-height:60px" class="dataBox" id="messageBox"><!--Display Message Here--></div><br>
+                                    <label style="font-size:14pt">Select Item: </label>
+                                    <input style="background-color:lightgrey; min-height:30px; width:130px;" class="dataBox" id="itemBox" placeholder="    Enter item ID#"><!--Enter Item ID Here--></input><br><br>
+                                    <button type="button" id="makePurchase-button" class="btn btn-primary" style="width:200px">Make Purchase</button> 
+                                <br>                                
+                            </div>                            
+                        </div>                                                
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-3 divMain" id="box7">
+                            <div class="dataBox" id="item7">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain" id="box8">
+                            <div class="dataBox" id="item8">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain" id="box9">
+                            <div class="dataBox" id="item9">
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3 divMain">
+                            <h3>Change</h3>
+                            <div style="text-align:center">
+                                    <div style="background-color:lightgrey; min-height:100px" class="dataBox" id="changeBox"><!--Display Change Here--></div><br>
+                                    <div><button type="button" id="changeReturn-button" class="btn btn-primary" style="width:200px">Change Return</button></div>                                 
+                            </div>                                
+                            </div>                           
+                        </div>                                                
+                    </div>                    
+                </div>
+            </div>
+        </div>
+
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="js/home.js"></script>
+    </body>

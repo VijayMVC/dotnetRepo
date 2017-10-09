@@ -1,0 +1,13 @@
+.divMain{
+border-style: solid;
+min-height: 270px;
+}
+
+.btn{
+margin: 4px 4px 4px 4px;
+width: 100px;
+}
+
+h3{
+text-align:center;
+}
