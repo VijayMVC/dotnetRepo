@@ -90,6 +90,7 @@ $('#makePurchase-button').click(function(){
 //return change
 $('#changeReturn-button').click(function(){
     amount = 0;
+    $('#changeBox').empty();
     ClearVendingMachine();
     FillVendingMachine();
     DisplayMoneyIn();

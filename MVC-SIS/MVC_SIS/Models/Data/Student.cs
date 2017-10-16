@@ -10,7 +10,7 @@ namespace Exercises.Models.Data
     public class Student
     {
         public int StudentId { get; set; }
-        [Required(ErrorMessage ="Please enter a first name")]
+        [Required(ErrorMessage = "Please enter a first name")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Please enter a Last name")]
         public string LastName { get; set; }

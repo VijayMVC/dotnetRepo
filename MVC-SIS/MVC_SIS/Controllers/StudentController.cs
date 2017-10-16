@@ -98,21 +98,22 @@ namespace Exercises.Controllers
                 aStudent.Student.Address.State = StateRepository.Get(aStudent.Student.Address.State.StateName);
 
                 StudentRepository.Edit(aStudent.Student);
+                StudentRepository.SaveAddress(aStudent.Student.StudentId, aStudent.Student.Address);
 
                 return RedirectToAction("List");
-            }
+        }
             else
             {
                 var s = StudentRepository.Get(aStudent.Student.StudentId);
-                var viewModel = new StudentVM();
-                viewModel.SetCourseItems(CourseRepository.GetAll());
+        var viewModel = new StudentVM();
+        viewModel.SetCourseItems(CourseRepository.GetAll());
                 viewModel.SetMajorItems(MajorRepository.GetAll());
                 viewModel.SetStateItems(StateRepository.GetAll());
                 viewModel.Student = s;
 
                 return View(viewModel);
-            }
-        }
+    }
+}
 
         [HttpGet]
         public ActionResult DeleteStudent(int id)
