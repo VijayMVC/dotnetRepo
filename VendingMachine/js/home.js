@@ -60,12 +60,23 @@ function VendingAnItem(id){
         type: 'GET',
         url: "http://localhost:8080/money/"+amount.toFixed(2)+"/item/"+id,
         success: function(object){
+            $('.messageBox').empty();
+            $('.changeBox').empty();
+            FillVendingMachine();
             $('#messageBox').append("<p style='font-size:14px'>Thank you!!!</p>");
             var change = "<p> Quarters: "+object.quarters+"<br><p> Dimes: "+object.dimes+"<br><p> Nickels: "+object.nickels+"<br><p> Pennies: "+object.pennies+"</p>";
             $('#changeBox').append(change);
+            amount=0;
+            DisplayMoneyIn();
         },
         error: function(object) {
+            $('#messageBox').empty();
+            if(object.responseJSON.message == "No message available"){
+            $('#messageBox').append("Please select an item!");
+            }
+            else{  
             $('#messageBox').append(object.responseJSON.message);
+            }
         }
     })
 }

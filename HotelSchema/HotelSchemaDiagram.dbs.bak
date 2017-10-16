@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="HotelSchema" id="Project_26cb640" template="Default" database="MySql" >
+	<schema name="hotelschema" schemaname="hotelschema" >
+		<table name="addonrates" >
+			<column name="addonrateid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="startdate" type="date" jt="91" />
+			<column name="enddate" type="date" jt="91" />
+			<column name="multiplier" type="int" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="30" jt="12" mandatory="y" />
+			<index name="pk_rates_0" unique="PRIMARY_KEY" >
+				<column name="addonrateid" />
+			</index>
+		</table>
+		<table name="addons" >
+			<column name="addonid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="addonname" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="addonfee" type="int" jt="4" mandatory="y" />
+			<column name="addonrateid" type="int" jt="4" mandatory="y" />
+			<index name="pk_addons" unique="PRIMARY_KEY" >
+				<column name="addonid" />
+			</index>
+			<index name="idx_addons" unique="NORMAL" >
+				<column name="addonrateid" />
+			</index>
+			<fk name="fk_addons_rates" to_schema="hotelschema" to_table="addonrates" >
+				<fk_column name="addonrateid" pk="addonrateid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="amenities" >
+			<column name="amenityid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="roomid" type="int" jt="4" mandatory="y" />
+			<index name="pk_amenities" unique="PRIMARY_KEY" >
+				<column name="amenityid" />
+			</index>
+			<index name="idx_amenities" unique="NORMAL" >
+				<column name="roomid" />
+			</index>
+			<fk name="fk_amenities_room" to_schema="hotelschema" to_table="room" >
+				<fk_column name="roomid" pk="roomid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="bill" >
+			<column name="reservationid" type="int" jt="4" mandatory="y" />
+			<column name="billdate" type="date" jt="91" mandatory="y" />
+			<column name="tax" type="int" jt="4" mandatory="y" />
+			<column name="total" type="int" jt="4" mandatory="y" />
+			<index name="pk_bill" unique="PRIMARY_KEY" >
+				<column name="reservationid" />
+			</index>
+			<fk name="fk_bill_reservation" to_schema="hotelschema" to_table="reservation" >
+				<fk_column name="reservationid" pk="reservationid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="billdetails" >
+			<column name="reservationid" type="int" jt="4" mandatory="y" />
+			<column name="addonid" type="int" jt="4" />
+			<column name="cost" type="int" jt="4" mandatory="y" />
+			<column name="discount" type="int" jt="4" />
+			<index name="idx_billdetails" unique="NORMAL" >
+				<column name="addonid" />
+			</index>
+			<fk name="fk_billdetails_bill" to_schema="hotelschema" to_table="bill" >
+				<fk_column name="reservationid" pk="reservationid" />
+			</fk>
+			<fk name="fk_billdetails_addons" to_schema="hotelschema" to_table="addons" >
+				<fk_column name="addonid" pk="addonid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="customer" >
+			<comment><![CDATA[Basic customer contact information needs to be tracked (name, phone, email, etc)
+A customer should be able to book multiple rooms on the same reservation.
+Reservations should have a date range
+Reservations should list the names and ages of all guests.]]></comment>
+			<column name="customerid" type="int" length="30" jt="4" mandatory="y" autoincrement="y" />
+			<column name="firstname" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="lastname" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="phone" type="varchar" length="24" jt="12" />
+			<column name="address1" type="varchar" length="50" jt="12" />
+			<column name="address2" type="varchar" length="50" jt="12" />
+			<column name="city" type="varchar" length="30" jt="12" />
+			<column name="state" type="varchar" length="30" jt="12" />
+			<column name="postalcode" type="varchar" length="10" jt="12" />
+			<column name="country" type="varchar" length="15" jt="12" />
+			<column name="birthdate" type="date" jt="91" mandatory="y" />
+			<index name="pk_customer" unique="PRIMARY_KEY" >
+				<column name="customerid" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="guest" >
+			<column name="customerid" type="int" jt="4" mandatory="y" />
+			<column name="guestid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="firstname" type="varchar" length="30" jt="12" />
+			<column name="lastname" type="varchar" length="30" jt="12" />
+			<column name="age" type="int" jt="4" />
+			<index name="idx_guest" unique="NORMAL" >
+				<column name="customerid" />
+			</index>
+			<index name="pk_guest" unique="PRIMARY_KEY" >
+				<column name="guestid" />
+			</index>
+			<fk name="fk_guest_customer" to_schema="hotelschema" to_table="reservation" >
+				<fk_column name="customerid" pk="customerid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="rates" >
+			<column name="rateid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="startdate" type="date" jt="91" />
+			<column name="enddate" type="date" jt="91" />
+			<column name="multiplier" type="int" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="30" jt="12" mandatory="y" />
+			<index name="pk_rates" unique="PRIMARY_KEY" >
+				<column name="rateid" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="reservation" >
+			<column name="reservationid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="customerid" type="int" jt="4" mandatory="y" />
+			<column name="startdate" type="date" jt="91" mandatory="y" />
+			<column name="enddate" type="date" jt="91" mandatory="y" />
+			<index name="pk_reservation" unique="PRIMARY_KEY" >
+				<column name="reservationid" />
+			</index>
+			<index name="idx_reservation" unique="UNIQUE" >
+				<column name="customerid" />
+			</index>
+			<fk name="fk_reservation_customer" to_schema="hotelschema" to_table="customer" >
+				<fk_column name="customerid" pk="customerid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="reservationroom" >
+			<comment><![CDATA[look into elliminating reservationroomid and making roomid+reservationid the pk]]></comment>
+			<column name="reservationroomid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="roomid" type="int" jt="4" mandatory="y" >
+				<comment><![CDATA[fk]]></comment>
+			</column>
+			<column name="reservationid" type="int" jt="4" mandatory="y" >
+				<comment><![CDATA[fk]]></comment>
+			</column>
+			<index name="pk_reservationroom" unique="PRIMARY_KEY" >
+				<column name="reservationroomid" />
+			</index>
+			<index name="idx_reservationroom" unique="NORMAL" >
+				<column name="roomid" />
+			</index>
+			<index name="idx_reservationroom" unique="NORMAL" >
+				<column name="reservationid" />
+			</index>
+			<fk name="fk_reservationroom_room" to_schema="hotelschema" to_table="room" >
+				<fk_column name="roomid" pk="roomid" />
+			</fk>
+			<fk name="fk_reservationroom_reservation" to_schema="hotelschema" to_table="reservation" >
+				<fk_column name="reservationid" pk="reservationid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="room" >
+			<column name="roomid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="roomtypeid" type="varchar" length="30" jt="12" mandatory="y" >
+				<comment><![CDATA[will be FK]]></comment>
+			</column>
+			<column name="roomnumber" type="int" jt="4" mandatory="y" />
+			<column name="occupancy" type="int" jt="4" mandatory="y" />
+			<index name="pk_room" unique="PRIMARY_KEY" >
+				<column name="roomid" />
+			</index>
+			<index name="idx_room" unique="NORMAL" >
+				<column name="roomtypeid" />
+			</index>
+			<fk name="fk_room_roomtype" to_schema="hotelschema" to_table="roomtype" >
+				<fk_column name="roomtypeid" pk="roomtypeid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="roomtype" >
+			<column name="roomtypeid" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="roomtypename" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="baserate" type="int" jt="4" mandatory="y" />
+			<index name="pk_roomtype" unique="PRIMARY_KEY" >
+				<column name="roomtypeid" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="roomtyperates" >
+			<column name="roomtypeid" type="int" jt="4" mandatory="y" />
+			<column name="rateid" type="int" jt="4" mandatory="y" />
+			<index name="idx_roomtyperates" unique="NORMAL" >
+				<column name="roomtypeid" />
+			</index>
+			<index name="idx_roomtyperates" unique="NORMAL" >
+				<column name="rateid" />
+			</index>
+			<fk name="fk_roomtyperates_roomtype" to_schema="hotelschema" to_table="roomtype" >
+				<fk_column name="roomtypeid" pk="roomtypeid" />
+			</fk>
+			<fk name="fk_roomtyperates_rates" to_schema="hotelschema" to_table="rates" >
+				<fk_column name="rateid" pk="rateid" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout_1bea0b4" show_relation="columns" >
+		<entity schema="hotelschema" name="bill" color="c1d8ee" x="210" y="225" />
+		<entity schema="hotelschema" name="addonrates" color="c1d8ee" x="645" y="60" />
+		<entity schema="hotelschema" name="billdetails" color="c1d8ee" x="255" y="45" />
+		<entity schema="hotelschema" name="addons" color="c1d8ee" x="465" y="45" />
+		<entity schema="hotelschema" name="roomtype" color="c1d8ee" x="450" y="180" />
+		<entity schema="hotelschema" name="roomtyperates" color="c1d8ee" x="660" y="255" />
+		<entity schema="hotelschema" name="amenities" color="c1d8ee" x="510" y="330" />
+		<entity schema="hotelschema" name="rates" color="c1d8ee" x="645" y="465" />
+		<entity schema="hotelschema" name="room" color="c1d8ee" x="435" y="495" />
+		<entity schema="hotelschema" name="reservationroom" color="c1d8ee" x="225" y="465" />
+		<entity schema="hotelschema" name="guest" color="c1d8ee" x="45" y="480" />
+		<entity schema="hotelschema" name="reservation" color="c1d8ee" x="45" y="315" />
+		<entity schema="hotelschema" name="customer" color="c1d8ee" x="60" y="45" />
+	</layout>
+</project>
