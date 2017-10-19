@@ -67,6 +67,7 @@ namespace Exercises.Controllers
             viewModel.SetCourseItems(CourseRepository.GetAll());
             viewModel.SetMajorItems(MajorRepository.GetAll());
             viewModel.SetStateItems(StateRepository.GetAll());
+
             foreach(var course in viewModel.CourseItems)
             {
                 if (s.Courses != null)
