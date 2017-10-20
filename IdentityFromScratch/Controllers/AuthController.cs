@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IdentityFromScratch.Controllers
 {
@@ -30,28 +33,33 @@ namespace IdentityFromScratch.Controllers
                 return View(model);
             }
 
-            if (model.Email == "jake@sg.com" && model.Password == "password")
+            var ctx = Request.GetOwinContext();
+            var authMgr = ctx.Authentication;
+            var userMgr = ctx.GetUserManager<UserManager<IdentityUser>>();
+
+            var newUser = userMgr.Find(model.Email, model.Password);
+
+            if (newUser != null)
             {
-                var identity = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name,"Bob"),
-                    new Claim(ClaimTypes.Email,"jake@sg.com"),
-                    new Claim(ClaimTypes.Country,"USA")
-                },
-                "ApplicationCookie");
-
-                var ctx = Request.GetOwinContext();
-                var authMgr = ctx.Authentication;
-
-                authMgr.SignIn(identity);
-
-                if (string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
-                {
-                    return Redirect(Url.Action("Index", "Home"));
-                }
-                return Redirect(model.ReturnUrl);
+                var loginUser = userMgr.CreateIdentity(newUser, DefaultAuthenticationTypes.ApplicationCookie);
+                authMgr.SignIn(loginUser);
             }
-            return View(model);
+
+            if (string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
+            {
+                return Redirect(Url.Action("Index", "Home"));
+            }
+            return Redirect(model.ReturnUrl);
+        }
+
+        public ActionResult Logout()
+        {
+            var ctx = Request.GetOwinContext();
+            var authMgr = ctx.Authentication;
+
+            authMgr.SignOut("ApplicationCookie");
+
+            return RedirectToAction("Login");
         }
     }
 }

@@ -22,7 +22,6 @@ create table Customer(
 	Country nvarchar(15),
 	BirthDate datetime2
 )
-go
 
 create table Reservation(
 	ReservationID int Identity (1,1) Primary Key,
@@ -31,7 +30,15 @@ create table Reservation(
 	EndDate date,
 	Room int
 )
-go
+
+create table PromoCodes(
+	PromoCodeID int Identity (1,1) Primary Key,
+	ReservationID int foreign key references Reservation(reservationID),
+	StartDate date,
+	EndDate date,
+	DollarsOff money,
+	DiscountRate int
+)
 
 create table Guest(
 	GuestID int Identity (1,1) Primary Key,
@@ -44,13 +51,14 @@ create table Guest(
 create table RoomType(
 	RoomTypeID int Identity (1,1) Primary Key,
 	RoomTypeName varchar (30) not null,
-	BaseRate int not null
+	BaseRate money not null
 )
 
 create table Room(
 	RoomID int Identity (1,1) Primary Key,
 	RoomTypeID int foreign key references RoomType(roomtypeid),
 	RoomNumber int not null,
+	RoomFloor varchar(20),
 	Occupancy int not null, 
 )
 
@@ -63,7 +71,11 @@ create table ReservationRoom(
 create table Amenities(
 	AmenityID int Identity (1,1) Primary Key, 
 	AmenityName varchar (30) not null,
-	RoomID int foreign key references Room(RoomID) not null
+)
+
+create table RoomAmenities(
+	AmenityID int foreign key references Amenities(AmenityID),
+	RoomID int foreign key references Room(roomID),
 )
 
 create table Rates(
@@ -89,7 +101,7 @@ create table AddOnRates(
 create table AddOns(
 	AddOnID int Identity (1,1) Primary Key,
 	AddOnName varchar(30),
-	AddOnFee int,
+	AddOnFee money,
 	AddOnRateID int foreign key references AddOnRates(AddOnRateID)
 )
 
@@ -97,13 +109,13 @@ create table Bill(
 	ReservationID int Primary Key foreign key references Reservation(ReservationID),
 	BillDate datetime2 not null,
 	Tax int not null,
-	Total int not null,
+	Total money not null,
 	discount int,
 )
 
 create table BillDetails(
 	ReservationID int foreign key references Bill(ReservationID),
-	AddOnID int foreign key references AddOns(AddOnID),
-	Cost int,
+	AddOnID int foreign key references AddOns(AddOnID) null,
+	Cost money,
 	ItemDescription varchar(30)
 )
