@@ -34,6 +34,7 @@ namespace DvdLibrary.Data.EF
             using (var context = new DvdListEntities())
             {
                 context.Entry(dvd).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
             }
         }
 

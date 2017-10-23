@@ -108,9 +108,9 @@ create table AddOns(
 create table Bill(
 	ReservationID int Primary Key foreign key references Reservation(ReservationID),
 	BillDate datetime2 not null,
-	Tax int not null,
+	Tax money not null,
 	Total money not null,
-	discount int,
+	discount money,
 )
 
 create table BillDetails(
