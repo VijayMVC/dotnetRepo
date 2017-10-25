@@ -1,6 +1,4 @@
 ﻿using DvdLibrary.Data;
-using DvdLibrary.Data.ADO;
-using DvdLibrary.Data.Repositories;
 using DvdLibrary.Models;
 using NUnit.Framework;
 using System;
@@ -10,11 +8,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DvdLibrary.Data.EF;
 
 namespace DvdLibrary.Tests.IntegrationTests
 {
     [TestFixture]
-    public class AdoTests
+    public class EFTests
     {
         [SetUp]
         public void init()
@@ -28,15 +27,15 @@ namespace DvdLibrary.Tests.IntegrationTests
                 cmd.Connection = cn;
                 cn.Open();
 
-                cmd.ExecuteNonQuery();        
+                cmd.ExecuteNonQuery();
             }
         }
         [Test]
-        public void ADOCanLoadDvds()
+        public void EFCanLoadDvds()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
 
-            var dvds = repo.GetAllDvds();
+                var dvds = repo.GetAllDvds();
 
             Assert.AreEqual(3, dvds.Count);
             Assert.AreEqual("Office Space", dvds[0].Title);
@@ -47,9 +46,9 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADOCanLoadDvdById()
+        public void EFCanLoadDvdById()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
             var dvd = repo.GetDvd(1);
 
             Assert.IsNotNull(dvd);
@@ -62,9 +61,9 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADOCanLoadDvdsByTitle()
+        public void EFCanLoadDvdsByTitle()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
 
             var dvds = repo.GetDvdsByTitle("Office Space");
 
@@ -77,18 +76,18 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADONotFoundDvdReturnsNull()
+        public void EFNotFoundDvdReturnsNull()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
             var dvd = repo.GetDvd(1000000000);
 
             Assert.IsNull(dvd);
         }
 
         [Test]
-        public void ADOCanAddDvd()
+        public void EFCanAddDvd()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
             Dvd dvdToAdd = new Dvd();
 
             dvdToAdd.Title = "Grand Budapest Hotel";
@@ -103,9 +102,9 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADOCanEditDvd()
+        public void EFCanEditDvd()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
             Dvd dvdToAdd = new Dvd();
 
             dvdToAdd.Title = "Grand Budapest Hotel";
@@ -132,9 +131,9 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADOCanDeleteDvd()
+        public void EFCanDeleteDvd()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
             Dvd dvdToAdd = new Dvd();
 
             dvdToAdd.Title = "Grand Budapest Hotel";
@@ -156,9 +155,9 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADOCanLoadDvdsByYear()
+        public void EFCanLoadDvdsByYear()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
 
             var dvds = repo.GetDvdsByDate(1999);
 
@@ -166,9 +165,9 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADOCanLoadDvdsByDirector()
+        public void EFCanLoadDvdsByDirector()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
 
             var dvds = repo.GetDvdsByDirector("Director A");
 
@@ -176,9 +175,9 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void ADOCanLoadDvdsByRating()
+        public void EFCanLoadDvdsByRating()
         {
-            DvdRepositoryADO repo = new DvdRepositoryADO();
+            DvdRepositoryEF repo = new DvdRepositoryEF();
 
             var dvds = repo.GetDvdsByRating("R");
 
@@ -186,3 +185,4 @@ namespace DvdLibrary.Tests.IntegrationTests
         }
     }
 }
+

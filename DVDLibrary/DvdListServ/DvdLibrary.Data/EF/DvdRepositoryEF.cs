@@ -8,7 +8,7 @@ using DvdLibrary.Models;
 
 namespace DvdLibrary.Data.EF
 {
-    class DvdRepositoryEF : IDvdRepository
+    public class DvdRepositoryEF : IDvdRepository
     {
         public void AddDvd(Dvd dvd)
         {
