@@ -185,6 +185,7 @@ namespace CarDealership.Data.Migrations
                 {
                     FirstName = "Bill",
                     LastName = "Johnson",
+                    PurchaseID = 1,
                     Email = "bill.johnson@gmail.com",
                     Phone = "111-111-1111",
                     City = "Anoka",
@@ -277,7 +278,7 @@ namespace CarDealership.Data.Migrations
                     SalePrice = 16000M,
                     Transmission = "Manual",
                     VinNumber = "4T3ZF13C12U459747",
-                    Year = DateTime.Parse("2017"),
+                    Year = DateTime.Parse("1/1/2017")
                 },
                 new Vehicle
                 {
@@ -293,7 +294,7 @@ namespace CarDealership.Data.Migrations
                     SalePrice = 16000M,
                     Transmission = "Automatic",
                     VinNumber = "1FAFP53222G297529",
-                    Year = DateTime.Parse("2017"),
+                    Year = DateTime.Parse("1/1/2017"),
                 },
                 new Vehicle
                 {
@@ -309,7 +310,7 @@ namespace CarDealership.Data.Migrations
                     SalePrice = 16000M,
                     Transmission = "Manual",
                     VinNumber = "ZFF65THA9D0186686",
-                    Year = DateTime.Parse("2016"),
+                    Year = DateTime.Parse("1/1/2016"),
                 },
                 new Vehicle
                 {
@@ -325,7 +326,7 @@ namespace CarDealership.Data.Migrations
                     SalePrice = 16000M,
                     Transmission = "Manual",
                     VinNumber = "4T3ZF13C12U459747",
-                    Year = DateTime.Parse("2017"),
+                    Year = DateTime.Parse("1/1/2017"),
                 },
                 new Vehicle
                 {
@@ -341,7 +342,7 @@ namespace CarDealership.Data.Migrations
                     SalePrice = 25000M,
                     Transmission = "Manual",
                     VinNumber = "JA4NW61S23J021156",
-                    Year = DateTime.Parse("2006"),
+                    Year = DateTime.Parse("1/1/2006"),
                 },
                 new Vehicle
                 {
@@ -357,7 +358,7 @@ namespace CarDealership.Data.Migrations
                     SalePrice = 50000M,
                     Transmission = "Automatic",
                     VinNumber = "1HGCR2F32DA718943",
-                    Year = DateTime.Parse("2017"),
+                    Year = DateTime.Parse("1/1/2017"),
                 }
                 );
 

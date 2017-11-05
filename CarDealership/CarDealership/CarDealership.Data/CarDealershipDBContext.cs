@@ -1,4 +1,5 @@
 ﻿using CarDealership.Models.Tables;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarDealership.Models
 {
-    public class CarDealershipDBContext : DbContext
+    public class CarDealershipDBContext : IdentityDbContext
     {
         public CarDealershipDBContext() : base("CarDealership")
         {

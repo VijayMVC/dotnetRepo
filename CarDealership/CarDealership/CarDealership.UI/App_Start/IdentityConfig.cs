@@ -1,4 +1,4 @@
-﻿using CarDealership.UI.Models;
+﻿using CarDealership.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,21 +16,14 @@ namespace CarDealership.UI.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext(() => new CarDealershipDBContext());
-
-            app.CreatePerOwinContext<UserManager<AppUser>>((options, context) =>
-                new UserManager<AppUser>(
-                    new UserStore<AppUser>(context.Get<CarDealershipDBContext>())));
-
-            app.CreatePerOwinContext<RoleManager<AppRole>>((options, context) =>
-                new RoleManager<AppRole>(
-                    new RoleStore<AppRole>(context.Get<CarDealershipDBContext>())));
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Home/Login"),
+                AuthenticationType = "ApplicationCookie",
+                LoginPath = new PathString("/auth/login")
             });
+            app.CreatePerOwinContext(() => new CarDealershipDBContext());
+            app.CreatePerOwinContext<UserManager<IdentityUser>>((options, context) => new UserManager<IdentityUser>(new UserStore<IdentityUser>(context.Get<CarDealershipDBContext>())));
+            app.CreatePerOwinContext<RoleManager<IdentityRole>>((options, context) => new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context.Get<CarDealershipDBContext>())));
         }
     }
 }

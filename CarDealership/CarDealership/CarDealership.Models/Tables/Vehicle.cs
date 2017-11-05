@@ -25,5 +25,7 @@ namespace CarDealership.Models
         public int BodyTypeID { get; set; }
         public int SpecialsID { get; set; }
         public int ImageID { get; set; }
+
+        public virtual CarModel CarModel { get; set; }
     }
 }
