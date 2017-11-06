@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using CarDealership.Models;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,17 +16,7 @@ namespace ClassLibrary1.EFRepoTests
         [SetUp]
         public void init()
         {
-            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CarDealership"].ConnectionString))
-            {
-                var cmd = new SqlCommand();
-                cmd.CommandText = "dbreset";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                cmd.Connection = cn;
-                cn.Open();
-
-                cmd.ExecuteNonQuery();
-            }
+            
         }
     }
 }
