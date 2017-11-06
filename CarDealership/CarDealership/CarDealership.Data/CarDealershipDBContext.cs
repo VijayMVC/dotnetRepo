@@ -11,7 +11,7 @@ namespace CarDealership.Models
 {
     public class CarDealershipDBContext : IdentityDbContext
     {
-        public CarDealershipDBContext() : base("CarDealership")
+        public CarDealershipDBContext() : base("CarDealership2")
         {
 
         }

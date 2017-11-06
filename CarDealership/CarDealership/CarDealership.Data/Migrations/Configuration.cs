@@ -112,6 +112,7 @@ namespace CarDealership.Data.Migrations
                 new CarModel
                 {
                     ModelName = "3",
+                    MakeID = 1,
                     AddedDate = DateTime.Parse("11/4/2017"),
                     BodyTypeID = 2, 
                     EmployeeID = 1
@@ -119,6 +120,7 @@ namespace CarDealership.Data.Migrations
                 new CarModel
                 {
                     ModelName = "Corolla",
+                    MakeID = 2,
                     AddedDate = DateTime.Parse("11/4/2017"),
                     BodyTypeID = 1,
                     EmployeeID = 1
@@ -126,6 +128,7 @@ namespace CarDealership.Data.Migrations
                 new CarModel
                 {
                     ModelName = "Silverado",
+                    MakeID = 3,
                     AddedDate = DateTime.Parse("11/4/2017"),
                     BodyTypeID = 3,
                     EmployeeID = 1
@@ -194,7 +197,7 @@ namespace CarDealership.Data.Migrations
                     PostalCode = "55303"
                 });
 
-            context.Employees.AddOrUpdate(e => e.EmployeeID,
+            context.Employees.AddOrUpdate(e => e.Email,
                 new Employee
                 {
                     FirstName = "Joe",
@@ -325,7 +328,7 @@ namespace CarDealership.Data.Migrations
                     MSRP = 20000M,
                     SalePrice = 16000M,
                     Transmission = "Manual",
-                    VinNumber = "4T3ZF13C12U459747",
+                    VinNumber = "4T3ZF13C12U423456",
                     Year = DateTime.Parse("1/1/2017"),
                 },
                 new Vehicle
@@ -361,7 +364,6 @@ namespace CarDealership.Data.Migrations
                     Year = DateTime.Parse("1/1/2017"),
                 }
                 );
-
         }
     }
 }

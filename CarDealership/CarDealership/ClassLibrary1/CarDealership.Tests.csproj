@@ -34,6 +34,7 @@
       <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,10 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EFRepoTests\EFRepoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CarDealership.Data\CarDealership.Data.csproj">
+      <Project>{fffa5eb9-c017-4a90-9e89-98477eb4a299}</Project>
+      <Name>CarDealership.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CarDealership.Models\CarDealership.Models.csproj">
+      <Project>{ba48b5d5-3b4b-44da-a5b4-893757b82828}</Project>
+      <Name>CarDealership.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CarDealership.UI\CarDealership.UI.csproj">
+      <Project>{4f4ebcf5-91c9-4d80-94ea-ed4e3e89a96c}</Project>
+      <Name>CarDealership.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

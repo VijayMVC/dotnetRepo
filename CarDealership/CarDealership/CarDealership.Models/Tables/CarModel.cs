@@ -13,6 +13,7 @@ namespace CarDealership.Models
         public DateTime AddedDate { get; set; }
         public int EmployeeID { get; set; }
         public int BodyTypeID { get; set; }
+        public int MakeID { get; set; }
 
         public virtual Make Make { get; set; }
     }

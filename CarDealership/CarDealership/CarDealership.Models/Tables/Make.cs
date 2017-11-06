@@ -12,7 +12,7 @@ namespace CarDealership.Models
         public int MakeID { get; set; }
         public string MakeName { get; set; }
         public DateTime AddedDate { get; set; }
-        public int ModelID { get; set; }
         public int EmployeeID { get; set; }
+
     }
 }

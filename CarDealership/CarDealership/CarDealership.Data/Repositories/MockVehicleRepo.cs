@@ -109,6 +109,16 @@ namespace CarDealership.Data.Repositories
             }
         };
 
+        public void AddMake(Make make)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddModel(CarModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddVehicle(Vehicle vehicle)
         {
             _vehicles.Add(vehicle);
@@ -185,6 +195,11 @@ namespace CarDealership.Data.Repositories
             Vehicle car = new Vehicle();
             car = _vehicles.Where(v => v.VehicleID == vehicleID).FirstOrDefault();
             return car;
+        }
+
+        public Vehicle GetVehicleByVin(string vinNumber)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Vehicle> GetVehiclesByMake(string make)
