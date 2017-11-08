@@ -11,6 +11,7 @@ namespace CarDealership.UI.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.Title = "Home Page";
             return View();
         }
     }

@@ -14,5 +14,11 @@ namespace CarDealership.Models.Tables
         public DateTime EndDate { get; set; }
         public int value { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
+
+        public Special()
+        {
+            Vehicles = new HashSet<Vehicle>();
+        }
     }
 }

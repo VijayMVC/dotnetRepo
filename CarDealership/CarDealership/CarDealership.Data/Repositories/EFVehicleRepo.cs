@@ -87,7 +87,7 @@ namespace CarDealership.Data.Repositories
 
         public List<Vehicle> GetVehiclesByMake(string make)
         {
-            return context.Vehicles.Where(v => v.CarModel.Make.MakeName.Contains(make)).ToList();
+            return context.Vehicles.Where(v => v.CarMake.MakeName.Contains(make)).ToList();
         }
 
         public List<Vehicle> GetVehiclesByModel(string model)
@@ -95,9 +95,9 @@ namespace CarDealership.Data.Repositories
             return context.Vehicles.Where(v => v.CarModel.ModelName.Contains(model)).ToList();
         }
 
-        public List<Vehicle> GetVehiclesByYear(string year)
+        public List<Vehicle> GetVehiclesByYear(int year)
         {
-            return context.Vehicles.Where(v => v.Year.Year.ToString("yyyy") == year).ToList();
+            return context.Vehicles.Where(v => v.Year == year).ToList();
         }
     }
 }

@@ -112,6 +112,7 @@
     <Compile Include="Repositories\EFVehicleRepo.cs" />
     <Compile Include="Repositories\IVehicleRepo.cs" />
     <Compile Include="Repositories\MockVehicleRepo.cs" />
+    <Compile Include="Repositories\VehicleRepoFactory.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>

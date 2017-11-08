@@ -12,6 +12,6 @@ namespace CarDealership.Models.Tables
         public decimal PurchasePrice { get; set; }
         public string VinNumber { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public int PurchaseTypeID { get; set; }
+        public PurchaseType APurchaseType { get; set; }
     }
 }

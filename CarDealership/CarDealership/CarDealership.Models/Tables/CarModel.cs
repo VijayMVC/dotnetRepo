@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarDealership.Models.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,6 @@ namespace CarDealership.Models
         public int CarModelID { get; set; }
         public string ModelName { get; set; }
         public DateTime AddedDate { get; set; }
-        public int EmployeeID { get; set; }
-        public int BodyTypeID { get; set; }
-        public int MakeID { get; set; }
-
-        public virtual Make Make { get; set; }
+        public virtual Employee AnEmployee { get; set; }        
     }
 }
