@@ -1,0 +1,40 @@
+﻿@model CarDealership.Models.Tables.ContactUs
+
+<h2>Contact Us</h2>
+
+@using (@Html.BeginForm())
+{   
+    <label>Name</label>
+    @Html.TextBoxFor(p => p.FirstName, new { @class = "form-control", placeholder = "First" })
+    @Html.TextBoxFor(p => p.LastName, new { @class = "form-control", placeholder = "Last" })
+
+    <label>Email Address</label>
+    @Html.TextBoxFor(p => p.Email, new { @class = "form-control"})
+    
+    <label>Phone</label>
+    @Html.TextBoxFor(p => p.Phone, new { @class = "form-control" })
+
+    <label>Message</label>
+    @Html.TextAreaFor(p => p.Message, new { @class = "form-control", id="messageForm" })
+
+    <button type="submit" id="search" class="btn btn-primary btn-sm">Submit</button>
+}
+
+
+
+@section scripts{
+    <script src="~/Scripts/search.js"></script>
+    <script>
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8
+                });
+            }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQdUCGe0ljgk8aDajGlvsOVZNk52Mgfu0&callback=initMap"
+        type="text/javascript"></script>
+}
+
+

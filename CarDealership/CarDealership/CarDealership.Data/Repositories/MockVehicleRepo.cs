@@ -10,27 +10,241 @@ namespace CarDealership.Data.Repositories
 {
     public class MockVehicleRepo : IVehicleRepo
     {
+        private static List<Employee> _employees = new List<Employee>
+        {
+                new Employee
+                {
+                    FirstName = "Joe",
+                    LastName = "Miller",
+                    Email = "jmiller@guildcars.com",
+                    Phone = "222-222-2222",
+                    Street1 = "1234 Main Street",
+                    City = "Minneapolis",
+                    State = "MN",
+                    PostalCode = "55121"
+                }
+        };
+
         private static List<BodyType> _bodyTypes = new List<BodyType>
         {
             new BodyType
             {
+                BodyTypeID = 1,
                 BodyTypeName = "Two-Door Car"
             },
             new BodyType
             {
+                BodyTypeID = 2,
                 BodyTypeName = "Four-Door Car"
             },
             new BodyType
             {
+                BodyTypeID = 3,
                 BodyTypeName = "Sports-Utility Vehicle"
             },
             new BodyType
             {
+                BodyTypeID = 4,
                 BodyTypeName = "Pickup"
             },
             new BodyType
             {
+                BodyTypeID = 5,
                 BodyTypeName = "Crossover"
+            }
+        };
+
+        private static List<Make> _makes = new List<Make>
+        {
+            new Make
+            {
+                MakeID = 1,
+                MakeName = "Mazda",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new Make
+            {
+                MakeID = 2,
+                MakeName = "Toyota",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new Make
+            {
+                MakeID = 3,
+                MakeName = "Chevy",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new Make
+            {
+                MakeID = 4,
+                MakeName = "BMW",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new Make
+            {
+                MakeID = 5,
+                MakeName = "Ford",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+        };
+        private static List<CarModel> _carModels = new List<CarModel>
+        {
+            new CarModel
+            {
+                CarModelID = 1,
+                ModelName = "3",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new CarModel
+            {
+                CarModelID = 2,
+                ModelName = "Corolla",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new CarModel
+            {
+                CarModelID = 3,
+                ModelName = "Silverado",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new CarModel
+            {
+                CarModelID = 4,
+                ModelName = "550S",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+            new CarModel
+            {
+                CarModelID = 5,
+                ModelName = "Focus",
+                AddedDate = DateTime.Parse("11/07/2017"),
+                AnEmployee = _employees[0]
+            },
+        };
+        private static List<Vehicle> _vehicles = new List<Vehicle>
+        {
+            new Vehicle
+            {
+                VehicleID = 1,
+                Color = "Meteorite Grey",
+                Description = "Fancy new Mazda 3",
+                Interior = "Leather",
+                IsAvailable = false,
+                IsFeatured = false,
+                IsNew = true,
+                Mileage = 520,
+                CarBody = _bodyTypes[1],
+                CarMake = _makes[0],
+                CarModel = _carModels[0],
+                MSRP = 20000M,
+                SalePrice = 16000M,
+                IsAutomatic = false,
+                VinNumber = "4T3ZF13C12U459747",
+                Year = 2016,
+            },
+            new Vehicle
+            {
+                VehicleID = 2,
+                Color = "Red",
+                Description = "This is a two-door Toyota Corolla",
+                Interior = "Cloth",
+                IsAvailable = true,
+                IsFeatured = true,
+                IsNew = true,
+                Mileage = 300,
+                CarModel = _carModels[1],
+                CarMake = _makes[1],
+                MSRP = 16000M,
+                SalePrice = 16000M,
+                IsAutomatic = false,
+                VinNumber = "1FAFP53222G297529",
+                Year = 2015,
+                CarBody = _bodyTypes[0]
+            },
+            new Vehicle
+            {
+                VehicleID = 3,
+                Color = "Black",
+                Description = "This is a car",
+                Interior = "Leather",
+                IsAvailable = true,
+                IsFeatured = true,
+                IsNew = true,
+                Mileage = 520,
+                CarMake = _makes[4],
+                CarModel = _carModels[4],
+                MSRP = 20000M,
+                SalePrice = 16000M,
+                IsAutomatic = false,
+                VinNumber = "ZFF65THA9D0186686",
+                Year = 2017,
+                CarBody = _bodyTypes[1],
+            },
+            new Vehicle
+            {
+                VehicleID = 4,
+                Color = "Electric Blue",
+                Description = "this is car here",
+                Interior = "Cloth",
+                IsAvailable = true,
+                IsFeatured = false,
+                IsNew = false,
+                Mileage = 20000,
+                CarMake =  _makes[3],
+                CarModel = _carModels[3],
+                MSRP = 20000M,
+                SalePrice = 16000M,
+                IsAutomatic = true,
+                VinNumber = "4T3ZF13C12U459747",
+                Year = 2017,
+                CarBody = _bodyTypes[0]
+            },
+            new Vehicle
+            {
+                VehicleID = 5,
+                Color = "Rusty",
+                Description = "This is an old beat up truck",
+                Interior = "Cloth",
+                IsAvailable = true,
+                IsFeatured = true,
+                IsNew = false,
+                Mileage = 150000,
+                CarMake = _makes[2],
+                CarModel = _carModels[2],
+                MSRP = 50000M,
+                SalePrice = 25000M,
+                IsAutomatic = false,
+                VinNumber = "JA4NW61S23J021156",
+                Year = 2000,
+                CarBody = _bodyTypes[3]
+            },
+            new Vehicle
+            {
+                VehicleID = 6,
+                Color = "Canary Yellow",
+                Description = "This car is spectacular",
+                Interior = "Leather",
+                IsAvailable = true,
+                IsFeatured = true,
+                IsNew = true,
+                Mileage = 12,
+                CarMake = _makes[0],
+                CarModel = _carModels[0],
+                MSRP = 50000M,
+                SalePrice = 50000M,
+                IsAutomatic = true,
+                VinNumber = "1HGCR2F32DA718943",
+                Year = 2017,
+                CarBody = _bodyTypes[0],
             }
         };
 
@@ -68,7 +282,7 @@ namespace CarDealership.Data.Repositories
                     City = "Anoka",
                     State = "MN",
                     Street1 = "7750 149th Ave",
-                    PostalCode = "55303"
+                    PostalCode = "55303",
                 }
         };
 
@@ -92,230 +306,24 @@ namespace CarDealership.Data.Repositories
         {
                 new Purchase
                 {
+                    PurchaseID = 1,
                     PurchaseDate = DateTime.Parse("11/4/17"),
                     PurchasePrice = 16000M,
-                    APurchaseType = new PurchaseType
-                    {
-                        PurchaseTypeID = 1,
-                        PurchaseTypeName = "Cash"
-                    },
+                    APurchaseType = _purchaseTypes[0],
                     VinNumber = "4T3ZF13C12U459747",
+                    ACustomer = _customers[0]
                 }
         };
 
-        private static List<Employee> _employees = new List<Employee>
-        {
-                new Employee
-                {
-                    FirstName = "Joe",
-                    LastName = "Miller",
-                    Email = "jmiller@guildcars.com",
-                    Phone = "222-222-2222",
-                    Street1 = "1234 Main Street",
-                    City = "Minneapolis",
-                    State = "MN",
-                    PostalCode = "55121"
-                }
-        };
 
-        private static List<Vehicle> _vehicles = new List<Vehicle>
-        {
-            new Vehicle
-            {
-                Color = "Meteorite Grey",
-                Description = "Fancy new Mazda 3",
-                Interior = "Leather",
-                IsAvailable = false,
-                IsFeatured = false,
-                IsNew = true,
-                Mileage = 520,
-                CarBody = new BodyType
-                {
-                    BodyTypeID = 1,
-                    BodyTypeName = "Car"
-                },
-                CarMake = new Make
-                {
-                    MakeID = 1,
-                    MakeName = "Mazda",
-                    AddedDate = DateTime.Parse("11/07/2017"),
-                    AnEmployee = new Employee
-                    {
-                        EmployeeID = 1,
-                        FirstName = "Bob",
-                        LastName = "Miller",
-                        Email = "bmiller@guildcars.com",
-                        Phone = "123-456-7890",
-                        Street1 = "12234 Main Street",
-                        Street2 = "Apt 123",
-                        City = "Minneapolis",
-                        State = "MN",
-                        PostalCode = "55121"
-                    }
-                },
-                CarModel = new CarModel
-                {
-                    CarModelID = 1,
-                    ModelName = "3",
-                    AddedDate = DateTime.Parse("11/07/2017"),
-                    AnEmployee = new Employee
-                    {
-                        EmployeeID = 2,
-                        FirstName = "Joe",
-                        LastName = "Johnson",
-                        Email = "jjohnson@guildcars.com",
-                        Phone = "123-456-7320",
-                        Street1 = "1445 Main Street",
-                        City = "Minneapolis",
-                        State = "MN",
-                        PostalCode = "55121"
-                    }
-                },
-                MSRP = 20000M,
-                SalePrice = 16000M,
-                IsAutomatic = false,
-                VinNumber = "4T3ZF13C12U459747",
-                Year = 2017
-            },
-            new Vehicle
-            {
-                VehicleID = 2,
-                Color = "Red",
-                Description = "This is a two-door Toyota Corolla",
-                Interior = "Cloth",
-                IsAvailable = true,
-                IsFeatured = true,
-                IsNew = true,
-                Mileage = 300,
-                CarModel = new CarModel
-                {
-                    CarModelID = 2,
-                    ModelName = "Corolla",
-                },
-                CarMake = new Make
-                {
-                    MakeID = 2,
-                    MakeName = "Toyota",
-                },
-                MSRP = 16000M,
-                SalePrice = 16000M,
-                IsAutomatic = false,
-                VinNumber = "1FAFP53222G297529",
-                Year = 2017
-            },
-            new Vehicle
-            {
-                VehicleID = 3,
-                Color = "Black",
-                Description = "This is a car",
-                Interior = "Leather",
-                IsAvailable = true,
-                IsFeatured = true,
-                IsNew = true,
-                Mileage = 520,
-                CarMake = new Make
-                {
-                    MakeID = 2,
-                    MakeName = "Ford",
-                },
-                CarModel = new CarModel
-                {
-                    CarModelID = 3,
-                    ModelName = "Fusion",
-                },
-                MSRP = 20000M,
-                SalePrice = 16000M,
-                IsAutomatic = false,
-                VinNumber = "ZFF65THA9D0186686",
-                Year = 2017
-            },
-            new Vehicle
-            {
-                VehicleID = 4,
-                Color = "Electric Blue",
-                Description = "this is a van here",
-                Interior = "Cloth",
-                IsAvailable = true,
-                IsFeatured = false,
-                IsNew = false,
-                Mileage = 20000,
-                CarMake =  new Make
-                {
-                    MakeID = 4,
-                    MakeName = "Dodge",
-                },
-                CarModel = new CarModel
-                {
-                    CarModelID = 4,
-                    ModelName = "Caravan"
-                },
-                MSRP = 20000M,
-                SalePrice = 16000M,
-                IsAutomatic = true,
-                VinNumber = "4T3ZF13C12U459747",
-                Year = 2017
-            },
-            new Vehicle
-            {
-                VehicleID = 5,
-                Color = "Rusty",
-                Description = "This is an old beat up truck",
-                Interior = "Cloth",
-                IsAvailable = true,
-                IsFeatured = true,
-                IsNew = false,
-                Mileage = 150000,
-                CarMake = new Make
-                {
-                    MakeID = 5,
-                    MakeName = "Chevy",
-                },
-                CarModel = new CarModel
-                {
-                    CarModelID = 5,
-                    ModelName = "Silverado"
-                },
-                MSRP = 50000M,
-                SalePrice = 25000M,
-                IsAutomatic = false,
-                VinNumber = "JA4NW61S23J021156",
-                Year = 2017
-            },
-            new Vehicle
-            {
-                VehicleID = 6,
-                Color = "Canary Yellow",
-                Description = "This car is spectacular",
-                Interior = "Leather",
-                IsAvailable = true,
-                IsFeatured = true,
-                IsNew = true,
-                Mileage = 12,
-                CarMake = new Make
-                {
-                    MakeID = 6,
-                    MakeName = "BMW"
-                },
-                CarModel = new CarModel
-                {
-                    CarModelID = 6,
-                    ModelName = "550S"
-                },
-                MSRP = 50000M,
-                SalePrice = 50000M,
-                IsAutomatic = true,
-                VinNumber = "1HGCR2F32DA718943",
-                Year = 2017
-            }
-        };
 
-        private static List<Make> _makes = new List<Make>();
+
+
         public void AddMake(Make make)
         {
             _makes.Add(make);
         }
 
-        private static List<CarModel> _carModels = new List<CarModel>();
         public void AddModel(CarModel model)
         {
             _carModels.Add(model);
@@ -417,6 +425,33 @@ namespace CarDealership.Data.Repositories
         public List<Vehicle> GetVehiclesByYear(int year)
         {
             return _vehicles.Where(v => v.Year == year).ToList();
+        }
+
+        public List<Vehicle> QuickSearch(string Type, string SearchKey, int YearMin, int YearMax, int PriceMin, int PriceMax)
+        {
+            List<Vehicle> toReturn = new List<Vehicle>();
+            List<Vehicle> vehicles = new List<Vehicle>();
+            if (Type == "New")
+            {
+                vehicles = (_vehicles.Where(v => v.IsNew == true).ToList());
+                foreach(var veh in vehicles)
+                    if (veh.CarMake.MakeName.Contains(SearchKey) || veh.CarModel.ModelName.Contains(SearchKey) || veh.Year.ToString() == SearchKey 
+                        && veh.Year >= YearMin && veh.Year <= YearMax && veh.SalePrice >= PriceMin && veh.SalePrice <= PriceMax)
+                    {
+                        toReturn.Add(veh);
+                    }
+            }
+            else if (Type == "Used")
+            {
+                vehicles = (_vehicles.Where(v => v.IsNew == false).ToList());
+                foreach (var veh in vehicles)
+                    if (veh.CarMake.MakeName.Contains(SearchKey) || veh.CarModel.ModelName.Contains(SearchKey) || veh.Year.ToString() == SearchKey
+                        && veh.Year >= YearMin && veh.Year <= YearMax && veh.SalePrice >= PriceMin && veh.SalePrice <= PriceMax)
+                    {
+                        toReturn.Add(veh);
+                    }
+            }
+            return toReturn;
         }
     }
 }

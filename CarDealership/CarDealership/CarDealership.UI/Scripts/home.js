@@ -9,7 +9,7 @@ function updateArea() {
 function getFeaturedVehicles() {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:55632/Featured',
+        url: 'http://localhost:55632/Vehicles',
         success: function (vehicles) {
             var output = "";
             var i = 0;

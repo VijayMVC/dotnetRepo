@@ -13,5 +13,6 @@ namespace CarDealership.Models.Tables
         public string VinNumber { get; set; }
         public DateTime PurchaseDate { get; set; }
         public PurchaseType APurchaseType { get; set; }
+        public virtual Customer ACustomer { get; set; }
     }
 }

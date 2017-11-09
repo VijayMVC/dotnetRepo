@@ -11,14 +11,14 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Guild Cars", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("Home","Index","Home", new { @class = "navLink"}) |
-                @Html.ActionLink("New Inventory", "GetNewInventory", "Home", new { @class = "navLink" }) |
-                @Html.ActionLink("Used Inventory", "GetUsedInventory", "Home", new { @class = "navLink" }) |
-                @Html.ActionLink("Specials", "GetSpecials", "Home", new { @class = "navLink" }) |
-                @Html.ActionLink("Contact", "ContactUs", "Home") 
-            </div>
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Guild Cars", "Index", "Home", new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "navLink" })</li>
+                <li>@Html.ActionLink("New Inventory", "NewInventory", "Home", new { @class = "navLink" })</li>
+                <li>@Html.ActionLink("Used Inventory", "UsedInventory", "Home", new { @class = "navLink" })</li>
+                <li>@Html.ActionLink("Specials", "Specials", "Home", new { @class = "navLink" })</li>
+                <li>@Html.ActionLink("Contact", "ContactUs", "Home")</li>
+            </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
@@ -30,11 +30,10 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/home.js"></script>
+    @RenderSection("scripts")
 </body>
 </html>

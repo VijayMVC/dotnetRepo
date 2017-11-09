@@ -18,11 +18,5 @@ namespace CarDealership.Models.Tables
         public string City { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
-        public virtual ICollection<Purchase> APurchase { get; set; }
-
-        public Customer()
-        {
-            APurchase = new HashSet<Purchase>();
-        }
     }
 }

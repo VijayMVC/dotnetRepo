@@ -11,8 +11,7 @@ namespace CarDealership.Data.Repositories
     {
         List<Vehicle> GetNumberOfVehicles(int number, int set);
         List<Vehicle> GetAllVehicles();
-        List<Vehicle> GetNewVehicles();
-        List<Vehicle> GetUsedVehicles();
+        List<Vehicle> QuickSearch(string Type, string SearchKey, int YearMin, int YearMax, int PriceMin, int PriceMax);
         List<Vehicle> GetFeaturedVehicles();
         List<Vehicle> GetPurchasedVehicles();
         List<Vehicle> GetAvailableVehicles();
@@ -20,6 +19,7 @@ namespace CarDealership.Data.Repositories
         List<Vehicle> GetVehiclesByModel(string model);
         List<Vehicle> GetVehiclesByYear(int year);
         Vehicle GetVehicleByVin(string vinNumber);
+        Vehicle GetVehicleByID(int id);
         void AddVehicle(Vehicle vehicle);
         void AddMake(Make make);
         void AddModel(CarModel model);

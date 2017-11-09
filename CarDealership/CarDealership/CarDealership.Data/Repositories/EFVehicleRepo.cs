@@ -80,6 +80,11 @@ namespace CarDealership.Data.Repositories
             return context.Vehicles.Where(v => v.IsNew == false).ToList();
         }
 
+        public Vehicle GetVehicleByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Vehicle GetVehicleByVin(string vinNumber)
         {
             return context.Vehicles.FirstOrDefault(v => v.VinNumber == vinNumber);
@@ -98,6 +103,11 @@ namespace CarDealership.Data.Repositories
         public List<Vehicle> GetVehiclesByYear(int year)
         {
             return context.Vehicles.Where(v => v.Year == year).ToList();
+        }
+
+        public List<Vehicle> QuickSearch(string Type, string SearchKey, int YearMin, int YearMax, int PriceMin, int PriceMax)
+        {
+            throw new NotImplementedException();
         }
     }
 }
