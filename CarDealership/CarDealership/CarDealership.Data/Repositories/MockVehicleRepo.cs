@@ -211,20 +211,20 @@ namespace CarDealership.Data.Repositories
             new Vehicle
             {
                 VehicleID = 5,
-                Color = "Rusty",
-                Description = "This is an old beat up truck",
+                Color = "Black",
+                Description = "This is a sweet new truck",
                 Interior = "Cloth",
                 IsAvailable = true,
                 IsFeatured = true,
-                IsNew = false,
-                Mileage = 150000,
+                IsNew = true,
+                Mileage = 500,
                 CarMake = _makes[2],
                 CarModel = _carModels[2],
                 MSRP = 50000M,
-                SalePrice = 25000M,
+                SalePrice = 45000,
                 IsAutomatic = false,
                 VinNumber = "JA4NW61S23J021156",
-                Year = 2000,
+                Year = 2017,
                 CarBody = _bodyTypes[3]
             },
             new Vehicle
@@ -252,21 +252,23 @@ namespace CarDealership.Data.Repositories
         {
             new ContactUs
             {
+                ContactUsID = 1,
                 FirstName = "Jake",
                 LastName = "Ganser",
                 Email = "jake.ganser@gmail.com",
                 Phone = "763-242-5080",
                 Message = "I would like to talk with a sales person to learn more about this vehicle",
-                VinNumber = "4T3ZF13C12U459747"
+                Date = DateTime.Parse("11/9/2017")
             },
             new ContactUs
             {
+                ContactUsID = 2,
                 FirstName = "Ashley",
                 LastName = "Weber",
                 Email = "AWebs@gmail.com",
                 Phone = "763-242-2344",
                 Message = "Do you have this vehicle with leather seats?",
-                VinNumber = "1FAFP53222G297529"
+                Date = DateTime.Parse("11/9/2017")
             }
         };
 
@@ -315,9 +317,24 @@ namespace CarDealership.Data.Repositories
                 }
         };
 
+        private static List<Special> _specials = new List<Special>
+        {
+            new Special
+            {
+                SpecialID = 1,
+                SpecialName = "Truck Month!!",
+                Description = "Take $1,500 off the sales price of all new trucks in the month of November!",
+                value = 1500,
+                BeginDate = DateTime.Parse("11/01/2017"),
+                EndDate = DateTime.Parse("11/30/2017"),
+                Vehicles = _vehicles.Where(v => v.CarBody.BodyTypeID == 4).Where(v => v.IsNew == true).ToList(),
+            }
+        };
 
-
-
+        public void AddContact(ContactUs contact)
+        {
+            _contacts.Add(contact);
+        }
 
         public void AddMake(Make make)
         {
@@ -329,14 +346,41 @@ namespace CarDealership.Data.Repositories
             _carModels.Add(model);
         }
 
+        public void AddSpecial(Special aSpecial)
+        {
+            _specials.Add(aSpecial);
+        }
+
         public void AddVehicle(Vehicle vehicle)
         {
             _vehicles.Add(vehicle);
         }
 
+        public void DeleteSpecial(int specialID)
+        {
+            _specials.RemoveAll(s => s.SpecialID == specialID);
+        }
+
         public void DeleteVehicle(int vehicleID)
         {
             _vehicles.RemoveAll(v => v.VehicleID == vehicleID);
+        }
+
+        public void EditSpecial(Special aSpecial)
+        {
+            foreach(var spec in _specials)
+            {
+                if (spec.SpecialID == aSpecial.SpecialID)
+                {
+                    spec.SpecialName = aSpecial.SpecialName;
+                    spec.value = aSpecial.value;
+                    spec.Vehicles = aSpecial.Vehicles;
+                    spec.Description = aSpecial.Description;
+                    spec.BeginDate = aSpecial.BeginDate;
+                    spec.EndDate = aSpecial.EndDate;
+                    spec.ImageLocation = aSpecial.ImageLocation;
+                }
+            }
         }
 
         public void EditVehicle(Vehicle vehicle)
@@ -393,6 +437,11 @@ namespace CarDealership.Data.Repositories
         public List<Vehicle> GetPurchasedVehicles()
         {
             return _vehicles.Where(v => v.IsAvailable == false).ToList();
+        }
+
+        public List<Special> GetSpecials()
+        {
+            return _specials;
         }
 
         public List<Vehicle> GetUsedVehicles()

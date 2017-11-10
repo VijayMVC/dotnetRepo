@@ -1,4 +1,5 @@
 ﻿using CarDealership.Models;
+using CarDealership.Models.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,17 @@ namespace CarDealership.Data.Repositories
         List<Vehicle> GetVehiclesByMake(string make);
         List<Vehicle> GetVehiclesByModel(string model);
         List<Vehicle> GetVehiclesByYear(int year);
+        List<Special> GetSpecials();
         Vehicle GetVehicleByVin(string vinNumber);
         Vehicle GetVehicleByID(int id);
         void AddVehicle(Vehicle vehicle);
         void AddMake(Make make);
         void AddModel(CarModel model);
+        void AddSpecial(Special aSpecial);
         void EditVehicle(Vehicle vehicle);
+        void EditSpecial(Special aSpecial);
         void DeleteVehicle(int vehicleID);
+        void DeleteSpecial(int specialID);
+        void AddContact(ContactUs contact);
     }
 }

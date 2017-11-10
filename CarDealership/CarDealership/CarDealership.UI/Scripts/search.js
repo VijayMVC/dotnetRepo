@@ -37,8 +37,8 @@ function quickSearch() {
 
                 output += '<div class="col-md-12" style="height:200px; border:solid; border-color:grey; margin-bottom:8px"><div class="col-md-3">' + vehicles[i].Year + ' ' + vehicles[i].CarMake.MakeName + ' ' + vehicles[i].CarModel.ModelName + '<img src="' + vehicles[i].ImageLocation + '" width="100%" height="100%"></div>'
                 output += '<div class="col-md-9"><div class="col-md-4"> <p>Body Style: ' + vehicles[i].CarBody.BodyTypeName + '</p><p>Transmission: ' + transmission + '</p><p>Color: ' + vehicles[i].Color + '</p></div>'
-                    output += '<div class="col-md-4"> <p>Interior: ' + vehicles[i].Interior + '</p><p>Mileage: ' + vehicles[i].Mileage + '</p><p>Vin: ' + vehicles[i].VinNumber + '</p></div>'
-                    output += '<div class="col-md-4"> <p>Sale Price: $' + vehicles[i].SalePrice + '</p><p>MSRP: $' + vehicles[i].MSRP + '</p><br/><button type="button" class="btn btn-default" onclick="vehicleDetails(' + vehicles[i].VehicleID + ')">Details</button></div></div></div>'
+                output += '<div class="col-md-4"> <p>Interior: ' + vehicles[i].Interior + '</p><p>Mileage: ' + vehicles[i].Mileage + '</p><p>Vin: ' + vehicles[i].VinNumber + '</p></div>'
+                output += '<div class="col-md-4"> <p>Sale Price: $' + vehicles[i].SalePrice + '</p><p>MSRP: $' + vehicles[i].MSRP + '</p><br/><button type="button" class="btn btn-default" onclick="vehicleDetails(' + vehicles[i].VehicleID + ')">Details</button></div></div></div>'
 
             }
             $('#Results').html(output);
@@ -93,5 +93,4 @@ function populateMessage() {
     if (params.get('vin') != null) {
         $('#messageForm').val("Vin #: " + params.get('vin'));
     }
-
 }

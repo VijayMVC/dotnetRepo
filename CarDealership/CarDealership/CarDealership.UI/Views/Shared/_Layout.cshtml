@@ -7,6 +7,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    @RenderSection("map")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,6 +19,97 @@
                 <li>@Html.ActionLink("Used Inventory", "UsedInventory", "Home", new { @class = "navLink" })</li>
                 <li>@Html.ActionLink("Specials", "Specials", "Home", new { @class = "navLink" })</li>
                 <li>@Html.ActionLink("Contact", "ContactUs", "Home")</li>
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Sales
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="management">
+                            <li>
+                                @Html.ActionLink("Add Blog", "AddBlog", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Pending Blog Posts", "PendingPosts", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Add Page", "AddPage", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Page Manager", "SavedPages", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Add Manager", "AddManager", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Remove Manager", "DeleteManager", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Change Password", "ChangePassword", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Logout", "Logout", "Home")
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Admin
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="management">
+                            <li>
+                                @Html.ActionLink("Add Blog", "AddBlog", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Pending Blog Posts", "PendingPosts", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Add Page", "AddPage", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Page Manager", "SavedPages", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Add Manager", "AddManager", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Remove Manager", "DeleteManager", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Change Password", "ChangePassword", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Logout", "Logout", "Home")
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else if (User.IsInRole("Sales"))
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Sales
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="management">
+                            <li>
+                                @Html.ActionLink("Add Blog", "AddBlog", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Saved Blogs", "SavedBlogs", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Change Password", "ChangePassword", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Logout", "Logout", "Home")
+                            </li>
+                        </ul>
+                    </li>
+                }
             </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

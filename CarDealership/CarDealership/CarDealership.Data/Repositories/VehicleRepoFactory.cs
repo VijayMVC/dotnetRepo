@@ -15,8 +15,8 @@ namespace CarDealership.Data.Repositories
 
             switch(mode)
             {
-                case "EF":
-                    return new EFVehicleRepo();
+                //case "EF":
+                //    return new EFVehicleRepo();
                 case "Mock":
                     return new MockVehicleRepo();
                 default:

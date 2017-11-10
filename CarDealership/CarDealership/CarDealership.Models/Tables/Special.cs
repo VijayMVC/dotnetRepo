@@ -15,6 +15,7 @@ namespace CarDealership.Models.Tables
         public int value { get; set; }
         public string Description { get; set; }
         public virtual ICollection<Vehicle> Vehicles { get; set; }
+        public string ImageLocation { get; set; }
 
         public Special()
         {

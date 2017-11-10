@@ -1,40 +1,71 @@
 ﻿@model CarDealership.Models.Tables.ContactUs
 
-<h2>Contact Us</h2>
+<h2 style="padding-top:50px">Contact Us</h2>
+<div class="col-md-6">
+    @using (@Html.BeginForm())
+    {
+        <label>Name</label>
+        @Html.TextBoxFor(p => p.FirstName, new { @class = "form-control", placeholder = "First" })<br/>
+        @Html.TextBoxFor(p => p.LastName, new { @class = "form-control", placeholder = "Last" })<br /><br />
 
-@using (@Html.BeginForm())
-{   
-    <label>Name</label>
-    @Html.TextBoxFor(p => p.FirstName, new { @class = "form-control", placeholder = "First" })
-    @Html.TextBoxFor(p => p.LastName, new { @class = "form-control", placeholder = "Last" })
+        <label>Email Address</label>
+        @Html.TextBoxFor(p => p.Email, new { @class = "form-control" })<br />
 
-    <label>Email Address</label>
-    @Html.TextBoxFor(p => p.Email, new { @class = "form-control"})
-    
-    <label>Phone</label>
-    @Html.TextBoxFor(p => p.Phone, new { @class = "form-control" })
+        <label>Phone</label>
+        @Html.TextBoxFor(p => p.Phone, new { @class = "form-control" })<br />
 
-    <label>Message</label>
-    @Html.TextAreaFor(p => p.Message, new { @class = "form-control", id="messageForm" })
+        <label>Message</label>
+        @Html.TextAreaFor(p => p.Message, new { @class = "form-control", id = "messageForm" })<br />
 
-    <button type="submit" id="search" class="btn btn-primary btn-sm">Submit</button>
-}
-
-
-
-@section scripts{
-    <script src="~/Scripts/search.js"></script>
-    <script>
+        <button type="submit" id="search" class="btn btn-primary btn-sm">Submit</button>
+    }
+</div>
+<div class="col-md-6">
+    <div style="height:500px;width:500px" id="map">
+        <script>
             var map;
             function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -34.397, lng: 150.644 },
-                    zoom: 8
+                var myLatLng = { lat: 44.977, lng: -93.265 };
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: myLatLng
+                });
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: 'Guild Cars'
                 });
             }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQdUCGe0ljgk8aDajGlvsOVZNk52Mgfu0&callback=initMap"
-        type="text/javascript"></script>
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQdUCGe0ljgk8aDajGlvsOVZNk52Mgfu0&callback=initMap"
+                type="text/javascript"></script>
+    </div>
+    <p>15 S 5th St <br />Minneapolis, MN 55402 <br /><br />Sales: 111-111-1111 <br />Service: 111-123-1223</p>
+</div>
+
+
+@section map{
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+           * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/Scripts/search.js"></script>
 }
 
 
