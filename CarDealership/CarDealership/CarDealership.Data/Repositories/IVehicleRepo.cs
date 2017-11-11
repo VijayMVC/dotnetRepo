@@ -15,6 +15,7 @@ namespace CarDealership.Data.Repositories
         List<Vehicle> QuickSearch(string Type, string SearchKey, int YearMin, int YearMax, int PriceMin, int PriceMax);
         List<Vehicle> GetFeaturedVehicles();
         List<Vehicle> GetPurchasedVehicles();
+        List<PurchaseType> GetPurchaseTypes();
         List<Vehicle> GetAvailableVehicles();
         List<Vehicle> GetVehiclesByMake(string make);
         List<Vehicle> GetVehiclesByModel(string model);
@@ -25,6 +26,7 @@ namespace CarDealership.Data.Repositories
         void AddVehicle(Vehicle vehicle);
         void AddMake(Make make);
         void AddModel(CarModel model);
+        void AddPurchase(Purchase purch);
         void AddSpecial(Special aSpecial);
         void EditVehicle(Vehicle vehicle);
         void EditSpecial(Special aSpecial);

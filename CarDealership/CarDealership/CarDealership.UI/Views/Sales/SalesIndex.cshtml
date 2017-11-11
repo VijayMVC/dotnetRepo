@@ -1,0 +1,103 @@
+﻿@model CarDealership.UI.Models.PurchaseVM
+
+<h2>Sales</h2>
+
+<form>
+    <div class="form-group">
+        @Html.Hidden("vehType", "All", new { @class = "form-control", id = "vehType" })
+
+        <label>Quick Search</label>
+        <input type="text" id="searchKey" placeholder="Enter Make, Model, or Year" />
+
+        <label>Price</label>
+        <select id="minPrice">
+            <option value="0">No Min</option>
+            @for (int i = 2000; i <= 25000; i += 1000)
+            {
+                <option value="@i">$@i</option>
+            }
+        </select>
+
+        <select id="maxPrice">
+            <option value="10000000">No Max</option>
+            @for (int i = 5000; i <= 100000; i += 5000)
+            {
+                <option value="@i">$@i</option>
+            }
+        </select>
+
+        <label>Year</label>
+        <select id="minYear">
+            <option value="1970">No Min</option>
+            @for (int i = 1970; i <= int.Parse(DateTime.Now.Year.ToString()); i += 1)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+
+
+        <select id="maxYear">
+            <option value="3000">No Max</option>
+            @for (int i = int.Parse(DateTime.Now.Year.ToString()); i >= 1970; i -= 1)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+
+        <button type="button" id="search" class="btn btn-primary btn-sm">Search</button>
+
+    </div>
+</form>
+
+
+
+<div class="col-md-12" id="Results">
+    <h3>Search Results</h3>
+</div>
+
+<div class="col-md-12" id="Details">
+    <h3>Purchase Vehicle</h3>
+</div>
+<div class="col-md-12" id="PurchaseVehicle">
+    <h3>Sales Information</h3>
+    @using (Html.BeginForm())
+    {
+        <div id="vinDiv">
+            @Html.HiddenFor(m => m.Purchase.VinNumber, new { @id = "vinBox" });
+        </div>
+        <div class="col-md-6">
+            <label>Name</label>
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.FirstName, new { @class = "form-control", placeholder = "First" })<br />
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.LastName, new { @class = "form-control", placeholder = "Last" })<br /><br />
+            <label>Phone</label>
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.Phone, new { @class = "form-control" })<br />
+            <label>Email</label>
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.Email, new { @class = "form-control" })<br /><br />
+        </div>
+        <div class="col-md-6">
+            <label>Address 1</label>
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.Street1, new { @class = "form-control" })<br />
+            <label>Address 2</label>
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.Street2, new { @class = "form-control" })<br />
+            <label>City</label>
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.City, new { @class = "form-control" })<br />
+            <label>State</label>
+            @Html.DropDownListFor(m => m.Purchase.ACustomer.State, Model.StatesItems, new { @class = "form-control" })<br />
+            <label>Zipcode</label>
+            @Html.TextBoxFor(m => m.Purchase.ACustomer.PostalCode, new { @class = "form-control" })
+        </div><br />
+        <hr />
+            <label>Purchase Type</label>
+            @Html.DropDownListFor(m => m.Purchase.APurchaseType.PurchaseTypeID, Model.PurchaseTypeItems, new { @class = "form-control", placeholder = "Select purchase type" })
+            <label>Purchase Price</label>
+            @Html.TextBoxFor(m => m.Purchase.PurchasePrice, new { @class = "form-control" })
+
+
+            <button type="submit" id="search" class="btn btn-primary btn-sm">Save</button>
+            }
+        </div>
+
+@section scripts{
+    <script src="~/Scripts/sales.js"></script>
+}
+@section map{}

@@ -130,6 +130,26 @@ namespace CarDealership.Data.Repositories
                 AnEmployee = _employees[0]
             },
         };
+
+        private static List<PurchaseType> _purchaseTypes = new List<PurchaseType>
+        {
+            new PurchaseType
+            {
+                PurchaseTypeID=1,
+                PurchaseTypeName="Dealer Finance",
+            },
+            new PurchaseType
+            {
+                PurchaseTypeID=2,
+                PurchaseTypeName="Credit",
+            },
+            new PurchaseType
+            {
+                PurchaseTypeID=3,
+                PurchaseTypeName="Cash",
+            }
+        };
+
         private static List<Vehicle> _vehicles = new List<Vehicle>
         {
             new Vehicle
@@ -288,22 +308,6 @@ namespace CarDealership.Data.Repositories
                 }
         };
 
-        private static List<PurchaseType> _purchaseTypes = new List<PurchaseType>
-        {
-                new PurchaseType
-                {
-                    PurchaseTypeName = "Credit",
-                },
-                new PurchaseType
-                {
-                    PurchaseTypeName = "Finance",
-                },
-                new PurchaseType
-                {
-                    PurchaseTypeName = "Cash",
-                }
-        };
-
         private static List<Purchase> _purchases = new List<Purchase>
         {
                 new Purchase
@@ -344,6 +348,16 @@ namespace CarDealership.Data.Repositories
         public void AddModel(CarModel model)
         {
             _carModels.Add(model);
+        }
+
+        public void AddPurchase(Purchase purch)
+        {
+            Vehicle veh = new Vehicle();
+            veh = _vehicles.Where(v => v.VinNumber == purch.VinNumber).SingleOrDefault();
+            veh.IsAvailable = false;
+            EditVehicle(veh);
+            purch.APurchaseType = _purchaseTypes.Where(p => p.PurchaseTypeID == purch.PurchaseID).SingleOrDefault();
+            _purchases.Add(purch);
         }
 
         public void AddSpecial(Special aSpecial)
@@ -458,7 +472,7 @@ namespace CarDealership.Data.Repositories
 
         public Vehicle GetVehicleByVin(string vinNumber)
         {
-            return _vehicles.Where(v => v.VinNumber == vinNumber).FirstOrDefault();
+            return _vehicles.Where(v => v.VinNumber == vinNumber.ToUpper()).FirstOrDefault();
         }
 
         public List<Vehicle> GetVehiclesByMake(string make)
@@ -500,7 +514,22 @@ namespace CarDealership.Data.Repositories
                         toReturn.Add(veh);
                     }
             }
+            else if (Type == "All")
+            {
+                vehicles = (_vehicles.Where(v => v.IsAvailable == true).ToList());
+                foreach (var veh in vehicles)
+                    if (veh.CarMake.MakeName.Contains(SearchKey) || veh.CarModel.ModelName.Contains(SearchKey) || veh.Year.ToString() == SearchKey
+                        && veh.Year >= YearMin && veh.Year <= YearMax && veh.SalePrice >= PriceMin && veh.SalePrice <= PriceMax)
+                    {
+                        toReturn.Add(veh);
+                    }
+            }
             return toReturn;
+        }
+
+        List<PurchaseType> IVehicleRepo.GetPurchaseTypes()
+        {
+            return _purchaseTypes;
         }
     }
 }
