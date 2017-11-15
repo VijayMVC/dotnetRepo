@@ -1,0 +1,25 @@
+﻿@model CarDealership.UI.Models.VehicleVM
+@{
+    ViewBag.Title = "AddVehicle";
+}
+
+<h2>Add Vehicle</h2>
+
+@using (@Html.BeginForm())
+{
+    <div class="col-md-6">
+        <label>Make</label>
+        @Html.DropDownListFor(m => m.AVehicle.CarMake.MakeID, Model.MakeItems, new { @class = "form-control", id="makeDrop"})
+    </div>
+
+    <div class="col-md-6">
+        <label>Model</label>
+        @Html.DropDownListFor(m => m.AVehicle.CarModel.CarModelID, Model.CarModelItems, new { @class = "form-control" })
+    </div>
+
+}
+
+@section scripts{
+    <script src="~/Scripts/admin.js"></script>
+}
+@section map{}

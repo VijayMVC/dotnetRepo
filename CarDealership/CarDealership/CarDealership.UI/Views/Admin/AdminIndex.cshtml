@@ -1,0 +1,66 @@
+﻿<h2>Admin</h2>
+
+@Html.ActionLink("Add a new vehicle", "AddVehicle", "Admin")
+
+<form>
+    <div class="form-group">
+        @Html.Hidden("vehType", "All", new { @class = "form-control", id = "vehType" })
+
+        <label>Quick Search</label>
+        <input type="text" id="searchKey" placeholder="Enter Make, Model, or Year" />
+
+        <label>Price</label>
+        <select id="minPrice">
+            <option value="0">No Min</option>
+            @for (int i = 2000; i <= 25000; i += 1000)
+            {
+                <option value="@i">$@i</option>
+            }
+        </select>
+
+        <select id="maxPrice">
+            <option value="10000000">No Max</option>
+            @for (int i = 5000; i <= 100000; i += 5000)
+            {
+                <option value="@i">$@i</option>
+            }
+        </select>
+
+        <label>Year</label>
+        <select id="minYear">
+            <option value="1960">No Min</option>
+            @for (int i = 1970; i <= int.Parse(DateTime.Now.Year.ToString()); i += 1)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+
+
+        <select id="maxYear">
+            <option value="3000">No Max</option>
+            @for (int i = int.Parse(DateTime.Now.Year.ToString()); i >= 1970; i -= 1)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+
+        <button type="button" id="search" class="btn btn-primary btn-sm">Search</button>
+
+    </div>
+</form>
+
+
+
+<div class="col-md-12" id="Results">
+    <h3>Search Results</h3>
+</div>
+
+<div class="col-md-12" id="Details">
+    <h3>Vehicle Details</h3>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/admin.js"></script>
+}
+@section map{}
+

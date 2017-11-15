@@ -99,35 +99,42 @@ namespace CarDealership.Data.Repositories
                 CarModelID = 1,
                 ModelName = "3",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AnEmployee = _employees[0],
+                AMake = _makes[0],
             },
             new CarModel
             {
                 CarModelID = 2,
                 ModelName = "Corolla",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AnEmployee = _employees[0],
+                AMake = _makes[1],
+                
             },
             new CarModel
             {
                 CarModelID = 3,
                 ModelName = "Silverado",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AnEmployee = _employees[0],
+                AMake = _makes[2],
             },
             new CarModel
             {
                 CarModelID = 4,
                 ModelName = "550S",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AnEmployee = _employees[0],
+                AMake = _makes[3],
             },
             new CarModel
             {
                 CarModelID = 5,
                 ModelName = "Focus",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AnEmployee = _employees[0],
+                AMake = _makes[4],
+                
             },
         };
 
@@ -436,6 +443,16 @@ namespace CarDealership.Data.Repositories
         public List<Vehicle> GetFeaturedVehicles()
         {
             return _vehicles.Where(v => v.IsFeatured == true).ToList();
+        }
+
+        public List<Make> GetMakeItems()
+        {
+            return _makes;
+        }
+
+        public List<CarModel> GetModelItems()
+        {
+            return _carModels;
         }
 
         public List<Vehicle> GetNewVehicles()

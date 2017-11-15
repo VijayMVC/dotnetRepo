@@ -37,9 +37,9 @@ namespace CarDealership.UI.Controllers
             return Ok(repo.GetVehicleByID(id));
         }
 
-        [Route("Vehicle/{vin}")]
+        [Route("Vehicle/Vin/{vin}")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult vehicleDetailsVin(string vin)
+        public IHttpActionResult vehicleVin(string vin)
         {
             var repo = VehicleRepoFactory.Create();
             return Ok(repo.GetVehicleByVin(vin));

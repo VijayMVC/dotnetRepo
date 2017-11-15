@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\VehicleVM.cs" />
     <Compile Include="Tables\BodyType.cs" />
     <Compile Include="Tables\CarModel.cs" />
     <Compile Include="Tables\ContactUs.cs" />
@@ -52,6 +51,9 @@
     <Compile Include="Tables\PurchaseType.cs" />
     <Compile Include="Tables\Special.cs" />
     <Compile Include="Tables\Vehicle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

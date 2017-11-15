@@ -21,6 +21,8 @@ namespace CarDealership.Data.Repositories
         List<Vehicle> GetVehiclesByModel(string model);
         List<Vehicle> GetVehiclesByYear(int year);
         List<Special> GetSpecials();
+        List<Make> GetMakeItems();
+        List<CarModel> GetModelItems();
         Vehicle GetVehicleByVin(string vinNumber);
         Vehicle GetVehicleByID(int id);
         void AddVehicle(Vehicle vehicle);
