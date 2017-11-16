@@ -21,7 +21,7 @@
                 <li>@Html.ActionLink("Contact", "ContactUs", "Home")</li>
                 @if (User.IsInRole("admin"))
                 {
-                    <li>@Html.ActionLink("Sales", "SalesIndex", "Sales", new { @class = "navLink" })</li>
+                    <li>@Html.ActionLink("Sales", "SalesIndex", "Sales")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Admin

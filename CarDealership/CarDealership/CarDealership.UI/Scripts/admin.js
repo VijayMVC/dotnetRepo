@@ -54,7 +54,7 @@ function getModels(make) {
         type: 'GET',
         url: 'http://localhost:55632/Vehicle/Models/' + make,
         success: function (models) {
-            var
+            var output = "";
         }
     })
 }
