@@ -46,15 +46,25 @@ function quickSearch() {
 }
 
 $('#makeDrop').on('change', function () {
-        getModels($(this).val())
-    });
+    getModels($(this).val())
+});
 
-function getModels(make) {
+function getModels(makeID) {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:55632/Vehicle/Models/' + make,
+        url: 'http://localhost:55632/Vehicle/Models/Make/' + makeID,
         success: function (models) {
-            var output = "";
+            var i = 0;
+            var output = "<div id= 'modelDrop'> <select class='form-control' data-val='true' data-val-number='The field CarModelID must be a number.' data-val-required='The CarModelID field is required.' id='AVehicle_CarModel_CarModelID' name='AVehicle.CarModel.CarModelID'><option value=''>Select Model</option>";
+            for (i; i < models.length; i++) {
+                output += "<option value=" + models[i].CarModelID + ">" + models[i].ModelName + "</option>"
+            }
+            output += "</select>"
+            $('#modelDrop').empty();
+            $('#modelDrop').html(output);
+        },
+        error: function (jqxhr, techstatus, errorthrow) {
+
         }
     })
 }

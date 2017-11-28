@@ -7,19 +7,63 @@
 
 @using (@Html.BeginForm())
 {
+    @Html.HiddenFor(m => m.AVehicle.IsAvailable)
     <div class="col-md-6">
         <label>Make</label>
-        @Html.DropDownListFor(m => m.AVehicle.CarMake.MakeID, Model.MakeItems, new { @class = "form-control", id="makeDrop"})
+        @Html.DropDownListFor(m => m.AVehicle.CarMake.MakeID, Model.MakeItems, "Select Make", new { @class = "form-control", id="makeDrop"})
+
+        <label>Type</label>
+        @Html.DropDownListFor(m => m.AVehicle.IsNew, Model.CarTypeItems, new { @class = "form-control"})
+        
+        <label>Year</label>
+        @Html.TextBoxFor(m => m.AVehicle.Year, DateTime.Now.Year.ToString(), new { @class = "form-control" })
+
+        <label>Color</label>
+        @Html.TextBoxFor(m => m.AVehicle.Color, new { @class = "form-control" })
+
+        <label>Mileage</label>
+        @Html.TextBoxFor(m => m.AVehicle.Mileage, new { @class = "form-control" })
+
+        <label>MSRP</label>
+        @Html.TextBoxFor(m => m.AVehicle.MSRP, new { @class = "form-control" })
+
     </div>
 
     <div class="col-md-6">
         <label>Model</label>
-        @Html.DropDownListFor(m => m.AVehicle.CarModel.CarModelID, Model.CarModelItems, new { @class = "form-control" })
+        <div>
+            @Html.DropDownListFor(m => m.AVehicle.CarModel.CarModelID, Model.CarModelItems, "Select Model", new { @class = "form-control", id = "modelDrop"})
+        </div> 
+
+        <label>Body Style</label>
+            @Html.DropDownListFor(m => m.AVehicle.CarBody.BodyTypeID, Model.BodyTypeItems, new { @class = "form-control" })
+
+        <label>Transmission</label>
+            @Html.DropDownListFor(m => m.AVehicle.IsAutomatic, Model.CarTransmissionItems, new { @class = "form-control" })
+
+        <label>Interior</label>
+            @Html.DropDownListFor(m => m.AVehicle.Interior, Model.CarInteriorItems,"Select Interior", new { @class = "form-control" })
+
+        <label>VIN #</label>
+            @Html.TextBoxFor(m => m.AVehicle.VinNumber, new { @class = "form-control" })
+
+        <label>Sale Price</label>
+            @Html.TextBoxFor(m => m.AVehicle.SalePrice, new { @class = "form-control" })
     </div>
 
+    <div class="col-md-12">
+        <label>Description</label>
+            @Html.TextAreaFor(m => m.AVehicle.Description, new { @class = "form-control"})
+
+            @Html.CheckBoxFor(m => m.AVehicle.IsFeatured, new { @class = "form-control" })
+        
+        <label>Picture</label>
+
+        <button type="submit" id="save" class="btn btn-primary btn-sm">Save</button>
+    </div>
 }
 
-@section scripts{
-    <script src="~/Scripts/admin.js"></script>
-}
-@section map{}
+        @section scripts{
+            <script src="~/Scripts/admin.js"></script>
+        }
+        @section map{}

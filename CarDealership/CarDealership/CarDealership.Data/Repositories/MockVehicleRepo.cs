@@ -440,9 +440,32 @@ namespace CarDealership.Data.Repositories
             return _vehicles.Where(v => v.IsAvailable == true).ToList();
         }
 
+        public BodyType GetBodyByID(int bodyTypeID)
+        {
+            BodyType toReturn = new BodyType();
+
+            toReturn = _bodyTypes.Where(b => b.BodyTypeID == bodyTypeID).SingleOrDefault();
+
+            return toReturn;
+        }
+
+        public List<BodyType> GetBodyTypes()
+        {
+            return _bodyTypes;
+        }
+
         public List<Vehicle> GetFeaturedVehicles()
         {
             return _vehicles.Where(v => v.IsFeatured == true).ToList();
+        }
+
+        public Make GetMakeByID(int makeID)
+        {
+            Make toReturn = new Make();
+
+            toReturn = _makes.Where(b => b.MakeID == makeID).SingleOrDefault();
+
+            return toReturn;
         }
 
         public List<Make> GetMakeItems()
@@ -450,9 +473,23 @@ namespace CarDealership.Data.Repositories
             return _makes;
         }
 
+        public CarModel GetModelByID(int carModelID)
+        {
+            CarModel toReturn = new CarModel();
+
+            toReturn = _carModels.Where(b => b.CarModelID == carModelID).SingleOrDefault();
+
+            return toReturn;
+        }
+
         public List<CarModel> GetModelItems()
         {
             return _carModels;
+        }
+
+        public List<CarModel> GetModelsByMake(int makeID)
+        {
+            return _carModels.Where(m => m.AMake.MakeID == makeID).ToList();
         }
 
         public List<Vehicle> GetNewVehicles()

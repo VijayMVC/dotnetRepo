@@ -13,11 +13,11 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Guild Cars", "Index", "Home", new { @class = "navbar-brand" })</li>
-                <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "navLink" })</li>
-                <li>@Html.ActionLink("New Inventory", "NewInventory", "Home", new { @class = "navLink" })</li>
-                <li>@Html.ActionLink("Used Inventory", "UsedInventory", "Home", new { @class = "navLink" })</li>
-                <li>@Html.ActionLink("Specials", "Specials", "Home", new { @class = "navLink" })</li>
+                <li>@Html.ActionLink("Guild Cars", "Index", null, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Home", "Index","Home")</li>
+                <li>@Html.ActionLink("New Inventory", "NewInventory", "Home")</li>
+                <li>@Html.ActionLink("Used Inventory", "UsedInventory", "Home")</li>
+                <li>@Html.ActionLink("Specials", "Specials", "Home")</li>
                 <li>@Html.ActionLink("Contact", "ContactUs", "Home")</li>
                 @if (User.IsInRole("admin"))
                 {

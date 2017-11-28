@@ -19,6 +19,7 @@ namespace CarDealership.Data.Repositories
         List<Vehicle> GetAvailableVehicles();
         List<Vehicle> GetVehiclesByMake(string make);
         List<Vehicle> GetVehiclesByModel(string model);
+        List<BodyType> GetBodyTypes();
         List<Vehicle> GetVehiclesByYear(int year);
         List<Special> GetSpecials();
         List<Make> GetMakeItems();
@@ -34,6 +35,10 @@ namespace CarDealership.Data.Repositories
         void EditSpecial(Special aSpecial);
         void DeleteVehicle(int vehicleID);
         void DeleteSpecial(int specialID);
+        CarModel GetModelByID(int carModelID);
         void AddContact(ContactUs contact);
+        Make GetMakeByID(int makeID);
+        List<CarModel> GetModelsByMake(int makeID);
+        BodyType GetBodyByID(int bodyTypeID);
     }
 }

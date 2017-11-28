@@ -26,10 +26,28 @@ namespace CarDealership.UI.Controllers
         {
             var input = repo.GetMakeItems();
             var mod = repo.GetModelItems();
+            var bodyTypes = repo.GetBodyTypes();
             var viewmodel = new VehicleVM();
             viewmodel.SetMakeItems(input);
             viewmodel.SetCarModelItems(mod);
+            viewmodel.SetCarTypeItems();
+            viewmodel.SetBodyTypeItems(bodyTypes);
+            viewmodel.SetCarTransmissionItems();
+            viewmodel.SetCarInteriorItems();
+            viewmodel.AVehicle.IsNew = true;
+            viewmodel.AVehicle.IsAutomatic = true;
+            viewmodel.AVehicle.IsAvailable = true;
             return View(viewmodel);
+        }
+
+        [HttpPost]
+        public ActionResult AddVehicle(VehicleVM model)
+        {
+            model.AVehicle.CarModel = repo.GetModelByID(model.AVehicle.CarModel.CarModelID);
+            model.AVehicle.CarMake = repo.GetMakeByID(model.AVehicle.CarMake.MakeID);
+            model.AVehicle.CarBody = repo.GetBodyByID(model.AVehicle.CarBody.BodyTypeID);
+            repo.AddVehicle(model.AVehicle);
+            return RedirectToAction("AdminIndex");
         }
     }
 }

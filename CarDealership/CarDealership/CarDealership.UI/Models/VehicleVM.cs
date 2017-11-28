@@ -1,4 +1,5 @@
 ﻿using CarDealership.Models;
+using CarDealership.Models.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace CarDealership.UI.Models
         public Vehicle AVehicle { get; set; }
         public List<SelectListItem> MakeItems { get; set; }
         public List<SelectListItem> CarModelItems { get; set; }
+        public List<SelectListItem> CarTypeItems { get; set; }
+        public List<SelectListItem> BodyTypeItems { get; set; }
+        public List<SelectListItem> CarTransmissionItems { get; set; }
+        public List<SelectListItem> CarInteriorItems { get; set; }
 
         public VehicleVM()
         {
@@ -19,6 +24,10 @@ namespace CarDealership.UI.Models
 
             MakeItems = new List<SelectListItem>();
             CarModelItems = new List<SelectListItem>();
+            CarTypeItems = new List<SelectListItem>();
+            BodyTypeItems = new List<SelectListItem>();
+            CarTransmissionItems = new List<SelectListItem>();
+            CarInteriorItems = new List<SelectListItem>();
         }
 
         public void SetMakeItems(IEnumerable<Make> makeItems)
@@ -29,6 +38,66 @@ namespace CarDealership.UI.Models
                 {
                     Value = item.MakeID.ToString(),
                     Text = item.MakeName
+                });
+            }
+        }
+
+        internal void SetCarInteriorItems()
+        {
+            CarInteriorItems.Add(new SelectListItem()
+            {
+                Value = "1",
+                Text = "Brown Leather"
+            });
+
+            CarInteriorItems.Add(new SelectListItem()
+            {
+                Value = "2",
+                Text = "Black Leather"
+            });
+
+            CarInteriorItems.Add(new SelectListItem()
+            {
+                Value = "3",
+                Text = "White Leather"
+            });
+
+            CarInteriorItems.Add(new SelectListItem()
+            {
+                Value = "4",
+                Text = "Black Cloth Upholstry"
+            });
+
+            CarInteriorItems.Add(new SelectListItem()
+            {
+                Value = "5",
+                Text = "White Cloth Upholstry"
+            });
+        }
+
+        internal void SetCarTransmissionItems()
+        {
+            CarTransmissionItems.Add(new SelectListItem()
+            {
+                Value = "true",
+                Text = "Automatic"
+            });
+
+            CarTransmissionItems.Add(new SelectListItem()
+            {
+                Value = "false",
+                Text = "Manual"
+            });
+        }
+
+        internal void SetBodyTypeItems(IEnumerable<BodyType> bodyTypeItems)
+        {
+            foreach (var item in bodyTypeItems)
+            {
+                BodyTypeItems.Add(new SelectListItem()
+                {
+                    Value = item.BodyTypeID.ToString(),
+                    Text = item.BodyTypeName
                 });
             }
         }
@@ -45,6 +114,19 @@ namespace CarDealership.UI.Models
             }
         }
 
+        public void SetCarTypeItems()
+        {
+                CarTypeItems.Add(new SelectListItem()
+                {
+                    Value = "true",
+                    Text = "New"
+                });
 
+                CarTypeItems.Add(new SelectListItem()
+                {
+                    Value = "false",
+                    Text = "Used"
+                });
+        }
     }
 }
