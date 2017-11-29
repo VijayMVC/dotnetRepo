@@ -29,7 +29,7 @@ namespace CarDealership.UI.Controllers
         {
             model.Purchase.PurchaseDate = DateTime.Now;
             repo.AddPurchase(model.Purchase);
-            return RedirectToAction("Index");
+            return RedirectToAction("SalesIndex");
         }
     }
 }

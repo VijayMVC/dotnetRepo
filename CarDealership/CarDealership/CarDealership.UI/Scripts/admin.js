@@ -36,7 +36,7 @@ function quickSearch() {
                 output += '<div class="col-md-12" style="height:200px; border:solid; border-color:grey; margin-bottom:8px"><div class="col-md-3">' + vehicles[i].Year + ' ' + vehicles[i].CarMake.MakeName + ' ' + vehicles[i].CarModel.ModelName + '<img src="' + vehicles[i].ImageLocation + '" width="100%" height="100%"></div>'
                 output += '<div class="col-md-9"><div class="col-md-4"> <p>Body Style: ' + vehicles[i].CarBody.BodyTypeName + '</p><p>Transmission: ' + transmission + '</p><p>Color: ' + vehicles[i].Color + '</p></div>'
                 output += '<div class="col-md-4"> <p>Interior: ' + vehicles[i].Interior + '</p><p>Mileage: ' + vehicles[i].Mileage + '</p><p>Vin: ' + vehicles[i].VinNumber + '</p></div>'
-                output += '<div class="col-md-4"> <p>Sale Price: $' + vehicles[i].SalePrice + '</p><p>MSRP: $' + vehicles[i].MSRP + '</p><br/><button type="button" class="btn btn-default" onclick="editVehicle(' + "'" + vehicles[i].VinNumber + "'" + ')">Edit</button></div></div></div>'
+                output += '<div class="col-md-4"> <p>Sale Price: $' + vehicles[i].SalePrice + '</p><p>MSRP: $' + vehicles[i].MSRP + '</p><br/> <a href="/Admin/EditVehicle/' + vehicles[i].VehicleID + '"><button type="button" class="btn btn-default"> Edit </button></a></div></div></div>'
             }
             $('#Results').html(output);
         },
@@ -69,35 +69,10 @@ function getModels(makeID) {
     })
 }
 
-function editVehicle(vin) {
-    $('#Results').hide('slow');
-    $('#Details').show('slow');
-    $('#PurchaseVehicle').show('slow');
-    $('#vinBox').val(vin);
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:55632/Vehicle/Vin/' + vin,
-        success: function (vehicle) {
-            var output = "";
-            var i = 0;
-            var buttonLabel;
-
-            if (vehicle.IsAutomatic == true) {
-                transmission = "Automatic"
-            }
-            else {
-                transmission = "Manual"
-            }
-
-            output += '<div class="col-md-12" style="height:200px; border:solid; border-color:grey; margin-bottom:8px"><div class="col-md-3">' + vehicle.Year + ' ' + vehicle.CarMake.MakeName + ' ' + vehicle.CarModel.ModelName + '<img src="' + vehicle.ImageLocation + '" width="100%" height="100%"></div>'
-            output += '<div class="col-md-9"><div class="col-md-4"> <p>Body Style: ' + vehicle.CarBody.BodyTypeName + '</p><p>Transmission: ' + transmission + '</p><p>Color: ' + vehicle.Color + '</p></div>'
-            output += '<div class="col-md-4"> <p>Interior: ' + vehicle.Interior + '</p><p>Mileage: ' + vehicle.Mileage + '</p><p>Vin: ' + vehicle.VinNumber + '</p></div>'
-            output += '<div class="col-md-4"> <p>Sale Price: $' + vehicle.SalePrice + '</p><p>MSRP: $' + vehicle.MSRP + '</p><br/></div></div >'
-            output += '<div class="col-md-offset-3 col-md-7"><p>Description: ' + vehicle.Description + '</p></div><div class="col-md-2"></div></div></div>'
-
-            $('#Details').html(output);
-        },
-        error: function (jqxhr, techstatus, errorthrow) {
-        }
-    })
-}
+$('#userSave').on("click", function () {
+    if ($('#pw').val() !== $('#pwConf').val())
+    {
+        alert("Confirm password does not match original, please re-enter")
+        return false;
+    }
+})

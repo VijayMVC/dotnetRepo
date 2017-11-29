@@ -54,10 +54,12 @@
     <div class="col-md-12">
         <label>Description</label>
             @Html.TextAreaFor(m => m.AVehicle.Description, new { @class = "form-control"})
-
-            @Html.CheckBoxFor(m => m.AVehicle.IsFeatured, new { @class = "form-control" })
+        <label>
+            @Html.CheckBoxFor(m => m.AVehicle.IsFeatured) Feature This Vehicle
+        </label><br />
         
         <label>Picture</label>
+            @Html.TextBoxFor(m => m.AVehicle.ImageLocation)&nbsp;<button type="button" id="upload" class="btn btn-primary btn-sm">Upload</button><br />
 
         <button type="submit" id="save" class="btn btn-primary btn-sm">Save</button>
     </div>

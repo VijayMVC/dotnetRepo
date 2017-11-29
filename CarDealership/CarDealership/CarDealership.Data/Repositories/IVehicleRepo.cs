@@ -40,5 +40,6 @@ namespace CarDealership.Data.Repositories
         Make GetMakeByID(int makeID);
         List<CarModel> GetModelsByMake(int makeID);
         BodyType GetBodyByID(int bodyTypeID);
+        List<Employee> GetUsers();
     }
 }

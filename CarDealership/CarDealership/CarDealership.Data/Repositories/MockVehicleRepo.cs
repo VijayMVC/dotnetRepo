@@ -21,7 +21,8 @@ namespace CarDealership.Data.Repositories
                     Street1 = "1234 Main Street",
                     City = "Minneapolis",
                     State = "MN",
-                    PostalCode = "55121"
+                    PostalCode = "55121",
+                    Role = "Sales"
                 }
         };
 
@@ -362,6 +363,7 @@ namespace CarDealership.Data.Repositories
             Vehicle veh = new Vehicle();
             veh = _vehicles.Where(v => v.VinNumber == purch.VinNumber).SingleOrDefault();
             veh.IsAvailable = false;
+            veh.IsFeatured = false;
             EditVehicle(veh);
             purch.APurchaseType = _purchaseTypes.Where(p => p.PurchaseTypeID == purch.PurchaseID).SingleOrDefault();
             _purchases.Add(purch);
@@ -515,6 +517,11 @@ namespace CarDealership.Data.Repositories
         public List<Vehicle> GetUsedVehicles()
         {
             return _vehicles.Where(v => v.IsNew == false).ToList();
+        }
+
+        public List<Employee> GetUsers()
+        {
+            return _employees;
         }
 
         public Vehicle GetVehicleByID(int vehicleID)

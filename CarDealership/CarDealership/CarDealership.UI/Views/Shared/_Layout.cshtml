@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - GuildCars</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
     @RenderSection("map")
 </head>
 <body>
@@ -29,7 +28,7 @@
                         </a>
                         <ul class="dropdown-menu" id="management">
                             <li>
-                                @Html.ActionLink("Vehicles", "GetVehicles", "Admin")
+                                @Html.ActionLink("Vehicles", "AdminIndex", "Admin")
                             </li>
                             <li>
                                 @Html.ActionLink("Add New Vehicle", "AddVehicle", "Admin")
@@ -41,7 +40,7 @@
                                 @Html.ActionLink("Add New Model", "AddModel", "Admin")
                             </li>
                             <li>
-                                @Html.ActionLink("Manage Users", "ManageUsers", "Admin")
+                                @Html.ActionLink("Manage Users", "Users", "Admin")
                             </li>
                             <li>
                                 @Html.ActionLink("Manage Specials", "ManageSpecials", "Admin")
