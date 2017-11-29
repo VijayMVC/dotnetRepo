@@ -111,14 +111,14 @@ namespace CarDealership.UI.Controllers
                 }
                 var findmanager = userMgr.FindByName(emp.UserName);
                 // create the user with the Sales class
-                if (!userMgr.IsInRole(findmanager.Id, "Sales"))
+                if (!userMgr.IsInRole(findmanager.Id, "sales"))
                 {
-                    userMgr.AddToRole(findmanager.Id, "Sales");
+                    userMgr.AddToRole(findmanager.Id, "sales");
                 }
 
-                if (!userMgr.IsInRole(findmanager.Id, "Admin"))
+                if (!userMgr.IsInRole(findmanager.Id, "admin"))
                 {
-                    userMgr.AddToRole(findmanager.Id, "Admin");
+                    userMgr.AddToRole(findmanager.Id, "admin");
                 }
                 
                 return RedirectToAction("Index", "Home");

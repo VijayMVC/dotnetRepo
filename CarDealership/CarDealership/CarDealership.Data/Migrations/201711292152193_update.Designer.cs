@@ -7,13 +7,13 @@ namespace CarDealership.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class custPurchID : IMigrationMetadata
+    public sealed partial class update : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(custPurchID));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(update));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711042053429_custPurchID"; }
+            get { return "201711292152193_update"; }
         }
         
         string IMigrationMetadata.Source

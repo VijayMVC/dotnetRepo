@@ -1,113 +1,175 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using CarDealership.Models;
-//using System.Data.Entity.Migrations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CarDealership.Models;
+using System.Data.Entity.Migrations;
+using CarDealership.Models.Tables;
 
-//namespace CarDealership.Data.Repositories
-//{
-//    class EFVehicleRepo : IVehicleRepo
-//    {
-//        CarDealershipDBContext context = new CarDealershipDBContext();
+namespace CarDealership.Data.Repositories
+{
+    class EFVehicleRepo : IVehicleRepo
+    {
+        CarDealershipDBContext context = new CarDealershipDBContext();
 
-//        public void AddMake(Make make)
-//        {
-//            context.Makes.Add(make);
-//            context.SaveChanges();
-//        }
+        public void AddContact(ContactUs contact)
+        {
+            context.Contacts.Add(contact);
+        }
 
-//        public void AddModel(CarModel model)
-//        {
-//            context.CarModels.Add(model);
-//            context.SaveChanges();
-//        }
+        public void AddMake(Make make)
+        {
+            context.Makes.Add(make);
+        }
 
-//        public void AddVehicle(Vehicle vehicle)
-//        {
-//            context.Vehicles.Add(vehicle);
-//            context.SaveChanges();
-//        }
+        public void AddModel(CarModel model)
+        {
+            context.CarModels.Add(model);
+        }
 
-//        public void DeleteVehicle(int vehicleID)
-//        {
-//            Vehicle vehicle = context.Vehicles.Find(vehicleID);
-//            context.Vehicles.Remove(vehicle);
-//            context.SaveChanges();
-//        }
+        public void AddPurchase(Purchase purch)
+        {
+            var veh = context.Vehicles.Where(v => v.VinNumber == purch.VinNumber).SingleOrDefault();
+            veh.IsAvailable = false;
+            veh.IsFeatured = false;
+            EditVehicle(veh);
+            context.Purchases.Add(purch);
+        }
 
-//        public void EditVehicle(Vehicle vehicle)
-//        {
-//            var change = context.Vehicles.FirstOrDefault(v => v.VinNumber == vehicle.VinNumber);
-//            context.Vehicles.AddOrUpdate(vehicle);
-//            context.SaveChanges();
-//        }
+        public void AddSpecial(Special aSpecial)
+        {
+            context.Specials.Add(aSpecial);
+        }
 
-//        public List<Vehicle> GetAllVehicles()
-//        {
-//            return context.Vehicles.OrderByDescending(v => v.MSRP).ToList();
-//        }
+        public void AddVehicle(Vehicle vehicle)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetAvailableVehicles()
-//        {
-//            return context.Vehicles.Where(v => v.IsAvailable == true).ToList();
-//        }
+        public void DeleteSpecial(int specialID)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetFeaturedVehicles()
-//        {
-//            return context.Vehicles.Where(v => v.IsFeatured == true).ToList();
-//        }
+        public void DeleteVehicle(int vehicleID)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetNewVehicles()
-//        {
-//            return context.Vehicles.Where(v => v.IsNew == true).ToList();
-//        }
+        public void EditSpecial(Special aSpecial)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetNumberOfVehicles(int number, int set)
-//        {
-//            var toReturn = context.Vehicles.OrderByDescending(v => v.MSRP).Where(v => v.IsAvailable == true).Skip(number * set).Take(number).ToList();
-//            return toReturn;
-//        }
+        public void EditVehicle(Vehicle vehicle)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetPurchasedVehicles()
-//        {
-//            return context.Vehicles.Where(v => v.IsAvailable == false).ToList();
-//        }
+        public List<Vehicle> GetAllVehicles()
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetUsedVehicles()
-//        {
-//            return context.Vehicles.Where(v => v.IsNew == false).ToList();
-//        }
+        public List<Vehicle> GetAvailableVehicles()
+        {
+            throw new NotImplementedException();
+        }
 
-//        public Vehicle GetVehicleByID(int id)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public BodyType GetBodyByID(int bodyTypeID)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public Vehicle GetVehicleByVin(string vinNumber)
-//        {
-//            return context.Vehicles.FirstOrDefault(v => v.VinNumber == vinNumber);
-//        }
+        public List<BodyType> GetBodyTypes()
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetVehiclesByMake(string make)
-//        {
-//            return context.Vehicles.Where(v => v.CarMake.MakeName.Contains(make)).ToList();
-//        }
+        public List<Vehicle> GetFeaturedVehicles()
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetVehiclesByModel(string model)
-//        {
-//            return context.Vehicles.Where(v => v.CarModel.ModelName.Contains(model)).ToList();
-//        }
+        public Make GetMakeByID(int makeID)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> GetVehiclesByYear(int year)
-//        {
-//            return context.Vehicles.Where(v => v.Year == year).ToList();
-//        }
+        public List<Make> GetMakeItems()
+        {
+            throw new NotImplementedException();
+        }
 
-//        public List<Vehicle> QuickSearch(string Type, string SearchKey, int YearMin, int YearMax, int PriceMin, int PriceMax)
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-//}
+        public CarModel GetModelByID(int carModelID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarModel> GetModelItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarModel> GetModelsByMake(int makeID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicle> GetNumberOfVehicles(int number, int set)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicle> GetPurchasedVehicles()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PurchaseType> GetPurchaseTypes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Special> GetSpecials()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vehicle GetVehicleByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vehicle GetVehicleByVin(string vinNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicle> GetVehiclesByMake(string make)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicle> GetVehiclesByModel(string model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicle> GetVehiclesByYear(int year)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicle> QuickSearch(string Type, string SearchKey, int YearMin, int YearMax, int PriceMin, int PriceMax)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
