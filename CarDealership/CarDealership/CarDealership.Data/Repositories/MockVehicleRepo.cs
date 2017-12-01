@@ -348,6 +348,11 @@ namespace CarDealership.Data.Repositories
             _contacts.Add(contact);
         }
 
+        public void AddEmployee(Employee emp)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddMake(Make make)
         {
             _makes.Add(make);

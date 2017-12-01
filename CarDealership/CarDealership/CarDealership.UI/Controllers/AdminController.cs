@@ -81,6 +81,12 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpGet]
+        public ActionResult AddMake()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Users()
         {
             var model = repo.GetUsers();
@@ -94,35 +100,26 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddUser(Employee emp)
+        public ActionResult AddUser(Employee m)
         {
-                CarDealership.Models.CarDealershipDBContext context = new CarDealershipDBContext();
+            CarDealershipDBContext context = new CarDealershipDBContext();
+            var repo = VehicleRepoFactory.Create();
 
-                var userMgr = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
-                var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
 
-                if (!userMgr.Users.Any(u => u.UserName == emp.UserName))
+            if (!userMgr.Users.Any(u => u.UserName == m.Name))
+            {
+                var newUser = new AppUser()
                 {
-                    var user = new IdentityUser()
-                    {
-                        UserName = emp.UserName
-                    };
-                    userMgr.Create(user, emp.Password);
-                }
-                var findmanager = userMgr.FindByName(emp.UserName);
-                // create the user with the Sales class
-                if (!userMgr.IsInRole(findmanager.Id, "sales"))
-                {
-                    userMgr.AddToRole(findmanager.Id, "sales");
-                }
-
-                if (!userMgr.IsInRole(findmanager.Id, "admin"))
-                {
-                    userMgr.AddToRole(findmanager.Id, "admin");
-                }
-                
-                return RedirectToAction("Index", "Home");
+                    UserName = m.Name,
+                    Email = m.Email
+                };
+                userMgr.Create(newUser, m.Password);
+                context.SaveChanges();
+                userMgr.AddToRole(newUser.Id, m.Role);
+                repo.AddEmployee(m);
+            }
+            return RedirectToAction("Index", "Home");
         }
-
     }
 }

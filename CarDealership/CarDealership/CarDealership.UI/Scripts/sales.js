@@ -14,6 +14,9 @@ $("#search").click(function () {
 function quickSearch() {
     var Type = $('#vehType').val();
     var SearchKey = $('#searchKey').val();
+    if (SearchKey == '') {
+        SearchKey = "null";
+    }
     var PriceMin = $('#minPrice').val();
     var PriceMax = $('#maxPrice').val();
     var YearMin = $('#minYear').val();

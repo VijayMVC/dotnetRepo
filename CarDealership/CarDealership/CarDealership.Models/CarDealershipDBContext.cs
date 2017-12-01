@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarDealership.Models
 {
-    public class CarDealershipDBContext : IdentityDbContext
+    public class CarDealershipDBContext : IdentityDbContext<AppUser>
     {
         public CarDealershipDBContext() : base("CarDealership2")
         {

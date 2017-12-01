@@ -16,16 +16,25 @@ namespace CarDealership.Data.Repositories
         public void AddContact(ContactUs contact)
         {
             context.Contacts.Add(contact);
+            context.SaveChanges();
+        }
+
+        public void AddEmployee(Employee emp)
+        {
+            context.Employees.Add(emp);
+            context.SaveChanges();
         }
 
         public void AddMake(Make make)
         {
             context.Makes.Add(make);
+            context.SaveChanges();
         }
 
         public void AddModel(CarModel model)
         {
             context.CarModels.Add(model);
+            context.SaveChanges();
         }
 
         public void AddPurchase(Purchase purch)
@@ -35,141 +44,210 @@ namespace CarDealership.Data.Repositories
             veh.IsFeatured = false;
             EditVehicle(veh);
             context.Purchases.Add(purch);
+            context.SaveChanges();
         }
 
         public void AddSpecial(Special aSpecial)
         {
             context.Specials.Add(aSpecial);
+            context.SaveChanges();
         }
 
         public void AddVehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            context.Vehicles.Add(vehicle);
+            context.SaveChanges();
         }
 
         public void DeleteSpecial(int specialID)
         {
-            throw new NotImplementedException();
+            context.Specials.Remove(context.Specials.Where(s => s.SpecialID == specialID).SingleOrDefault());
+            context.SaveChanges();
         }
 
         public void DeleteVehicle(int vehicleID)
         {
-            throw new NotImplementedException();
+            context.Vehicles.Remove(context.Vehicles.Where(v => v.VehicleID == vehicleID).SingleOrDefault());
+            context.SaveChanges();
         }
 
         public void EditSpecial(Special aSpecial)
         {
-            throw new NotImplementedException();
+            var change = context.Specials.FirstOrDefault(s => s.SpecialID == aSpecial.SpecialID);
+            change.ImageLocation = aSpecial.ImageLocation;
+            change.SpecialName = aSpecial.SpecialName;
+            change.value = aSpecial.value;
+            change.Vehicles = aSpecial.Vehicles;
+            change.Description = aSpecial.Description;
+            change.BeginDate = aSpecial.BeginDate;
+            change.EndDate = aSpecial.EndDate;
+            context.SaveChanges();
         }
 
         public void EditVehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            var change = context.Vehicles.FirstOrDefault(v => v.VehicleID == vehicle.VehicleID);
+            change.CarBody = vehicle.CarBody;
+            change.CarMake = vehicle.CarMake;
+            change.CarModel = vehicle.CarModel;
+            change.Color = vehicle.Color;
+            change.Description = vehicle.Description;
+            change.ImageLocation = vehicle.ImageLocation;
+            change.Interior = vehicle.Interior;
+            change.IsAutomatic = vehicle.IsAutomatic;
+            change.IsAvailable = vehicle.IsAvailable;
+            change.IsFeatured = vehicle.IsFeatured;
+            change.IsNew = vehicle.IsNew;
+            change.Mileage = vehicle.Mileage;
+            change.MSRP = vehicle.MSRP;
+            change.SalePrice = vehicle.SalePrice;
+            change.Specials = vehicle.Specials;
+            change.VinNumber = vehicle.VinNumber;
+            change.Year = vehicle.Year;
+            context.SaveChanges();
         }
 
         public List<Vehicle> GetAllVehicles()
         {
-            throw new NotImplementedException();
+            return context.Vehicles.ToList();
         }
 
         public List<Vehicle> GetAvailableVehicles()
         {
-            throw new NotImplementedException();
+            return context.Vehicles.Where(v => v.IsAvailable == true).ToList();
         }
 
         public BodyType GetBodyByID(int bodyTypeID)
         {
-            throw new NotImplementedException();
+            return context.BodyTypes.FirstOrDefault(b => b.BodyTypeID == bodyTypeID);
         }
 
         public List<BodyType> GetBodyTypes()
         {
-            throw new NotImplementedException();
+            return context.BodyTypes.ToList();
         }
 
         public List<Vehicle> GetFeaturedVehicles()
         {
-            throw new NotImplementedException();
+            return context.Vehicles.Where(v => v.IsFeatured == true).ToList();
         }
 
         public Make GetMakeByID(int makeID)
         {
-            throw new NotImplementedException();
+            return context.Makes.FirstOrDefault(m => m.MakeID == makeID);
         }
 
         public List<Make> GetMakeItems()
         {
-            throw new NotImplementedException();
+            return context.Makes.ToList();
         }
 
         public CarModel GetModelByID(int carModelID)
         {
-            throw new NotImplementedException();
+            return context.CarModels.FirstOrDefault(c => c.CarModelID == carModelID);
         }
 
         public List<CarModel> GetModelItems()
         {
-            throw new NotImplementedException();
+            return context.CarModels.ToList();
         }
 
         public List<CarModel> GetModelsByMake(int makeID)
         {
-            throw new NotImplementedException();
+            return context.CarModels.Where(c => c.AMake.MakeID == makeID).ToList();
         }
 
         public List<Vehicle> GetNumberOfVehicles(int number, int set)
         {
-            throw new NotImplementedException();
+            return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.IsAvailable == true).Skip(number * set).Take(number).ToList();
         }
 
         public List<Vehicle> GetPurchasedVehicles()
         {
-            throw new NotImplementedException();
+            return context.Vehicles.Where(v => v.IsAvailable == false).ToList();
         }
 
         public List<PurchaseType> GetPurchaseTypes()
         {
-            throw new NotImplementedException();
+            return context.PurchaseTypes.ToList();
         }
 
         public List<Special> GetSpecials()
         {
-            throw new NotImplementedException();
+            return context.Specials.ToList();
         }
 
         public List<Employee> GetUsers()
         {
-            throw new NotImplementedException();
+            return context.Employees.ToList();
         }
 
         public Vehicle GetVehicleByID(int id)
         {
-            throw new NotImplementedException();
+            return context.Vehicles.FirstOrDefault(v => v.VehicleID == id);
         }
 
         public Vehicle GetVehicleByVin(string vinNumber)
         {
-            throw new NotImplementedException();
+            return context.Vehicles.FirstOrDefault(v => v.VinNumber == vinNumber);
         }
 
         public List<Vehicle> GetVehiclesByMake(string make)
         {
-            throw new NotImplementedException();
+            return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.CarMake.MakeName.ToLower() == make.ToLower()).ToList();
         }
 
         public List<Vehicle> GetVehiclesByModel(string model)
         {
-            throw new NotImplementedException();
+            return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.CarModel.ModelName.ToLower() == model.ToLower()).ToList();
         }
 
         public List<Vehicle> GetVehiclesByYear(int year)
         {
-            throw new NotImplementedException();
+            return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.Year == year).ToList();
         }
 
         public List<Vehicle> QuickSearch(string Type, string SearchKey, int YearMin, int YearMax, int PriceMin, int PriceMax)
         {
-            throw new NotImplementedException();
+            if (Type == "New")
+            {
+                if (SearchKey == "null")
+                {
+                    return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.IsNew == true).Where(v => v.Year >= YearMin)
+                        .Where(v => v.Year <= YearMax).Where(v => v.SalePrice >= PriceMin).Where(v => v.SalePrice <= PriceMax).ToList();
+                }
+                else
+                {
+                    return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.CarMake.MakeName.Contains(SearchKey) || v.CarModel.ModelName.Contains(SearchKey) || v.Year.ToString() == SearchKey).Where(v => v.IsNew == true).Where(v => v.Year >= YearMin)
+                        .Where(v => v.Year <= YearMax).Where(v => v.SalePrice >= PriceMin).Where(v => v.SalePrice <= PriceMax).ToList();
+                }
+            }
+            else if (Type == "Used")
+            {
+                if (SearchKey == "null")
+                {
+                    return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.IsNew == false).Where(v => v.Year >= YearMin)
+                        .Where(v => v.Year <= YearMax).Where(v => v.SalePrice >= PriceMin).Where(v => v.SalePrice <= PriceMax).ToList();
+                }
+                else
+                {
+                    return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.CarMake.MakeName.Contains(SearchKey) || v.CarModel.ModelName.Contains(SearchKey) || v.Year.ToString() == SearchKey).Where(v => v.IsNew == false).Where(v => v.Year >= YearMin)
+                        .Where(v => v.Year <= YearMax).Where(v => v.SalePrice >= PriceMin).Where(v => v.SalePrice <= PriceMax).ToList();
+                }
+            }
+            else
+            {
+                if (SearchKey == "null")
+                {
+                    return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.Year >= YearMin)
+                        .Where(v => v.Year <= YearMax).Where(v => v.SalePrice >= PriceMin).Where(v => v.SalePrice <= PriceMax).ToList();
+                }
+                else
+                {
+                    return context.Vehicles.OrderByDescending(v => v.SalePrice).Where(v => v.CarMake.MakeName.Contains(SearchKey) || v.CarModel.ModelName.Contains(SearchKey) || v.Year.ToString() == SearchKey).Where(v => v.Year >= YearMin)
+                        .Where(v => v.Year <= YearMax).Where(v => v.SalePrice >= PriceMin).Where(v => v.SalePrice <= PriceMax).ToList();
+                }
+            }
         }
     }
 }

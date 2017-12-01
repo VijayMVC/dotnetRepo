@@ -18,12 +18,12 @@ namespace CarDealership.UI.App_Start
         {
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                AuthenticationType = "ApplicationCookie",
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/auth/login")
             });
             app.CreatePerOwinContext(() => new CarDealershipDBContext());
-            app.CreatePerOwinContext<UserManager<IdentityUser>>((options, context) => new UserManager<IdentityUser>(new UserStore<IdentityUser>(context.Get<CarDealershipDBContext>())));
-            app.CreatePerOwinContext<RoleManager<IdentityRole>>((options, context) => new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context.Get<CarDealershipDBContext>())));
+            app.CreatePerOwinContext<UserManager<AppUser>>((options, context) => new UserManager<AppUser>(new UserStore<AppUser>(context.Get<CarDealershipDBContext>())));
+            app.CreatePerOwinContext<RoleManager<AppRole>>((options, context) => new RoleManager<AppRole>(new RoleStore<AppRole>(context.Get<CarDealershipDBContext>())));
         }
     }
 }

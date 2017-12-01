@@ -41,5 +41,6 @@ namespace CarDealership.Data.Repositories
         List<CarModel> GetModelsByMake(int makeID);
         BodyType GetBodyByID(int bodyTypeID);
         List<Employee> GetUsers();
+        void AddEmployee(Employee emp);
     }
 }

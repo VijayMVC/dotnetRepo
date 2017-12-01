@@ -50,7 +50,7 @@ namespace CarDealership.Data.Migrations
                 c => new
                     {
                         EmployeeID = c.Int(nullable: false, identity: true),
-                        UserName = c.String(),
+                        Name = c.String(),
                         FirstName = c.String(),
                         LastName = c.String(),
                         Email = c.String(),
@@ -128,6 +128,7 @@ namespace CarDealership.Data.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");

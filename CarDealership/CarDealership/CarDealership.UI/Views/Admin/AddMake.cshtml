@@ -1,0 +1,13 @@
+﻿@model CarDealership.Models.Make
+@{
+    ViewBag.Title = "AddMake";
+}
+
+<h2>Add Make</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(m => m.MakeName)
+}
+
+

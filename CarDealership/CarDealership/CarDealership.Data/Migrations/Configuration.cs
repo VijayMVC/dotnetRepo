@@ -19,49 +19,37 @@ namespace CarDealership.Data.Migrations
 
         protected override void Seed(CarDealership.Models.CarDealershipDBContext context)
         {
-            var userMgr = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
-            var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+            var roleMgr = new RoleManager<AppRole>(new RoleStore<AppRole>(context));
 
             if (!roleMgr.RoleExists("sales"))
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "sales";
-                roleMgr.Create(role);
+                roleMgr.Create(new AppRole() { Name = "sales" });
             }
 
             if (!userMgr.Users.Any(u => u.UserName == "sales"))
             {
-                var user = new IdentityUser()
+                var user = new AppUser()
                 {
                     UserName = "sales"
                 };
                 userMgr.Create(user, "testing123");
-            }
-            var findmanager = userMgr.FindByName("sales");
-            // create the user with the manager class
-            if (!userMgr.IsInRole(findmanager.Id, "sales"))
-            {
-                userMgr.AddToRole(findmanager.Id, "sales");
+                userMgr.AddToRole(user.Id, "sales");
             }
 
             if (!roleMgr.RoleExists("admin"))
             {
-                roleMgr.Create(new IdentityRole() { Name = "admin" });
+                roleMgr.Create(new AppRole() { Name = "admin" });
             }
 
             if (!userMgr.Users.Any(u => u.UserName == "admin"))
             {
-                var user = new IdentityUser()
+                var user = new AppUser()
                 {
                     UserName = "admin"
                 };
                 userMgr.Create(user, "testing123");
-            }
-            var finduser = userMgr.FindByName("admin");
-            // create the user with the admin class
-            if (!userMgr.IsInRole(finduser.Id, "admin"))
-            {
-                userMgr.AddToRole(finduser.Id, "admin");
+                userMgr.AddToRole(user.Id, "admin");
             }
 
             context.Employees.AddOrUpdate(e => e.Email,
