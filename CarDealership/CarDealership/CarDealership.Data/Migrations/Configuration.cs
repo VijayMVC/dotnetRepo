@@ -102,35 +102,35 @@ namespace CarDealership.Data.Migrations
                 MakeID = 1,
                 MakeName = "Mazda",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 2,
                 MakeName = "Toyota",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 3,
                 MakeName = "Chevy",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 4,
                 MakeName = "BMW",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 5,
                 MakeName = "Ford",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
+                AddedBy = "admin"
             });
             context.SaveChanges();
 
@@ -140,40 +140,40 @@ namespace CarDealership.Data.Migrations
                 CarModelID = 1,
                 ModelName = "3",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
-                AMake = context.Makes.Where(e => e.MakeName == "Mazda").FirstOrDefault(),
+                AddedBy = "Admin",
+                Make = "Mazda"
             },
             new CarModel
             {
                 CarModelID = 2,
                 ModelName = "Corolla",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
-                AMake = context.Makes.Where(e => e.MakeName == "Toyota").FirstOrDefault(),
+                AddedBy = "Admin",
+                Make = "Toyota"
             },
             new CarModel
             {
                 CarModelID = 3,
                 ModelName = "Silverado",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
-                AMake = context.Makes.Where(e => e.MakeName == "Chevy").FirstOrDefault(),
+                AddedBy = "Admin",
+                Make = "Chevy"
             },
             new CarModel
             {
                 CarModelID = 4,
                 ModelName = "550S",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
-                AMake = context.Makes.Where(e => e.MakeName == "BMW").FirstOrDefault(),
+                AddedBy = "Admin",
+                Make = "BMW"
             },
             new CarModel
             {
                 CarModelID = 5,
                 ModelName = "Focus",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = context.Employees.Where(e => e.EmployeeID == 1).FirstOrDefault(),
-                AMake = context.Makes.Where(e => e.MakeName == "Ford").FirstOrDefault(),
+                AddedBy = "Admin",
+                Make = "Ford"
             });
             context.SaveChanges();
 

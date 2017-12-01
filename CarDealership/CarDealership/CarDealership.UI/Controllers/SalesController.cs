@@ -2,6 +2,8 @@
 using CarDealership.Models;
 using CarDealership.Models.Tables;
 using CarDealership.UI.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,29 @@ namespace CarDealership.UI.Controllers
             model.Purchase.PurchaseDate = DateTime.Now;
             repo.AddPurchase(model.Purchase);
             return RedirectToAction("SalesIndex");
+        }
+
+        public ActionResult ChangePassword()
+        {
+            return View(new ChangePasswordVM());
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordVM password)
+        {
+            if (password.newPassword == password.newPasswordConfirm)
+            {
+                var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+
+                userMgr.ChangePassword(User.Identity.GetUserId(), password.oldPassword, password.newPassword);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("newPassword", "Passwords must be the same");
+            }
+            return View(password);
         }
     }
 }

@@ -38,9 +38,10 @@ namespace CarDealership.Data.Repositories
         CarModel GetModelByID(int carModelID);
         void AddContact(ContactUs contact);
         Make GetMakeByID(int makeID);
-        List<CarModel> GetModelsByMake(int makeID);
         BodyType GetBodyByID(int bodyTypeID);
         List<Employee> GetUsers();
         void AddEmployee(Employee emp);
+        void EditEmployee(Employee emp);
+        Employee GetEmployeeByID(int empID);
     }
 }

@@ -96,7 +96,7 @@ namespace CarDealership.UI.Controllers
                 return View(model);
             }
 
-            var userManager = HttpContext.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
+            var userManager = HttpContext.GetOwinContext().GetUserManager<UserManager<AppUser>>();
             var authManager = HttpContext.GetOwinContext().Authentication;
 
             // attempt to load the user with this password

@@ -21,6 +21,8 @@ namespace CarDealership.Data.Repositories
 
         public void AddEmployee(Employee emp)
         {
+            emp.OldPassword = emp.Password;
+            emp.OldUserName = emp.UserName;
             context.Employees.Add(emp);
             context.SaveChanges();
         }
@@ -68,6 +70,25 @@ namespace CarDealership.Data.Repositories
         public void DeleteVehicle(int vehicleID)
         {
             context.Vehicles.Remove(context.Vehicles.Where(v => v.VehicleID == vehicleID).SingleOrDefault());
+            context.SaveChanges();
+        }
+
+        public void EditEmployee(Employee emp)
+        {
+            var change = context.Employees.FirstOrDefault(e => e.EmployeeID == emp.EmployeeID);
+            change.City = emp.City;
+            change.Email = emp.Email;
+            change.FirstName = emp.FirstName;
+            change.LastName = emp.LastName;
+            change.UserName = emp.UserName;
+            change.Password = emp.Password;
+            change.Phone = emp.Phone;
+            change.PostalCode = emp.PostalCode;
+            change.Role = emp.Role;
+            change.State = emp.State;
+            change.Street1 = emp.Street1;
+            change.Street2 = emp.Street2;
+            change.OldPassword = emp.Password;
             context.SaveChanges();
         }
 
@@ -127,6 +148,11 @@ namespace CarDealership.Data.Repositories
             return context.BodyTypes.ToList();
         }
 
+        public Employee GetEmployeeByID(int empID)
+        {
+            return context.Employees.FirstOrDefault(e => e.EmployeeID == empID);
+        }
+
         public List<Vehicle> GetFeaturedVehicles()
         {
             return context.Vehicles.Where(v => v.IsFeatured == true).ToList();
@@ -150,11 +176,6 @@ namespace CarDealership.Data.Repositories
         public List<CarModel> GetModelItems()
         {
             return context.CarModels.ToList();
-        }
-
-        public List<CarModel> GetModelsByMake(int makeID)
-        {
-            return context.CarModels.Where(c => c.AMake.MakeID == makeID).ToList();
         }
 
         public List<Vehicle> GetNumberOfVehicles(int number, int set)

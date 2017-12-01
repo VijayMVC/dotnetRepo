@@ -40,16 +40,12 @@
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td width="10%">
-                @Html.ActionLink("Edit", "EditUser", "Admin")
+                @Html.ActionLink("Edit", "EditUser/" + @item.EmployeeID, "Admin/")
             </td>
         </tr>
     }
 
 </table>
-
-
-
-
 
     @section scripts{
         <script src="~/Scripts/admin.js"></script>

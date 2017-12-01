@@ -81,12 +81,6 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddMake()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult Users()
         {
             var model = repo.GetUsers();
@@ -107,11 +101,11 @@ namespace CarDealership.UI.Controllers
 
             var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
 
-            if (!userMgr.Users.Any(u => u.UserName == m.Name))
+            if (!userMgr.Users.Any(u => u.UserName == m.UserName))
             {
                 var newUser = new AppUser()
                 {
-                    UserName = m.Name,
+                    UserName = m.UserName,
                     Email = m.Email
                 };
                 userMgr.Create(newUser, m.Password);
@@ -120,6 +114,79 @@ namespace CarDealership.UI.Controllers
                 repo.AddEmployee(m);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(int id)
+        {
+            var repo = VehicleRepoFactory.Create();
+            var emp = repo.GetEmployeeByID(id);
+            return View(emp);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(Employee emp)
+        {
+            CarDealershipDBContext context = new CarDealershipDBContext();
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+            var repo = VehicleRepoFactory.Create();
+
+            var user = userMgr.FindByName(emp.OldUserName);
+            {
+                user.UserName = emp.UserName;
+                user.Email = emp.Email;
+            };
+            userMgr.Update(user);
+            userMgr.ChangePassword(user.Id, emp.OldPassword, emp.Password);
+
+            repo.EditEmployee(emp);
+            return RedirectToAction("Users", "admin");
+        }
+
+        public ActionResult Makes()
+        {
+            var model = repo.GetMakeItems();
+            return View(model);
+        }
+
+        public ActionResult AddMake()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddMake(Make m)
+        {
+            m.AddedDate = DateTime.Today.Date;
+            m.AddedBy = User.Identity.Name;
+            var repo = VehicleRepoFactory.Create();
+            repo.AddMake(m);
+
+            return RedirectToAction("Makes", "admin");
+        }
+
+        public ActionResult Models()
+        {
+            var model = repo.GetModelItems();
+            return View(model);
+        }
+
+        public ActionResult AddModel()
+        {
+            var makes = repo.GetMakeItems();
+            var viewmodel = new AddModelVM();
+            viewmodel.SetMakeItems(makes);
+            return View(viewmodel);
+        }
+
+        [HttpPost]
+        public ActionResult AddModel(AddModelVM m)
+        {
+            m.CModel.AddedDate = DateTime.Today;
+            m.CModel.AddedBy = User.Identity.Name;
+            repo.AddModel(m.CModel);
+
+            return RedirectToAction("Models", "admin");
         }
     }
 }

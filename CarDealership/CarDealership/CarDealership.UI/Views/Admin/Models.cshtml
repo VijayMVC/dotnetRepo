@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CarDealership.Models.CarModel>
+
+@{
+    ViewBag.Title = "Models";
+}
+
+<h2>Models</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ActionLink("Add a New Model", "AddModel", "Admin")
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(m => m.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.ModelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.AddedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.AddedBy)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td width="20%">
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td class="pgBody" width="20%">
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            <td width="20%">
+                @Html.DisplayFor(modelItem => item.AddedDate.Day)
+            </td>
+            <td width="20%">
+                @Html.DisplayFor(modelItem => item.AddedBy)
+            </td>
+        </tr>
+    }
+</table>
+
+@section scripts{}
+@section map{}
+
+

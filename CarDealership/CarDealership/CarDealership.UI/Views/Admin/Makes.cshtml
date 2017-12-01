@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CarDealership.Models.Make>
+
+@{
+    ViewBag.Title = "Makes";
+}
+
+<h2>Makes</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ActionLink("Add a New Make", "AddMake", "Admin")
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MakeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddedBy)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td width="20%">
+                @Html.DisplayFor(modelItem => item.MakeName)
+            </td>
+            <td class="pgBody" width="20%">
+                @Html.DisplayFor(modelItem => item.AddedDate.Day)
+            </td>
+            <td width="20%">
+                @Html.DisplayFor(modelItem => item.AddedBy)
+            </td>
+        </tr>
+    }
+</table>
+    
+@section scripts{}
+@section map{}
+
+

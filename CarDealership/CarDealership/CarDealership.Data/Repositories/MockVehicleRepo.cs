@@ -62,35 +62,35 @@ namespace CarDealership.Data.Repositories
                 MakeID = 1,
                 MakeName = "Mazda",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 2,
                 MakeName = "Toyota",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 3,
                 MakeName = "Chevy",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 4,
                 MakeName = "BMW",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AddedBy = "admin"
             },
             new Make
             {
                 MakeID = 5,
                 MakeName = "Ford",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0]
+                AddedBy = "admin"
             },
         };
         private static List<CarModel> _carModels = new List<CarModel>
@@ -100,16 +100,16 @@ namespace CarDealership.Data.Repositories
                 CarModelID = 1,
                 ModelName = "3",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0],
-                AMake = _makes[0],
+                AddedBy = "Admin",
+                Make = "Mazda",
             },
             new CarModel
             {
                 CarModelID = 2,
                 ModelName = "Corolla",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0],
-                AMake = _makes[1],
+                AddedBy = "Admin",
+                Make = "Toyota",
                 
             },
             new CarModel
@@ -117,24 +117,24 @@ namespace CarDealership.Data.Repositories
                 CarModelID = 3,
                 ModelName = "Silverado",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0],
-                AMake = _makes[2],
+                AddedBy = "Admin",
+                Make = "Chevy",
             },
             new CarModel
             {
                 CarModelID = 4,
                 ModelName = "550S",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0],
-                AMake = _makes[3],
+                AddedBy = "Admin",
+                Make = "BMW",
             },
             new CarModel
             {
                 CarModelID = 5,
                 ModelName = "Focus",
                 AddedDate = DateTime.Parse("11/07/2017"),
-                AnEmployee = _employees[0],
-                AMake = _makes[4],
+                AddedBy = "Admin",
+                Make = "Ford",
                 
             },
         };
@@ -343,6 +343,10 @@ namespace CarDealership.Data.Repositories
             }
         };
 
+        public MockVehicleRepo()
+        {
+        }
+
         public void AddContact(ContactUs contact)
         {
             _contacts.Add(contact);
@@ -392,6 +396,11 @@ namespace CarDealership.Data.Repositories
         public void DeleteVehicle(int vehicleID)
         {
             _vehicles.RemoveAll(v => v.VehicleID == vehicleID);
+        }
+
+        public void EditEmployee(Employee emp)
+        {
+            throw new NotImplementedException();
         }
 
         public void EditSpecial(Special aSpecial)
@@ -461,6 +470,11 @@ namespace CarDealership.Data.Repositories
             return _bodyTypes;
         }
 
+        public Employee GetEmployeeByID(int empID)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Vehicle> GetFeaturedVehicles()
         {
             return _vehicles.Where(v => v.IsFeatured == true).ToList();
@@ -492,11 +506,6 @@ namespace CarDealership.Data.Repositories
         public List<CarModel> GetModelItems()
         {
             return _carModels;
-        }
-
-        public List<CarModel> GetModelsByMake(int makeID)
-        {
-            return _carModels.Where(m => m.AMake.MakeID == makeID).ToList();
         }
 
         public List<Vehicle> GetNewVehicles()

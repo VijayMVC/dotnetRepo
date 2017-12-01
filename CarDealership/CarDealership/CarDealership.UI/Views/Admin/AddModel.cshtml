@@ -1,0 +1,19 @@
+﻿@model CarDealership.UI.Models.AddModelVM
+@{
+    ViewBag.Title = "AddModel";
+}
+
+<h2>Add Model</h2>
+
+@using (Html.BeginForm())
+{
+    <label>Make</label>
+    @Html.DropDownListFor(m => m.CModel.Make,Model.MakeItems, new { @class = "form-control" })
+    <label>New Model</label>
+    @Html.TextBoxFor(m => m.CModel.ModelName, new { @class = "form-control" });
+    <button type="submit" id="save" class="btn btn-primary btn-sm">Save</button>
+}
+
+@section scripts{}
+@section map{}
+

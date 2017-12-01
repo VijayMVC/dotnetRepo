@@ -198,6 +198,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddModelVM.cs" />
+    <Compile Include="Models\ChangePasswordVM.cs" />
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\PurchaseVM.cs" />
     <Compile Include="Models\VehicleVM.cs" />
@@ -220,7 +222,12 @@
     <Content Include="Views\Admin\EditVehicle.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\AddUser.cshtml" />
+    <Content Include="Views\Admin\Makes.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Sales\ChangePassword.cshtml" />
     <Content Include="Views\Admin\AddMake.cshtml" />
+    <Content Include="Views\Admin\Models.cshtml" />
+    <Content Include="Views\Admin\AddModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

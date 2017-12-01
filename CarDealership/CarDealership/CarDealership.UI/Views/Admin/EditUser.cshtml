@@ -1,0 +1,38 @@
+﻿@model CarDealership.Models.Tables.Employee
+@{
+    ViewBag.Title = "EditUser";
+}
+
+<h2>Edit User</h2>
+
+@using (Html.BeginForm())
+{
+    {
+        @Html.HiddenFor(m => m.EmployeeID)
+        @Html.HiddenFor(m => m.OldPassword)
+        @Html.HiddenFor(m => m.OldUserName)
+
+        <label>User Name</label>
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+        <label>First Name</label>
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        <label>Last Name</label>
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        <label>Email Address</label>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <label>Role</label>
+        @Html.TextBoxFor(m => m.Role, new { @class = "form-control" })
+        <label>Password</label>
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password", id = "pw" })
+        <label>Confirm Password</label>
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password", id = "pwConf" })
+
+        <button type="submit" id="userSave" class="btn btn-primary btn-sm">Save</button>
+    }
+
+    @section scripts{
+        <script src="~/Scripts/admin.js"></script>
+    }
+    @section map{}
+}
+
