@@ -69,7 +69,10 @@ namespace CarDealership.Data.Repositories
 
         public void DeleteVehicle(int vehicleID)
         {
-            context.Vehicles.Remove(context.Vehicles.Where(v => v.VehicleID == vehicleID).SingleOrDefault());
+            var veh = context.Vehicles.FirstOrDefault(v => v.VehicleID == vehicleID);
+            veh.IsAvailable = false;
+            veh.IsFeatured = false;
+            EditVehicle(veh);
             context.SaveChanges();
         }
 
@@ -107,24 +110,25 @@ namespace CarDealership.Data.Repositories
 
         public void EditVehicle(Vehicle vehicle)
         {
-            var change = context.Vehicles.FirstOrDefault(v => v.VehicleID == vehicle.VehicleID);
-            change.CarBody = vehicle.CarBody;
-            change.CarMake = vehicle.CarMake;
-            change.CarModel = vehicle.CarModel;
-            change.Color = vehicle.Color;
-            change.Description = vehicle.Description;
-            change.ImageLocation = vehicle.ImageLocation;
-            change.Interior = vehicle.Interior;
-            change.IsAutomatic = vehicle.IsAutomatic;
-            change.IsAvailable = vehicle.IsAvailable;
-            change.IsFeatured = vehicle.IsFeatured;
-            change.IsNew = vehicle.IsNew;
-            change.Mileage = vehicle.Mileage;
-            change.MSRP = vehicle.MSRP;
-            change.SalePrice = vehicle.SalePrice;
-            change.Specials = vehicle.Specials;
-            change.VinNumber = vehicle.VinNumber;
-            change.Year = vehicle.Year;
+            //var change = context.Vehicles.FirstOrDefault(v => v.VehicleID == vehicle.VehicleID);
+            //change.CarBody = vehicle.CarBody;
+            //change.CarMake = vehicle.CarMake;
+            //change.CarModel = vehicle.CarModel;
+            //change.Color = vehicle.Color;
+            //change.Description = vehicle.Description;
+            //change.ImageLocation = vehicle.ImageLocation;
+            //change.Interior = vehicle.Interior;
+            //change.IsAutomatic = vehicle.IsAutomatic;
+            //change.IsAvailable = vehicle.IsAvailable;
+            //change.IsFeatured = vehicle.IsFeatured;
+            //change.IsNew = vehicle.IsNew;
+            //change.Mileage = vehicle.Mileage;
+            //change.MSRP = vehicle.MSRP;
+            //change.SalePrice = vehicle.SalePrice;
+            //change.Specials = vehicle.Specials;
+            //change.VinNumber = vehicle.VinNumber;
+            //change.Year = vehicle.Year;
+            context.Vehicles.AddOrUpdate(vehicle);
             context.SaveChanges();
         }
 
@@ -163,6 +167,11 @@ namespace CarDealership.Data.Repositories
             return context.Makes.FirstOrDefault(m => m.MakeID == makeID);
         }
 
+        public Make GetMakeByName(string name)
+        {
+            return context.Makes.FirstOrDefault(m => m.MakeName == name);
+        }
+
         public List<Make> GetMakeItems()
         {
             return context.Makes.ToList();
@@ -176,6 +185,11 @@ namespace CarDealership.Data.Repositories
         public List<CarModel> GetModelItems()
         {
             return context.CarModels.ToList();
+        }
+
+        public List<CarModel> GetModelsByMake(string make)
+        {
+            return context.CarModels.Where(m => m.Make.ToLower() == make.ToLower()).ToList();
         }
 
         public List<Vehicle> GetNumberOfVehicles(int number, int set)

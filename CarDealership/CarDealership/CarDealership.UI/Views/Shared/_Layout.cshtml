@@ -12,8 +12,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Guild Cars", "Index", null, new { @class = "navbar-brand" })</li>
-                <li>@Html.ActionLink("Home", "Index","Home")</li>
+                <li>@Html.ActionLink("Guild Cars", "Index","Home")</li>
                 <li>@Html.ActionLink("New Inventory", "NewInventory", "Home")</li>
                 <li>@Html.ActionLink("Used Inventory", "UsedInventory", "Home")</li>
                 <li>@Html.ActionLink("Specials", "Specials", "Home")</li>
@@ -42,12 +41,12 @@
                             <li>
                                 @Html.ActionLink("Manage Users", "Users", "Admin")
                             </li>
-                            <li>
+                            @*<li>
                                 @Html.ActionLink("Manage Specials", "ManageSpecials", "Admin")
                             </li>
                             <li>
                                 @Html.ActionLink("Reports", "Reports", "Admin")
-                            </li>
+                            </li>*@
                             <li>
                                 @Html.ActionLink("Change Password", "ChangePassword", "Sales")
                             </li>

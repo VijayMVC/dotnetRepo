@@ -44,5 +44,13 @@ namespace CarDealership.UI.Controllers
             var repo = VehicleRepoFactory.Create();
             return Ok(repo.GetVehicleByVin(vin));
         }
+
+        [Route("Vehicle/Models/Make/{make}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult vehicleModels(string make)
+        {
+            var repo = VehicleRepoFactory.Create();
+            return Ok(repo.GetModelsByMake(make));
+        }
     }
 }

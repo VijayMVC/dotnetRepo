@@ -17,6 +17,7 @@ namespace CarDealership.UI.Models
         public List<SelectListItem> BodyTypeItems { get; set; }
         public List<SelectListItem> CarTransmissionItems { get; set; }
         public List<SelectListItem> CarInteriorItems { get; set; }
+        public HttpPostedFileBase File { get; set; }
 
         public VehicleVM()
         {
@@ -36,7 +37,7 @@ namespace CarDealership.UI.Models
             {
                 MakeItems.Add(new SelectListItem()
                 {
-                    Value = item.MakeID.ToString(),
+                    Value = item.MakeName,
                     Text = item.MakeName
                 });
             }

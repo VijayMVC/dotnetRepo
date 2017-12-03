@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,11 +47,100 @@ namespace CarDealership.UI.Controllers
         [HttpPost]
         public ActionResult AddVehicle(VehicleVM model)
         {
-            model.AVehicle.CarModel = repo.GetModelByID(model.AVehicle.CarModel.CarModelID);
-            model.AVehicle.CarMake = repo.GetMakeByID(model.AVehicle.CarMake.MakeID);
-            model.AVehicle.CarBody = repo.GetBodyByID(model.AVehicle.CarBody.BodyTypeID);
-            repo.AddVehicle(model.AVehicle);
-            return RedirectToAction("AdminIndex");
+            Vehicle vehicle = new Vehicle();
+            vehicle = context.Vehicles.FirstOrDefault(v => v.VinNumber == model.AVehicle.VinNumber);
+            var input = repo.GetMakeItems();
+            var mod = repo.GetModelItems();
+            var bodyTypes = repo.GetBodyTypes();
+            model.SetMakeItems(input);
+            model.SetCarModelItems(mod);
+            model.SetCarTypeItems();
+            model.SetBodyTypeItems(bodyTypes);
+            model.SetCarTransmissionItems();
+            model.SetCarInteriorItems();
+
+            if (ModelState.IsValid)
+            {
+                bool errors = false;
+                if (vehicle != null)
+                {
+                    ModelState.AddModelError("AVehicle.VinNumber", "VIN Number already exists, please re-enter");
+                    errors = true;
+                }
+                if (model.AVehicle.Year.ToString().Length != 4 || model.AVehicle.Year < 1990 || model.AVehicle.Year > DateTime.Today.Year+1)
+                {
+                    ModelState.AddModelError("AVehicle.Year", "Year entered is not valid");
+                    errors = true;
+                }
+                if (errors == true)
+                {
+                    return View(model);
+                }
+
+                model.AVehicle.CarModel = repo.GetModelByID(model.AVehicle.CarModel.CarModelID);
+                model.AVehicle.CarMake = repo.GetMakeByName(model.AVehicle.CarMake.MakeName);
+                model.AVehicle.CarBody = repo.GetBodyByID(model.AVehicle.CarBody.BodyTypeID);
+                if (model.File != null)
+                {
+                    string pic = Path.GetFileName(model.File.FileName);
+                    string path = Path.Combine(
+                                           Server.MapPath("~/images"), pic);
+                    // file is uploaded
+                    model.File.SaveAs(path);
+
+                    vehicle = new Vehicle
+                    {
+                        VehicleID = model.AVehicle.VehicleID,
+                        CarBody = model.AVehicle.CarBody,
+                        CarMake = model.AVehicle.CarMake,
+                        CarModel = model.AVehicle.CarModel,
+                        Color = model.AVehicle.Color,
+                        Description = model.AVehicle.Description,
+                        Interior = model.AVehicle.Interior,
+                        IsAutomatic = model.AVehicle.IsAutomatic,
+                        IsAvailable = model.AVehicle.IsAvailable,
+                        IsFeatured = model.AVehicle.IsFeatured,
+                        IsNew = model.AVehicle.IsNew,
+                        Mileage = model.AVehicle.Mileage,
+                        MSRP = model.AVehicle.MSRP,
+                        SalePrice = model.AVehicle.SalePrice,
+                        Specials = model.AVehicle.Specials,
+                        VinNumber = model.AVehicle.VinNumber,
+                        Year = model.AVehicle.Year,
+                        ImageLocation = "images/" + Path.GetFileName(model.File.FileName),
+                    };
+                }
+                else
+                {
+                    vehicle = new Vehicle
+                    {
+                        VehicleID = model.AVehicle.VehicleID,
+                        CarBody = model.AVehicle.CarBody,
+                        CarMake = model.AVehicle.CarMake,
+                        CarModel = model.AVehicle.CarModel,
+                        Color = model.AVehicle.Color,
+                        Description = model.AVehicle.Description,
+                        Interior = model.AVehicle.Interior,
+                        IsAutomatic = model.AVehicle.IsAutomatic,
+                        IsAvailable = model.AVehicle.IsAvailable,
+                        IsFeatured = model.AVehicle.IsFeatured,
+                        IsNew = model.AVehicle.IsNew,
+                        Mileage = model.AVehicle.Mileage,
+                        MSRP = model.AVehicle.MSRP,
+                        SalePrice = model.AVehicle.SalePrice,
+                        Specials = model.AVehicle.Specials,
+                        VinNumber = model.AVehicle.VinNumber,
+                        Year = model.AVehicle.Year
+                    };
+                }
+                repo.AddVehicle(vehicle);
+                return RedirectToAction("AdminIndex");
+            }
+            else
+            {
+                ModelState.AddModelError("AVehicle", "All fields must be complete");
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -73,11 +163,100 @@ namespace CarDealership.UI.Controllers
         [HttpPost]
         public ActionResult EditVehicle(VehicleVM model)
         {
-            model.AVehicle.CarModel = repo.GetModelByID(model.AVehicle.CarModel.CarModelID);
-            model.AVehicle.CarMake = repo.GetMakeByID(model.AVehicle.CarMake.MakeID);
-            model.AVehicle.CarBody = repo.GetBodyByID(model.AVehicle.CarBody.BodyTypeID);
-            repo.EditVehicle(model.AVehicle);
-            return RedirectToAction("AdminIndex");
+            Vehicle vehicle = new Vehicle();
+            vehicle = context.Vehicles.FirstOrDefault(v => v.VinNumber == model.AVehicle.VinNumber);
+            var input = repo.GetMakeItems();
+            var mod = repo.GetModelItems();
+            var bodyTypes = repo.GetBodyTypes();
+            model.SetMakeItems(input);
+            model.SetCarModelItems(mod);
+            model.SetCarTypeItems();
+            model.SetBodyTypeItems(bodyTypes);
+            model.SetCarTransmissionItems();
+            model.SetCarInteriorItems();
+
+            if (ModelState.IsValid)
+            {
+                bool errors = false;
+                if (vehicle != null)
+                {
+                    ModelState.AddModelError("AVehicle.VinNumber", "VIN Number already exists, please re-enter");
+                    errors = true;
+                }
+                if (model.AVehicle.Year.ToString().Length != 4 || model.AVehicle.Year < 1990 || model.AVehicle.Year > DateTime.Today.Year + 1)
+                {
+                    ModelState.AddModelError("AVehicle.Year", "Year entered is not valid");
+                    errors = true;
+                }
+                if (errors == true)
+                {
+                    return View(model);
+                }
+
+                model.AVehicle.CarModel = repo.GetModelByID(model.AVehicle.CarModel.CarModelID);
+                model.AVehicle.CarMake = repo.GetMakeByName(model.AVehicle.CarMake.MakeName);
+                model.AVehicle.CarBody = repo.GetBodyByID(model.AVehicle.CarBody.BodyTypeID);
+                if (model.File != null)
+                {
+                    string pic = Path.GetFileName(model.File.FileName);
+                    string path = Path.Combine(
+                                           Server.MapPath("~/images"), pic);
+                    // file is uploaded
+                    model.File.SaveAs(path);
+
+                    vehicle = new Vehicle
+                    {
+                        VehicleID = model.AVehicle.VehicleID,
+                        CarBody = model.AVehicle.CarBody,
+                        CarMake = model.AVehicle.CarMake,
+                        CarModel = model.AVehicle.CarModel,
+                        Color = model.AVehicle.Color,
+                        Description = model.AVehicle.Description,
+                        Interior = model.AVehicle.Interior,
+                        IsAutomatic = model.AVehicle.IsAutomatic,
+                        IsAvailable = model.AVehicle.IsAvailable,
+                        IsFeatured = model.AVehicle.IsFeatured,
+                        IsNew = model.AVehicle.IsNew,
+                        Mileage = model.AVehicle.Mileage,
+                        MSRP = model.AVehicle.MSRP,
+                        SalePrice = model.AVehicle.SalePrice,
+                        Specials = model.AVehicle.Specials,
+                        VinNumber = model.AVehicle.VinNumber,
+                        Year = model.AVehicle.Year,
+                        ImageLocation = "images/" + Path.GetFileName(model.File.FileName),
+                    };
+                }
+                else
+                {
+                    vehicle = new Vehicle
+                    {
+                        VehicleID = model.AVehicle.VehicleID,
+                        CarBody = model.AVehicle.CarBody,
+                        CarMake = model.AVehicle.CarMake,
+                        CarModel = model.AVehicle.CarModel,
+                        Color = model.AVehicle.Color,
+                        Description = model.AVehicle.Description,
+                        Interior = model.AVehicle.Interior,
+                        IsAutomatic = model.AVehicle.IsAutomatic,
+                        IsAvailable = model.AVehicle.IsAvailable,
+                        IsFeatured = model.AVehicle.IsFeatured,
+                        IsNew = model.AVehicle.IsNew,
+                        Mileage = model.AVehicle.Mileage,
+                        MSRP = model.AVehicle.MSRP,
+                        SalePrice = model.AVehicle.SalePrice,
+                        Specials = model.AVehicle.Specials,
+                        VinNumber = model.AVehicle.VinNumber,
+                        Year = model.AVehicle.Year
+                    };
+                }
+                repo.EditVehicle(vehicle);
+                return RedirectToAction("AdminIndex");
+            }
+            else
+            {
+                ModelState.AddModelError("AVehicle", "All fields must be complete");
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -187,6 +366,13 @@ namespace CarDealership.UI.Controllers
             repo.AddModel(m.CModel);
 
             return RedirectToAction("Models", "admin");
+        }
+
+        [HttpGet]
+        public ActionResult RemoveVehicle(int id)
+        {
+            repo.DeleteVehicle(id);
+            return RedirectToAction("index", "Home");
         }
     }
 }

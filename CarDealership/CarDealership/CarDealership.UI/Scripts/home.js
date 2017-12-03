@@ -16,8 +16,8 @@ function getFeaturedVehicles() {
 
             for (i; i < vehicles.length; i++) {
                 if (vehicles[i].IsFeatured) {
-                    output += '<div class="col-md-3" style="height:200px"><div class="col-md-12" style="height:150px"><img src="' + vehicles[i].ImageLocation + '" width="100%" height="100%"></div>'
-                    output += '<div style="padding-top:6px; text-align:center"><h4>' + vehicles[i].Year + ' ' + vehicles[i].CarMake.MakeName + ' ' + vehicles[i].CarModel.ModelName + '</br>$' + vehicles[i].SalePrice +'</h4></div></div>'
+                    output += '<a href="/Home/VehicleDetails/' + vehicles[i].VehicleID + '"><div class="col-md-3" style="height:200px"><div class="col-md-12" style="height:150px"><img src="' + vehicles[i].ImageLocation + '" width="100%" height="100%"></div>'
+                    output += '<div style="padding-top:6px; text-align:center"><h4>' + vehicles[i].Year + ' ' + vehicles[i].CarMake.MakeName + ' ' + vehicles[i].CarModel.ModelName + '</br>$' + vehicles[i].SalePrice +'</h4></div></div></a>'
                 }
             }
             $('#Featured').html(output);

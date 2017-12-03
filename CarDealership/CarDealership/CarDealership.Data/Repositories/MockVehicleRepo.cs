@@ -489,6 +489,11 @@ namespace CarDealership.Data.Repositories
             return toReturn;
         }
 
+        public Make GetMakeByName(string makeName)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Make> GetMakeItems()
         {
             return _makes;
@@ -506,6 +511,11 @@ namespace CarDealership.Data.Repositories
         public List<CarModel> GetModelItems()
         {
             return _carModels;
+        }
+
+        public List<CarModel> GetModelsByMake(string make)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Vehicle> GetNewVehicles()

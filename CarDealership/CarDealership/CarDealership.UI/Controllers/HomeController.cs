@@ -38,6 +38,15 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpGet]
+        public ActionResult VehicleDetails(int id)
+        {
+            var repo = VehicleRepoFactory.Create();
+            Vehicle model = new Vehicle();
+            model = repo.GetVehicleByID(id);
+            return View(model);
+        }
+
+        [HttpGet]
         public ActionResult ContactUs()
         {
             ViewBag.Title = "Contact Us";

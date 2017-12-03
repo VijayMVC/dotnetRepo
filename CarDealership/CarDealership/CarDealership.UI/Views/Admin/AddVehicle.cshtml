@@ -5,27 +5,30 @@
 
 <h2>Add Vehicle</h2>
 
-@using (@Html.BeginForm())
+@Html.ValidationSummary()
+@using (Html.BeginForm("AddVehicle", "Admin", FormMethod.Post, new
+{ enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(m => m.AVehicle.IsAvailable)
+    @Html.HiddenFor(m => m.AVehicle.ImageLocation)
     <div class="col-md-6">
         <label>Make</label>
-        @Html.DropDownListFor(m => m.AVehicle.CarMake.MakeID, Model.MakeItems, "Select Make", new { @class = "form-control", id="makeDrop"})
+        @Html.DropDownListFor(m => m.AVehicle.CarMake.MakeName, Model.MakeItems, "Select Make", new { @class = "form-control", id="makeDrop"})
 
         <label>Type</label>
         @Html.DropDownListFor(m => m.AVehicle.IsNew, Model.CarTypeItems, new { @class = "form-control"})
         
         <label>Year</label>
-        @Html.TextBoxFor(m => m.AVehicle.Year, DateTime.Now.Year.ToString(), new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.AVehicle.Year, DateTime.Now.Year.ToString(), new { @class = "form-control", type="number", @min = "1990" })
 
         <label>Color</label>
-        @Html.TextBoxFor(m => m.AVehicle.Color, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.AVehicle.Color, new { @class = "form-control", required = "required"})
 
         <label>Mileage</label>
-        @Html.TextBoxFor(m => m.AVehicle.Mileage, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.AVehicle.Mileage, new { @class = "form-control", type="number", @min = "0" })
 
         <label>MSRP</label>
-        @Html.TextBoxFor(m => m.AVehicle.MSRP, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.AVehicle.MSRP, new { @class = "form-control", type = "number", @min = "0" })
 
     </div>
 
@@ -45,10 +48,11 @@
             @Html.DropDownListFor(m => m.AVehicle.Interior, Model.CarInteriorItems,"Select Interior", new { @class = "form-control" })
 
         <label>VIN #</label>
-            @Html.TextBoxFor(m => m.AVehicle.VinNumber, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.AVehicle.VinNumber, new { @class = "form-control", required = "required" })
+            
 
         <label>Sale Price</label>
-            @Html.TextBoxFor(m => m.AVehicle.SalePrice, new { @class = "form-control" })
+            $@Html.TextBoxFor(m => m.AVehicle.SalePrice, new { @class = "form-control", type = "number", @min="0" })
     </div>
 
     <div class="col-md-12">
@@ -59,7 +63,9 @@
         </label><br />
         
         <label>Picture</label>
-            @Html.TextBoxFor(m => m.AVehicle.ImageLocation)&nbsp;<button type="button" id="upload" class="btn btn-primary btn-sm">Upload</button><br />
+        <label for="file">Upload Image:</label>
+        @Html.TextBoxFor(m => m.File, new { type = "file" })
+        &nbsp;<button type="button" id="upload" class="btn btn-primary btn-sm">Upload</button><br />
 
         <button type="submit" id="save" class="btn btn-primary btn-sm">Save</button>
     </div>

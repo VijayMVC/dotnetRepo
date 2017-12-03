@@ -1,0 +1,55 @@
+﻿@model CarDealership.Models.Vehicle
+@{
+    ViewBag.Title = "VehicleDetails";
+}
+
+<h2>Vehicle Details</h2>
+
+<div class="col-md-12">
+    <div class="col-md-4">
+        <h3>@Html.DisplayFor(m => m.Year)&nbsp;@Html.DisplayFor(m => m.CarMake.MakeName)&nbsp;@Html.DisplayFor(m => m.CarModel.ModelName)</h3><br />
+        <img src="http://localhost:55632/@Model.ImageLocation" style="height:90%; width:100%" />
+    </div>
+    <div class="col-md-8" style="padding-top:80px">
+        <div class="col-md-4">
+            <h4>Style: @Html.DisplayFor(m => m.CarBody.BodyTypeName)</h4>
+            @if (Model.IsAutomatic == true)
+            {
+                <h4>Transmission: Automatic</h4>
+            }
+            else
+            {
+                <h4>Transmission: Manual</h4>
+            }
+            <h4>Color: @Html.DisplayFor(m => m.Color)</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>Interior: @Html.DisplayFor(m => m.Interior)</h4>
+            <h4>Mileage: @Html.DisplayFor(m => m.Mileage)</h4>
+            <h4>VIN: @Html.DisplayFor(m => m.VinNumber)</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>Sale Price: $@Html.DisplayFor(m => m.SalePrice)</h4>
+            <h4>MSRP: $@Html.DisplayFor(m => m.MSRP)</h4>
+        </div>
+        <div class="col-md-12" style="background-color:aliceblue">
+            <br /><h4>Description: @Html.DisplayFor(m => m.Description)</h4><br />
+        </div>
+    </div>
+    <div style="text-align:right">
+        @if (Model.IsAvailable == true)
+        {
+            <a href="http://localhost:55632/Home/ContactUs?vin=@Model.VinNumber"><button type="button" class="btn btn-primary" onclick="contactUs(@Model.VinNumber)">Contact Us</button></a>
+        }
+        else
+        {
+            <a href="http://localhost:55632/Home/ContactUs?vin=@Model.VinNumber"><button type="button" class="btn btn-default" onclick="contactUs(@Model.VinNumber)" disabled>Unavailable-Sold</button></a>
+        }
+    </div>
+</div>
+
+@section scripts{  
+<script src="~/Scripts/search.js"></script>
+    }
+@section map{}
+
