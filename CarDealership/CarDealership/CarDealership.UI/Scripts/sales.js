@@ -37,10 +37,10 @@ function quickSearch() {
 
             for (i; i < vehicles.length; i++) {
 
-                output += '<div class="col-md-12" style="height:200px; border:solid; border-color:grey; margin-bottom:8px"><div class="col-md-3">' + vehicles[i].Year + ' ' + vehicles[i].CarMake.MakeName + ' ' + vehicles[i].CarModel.ModelName + '<img src="' + vehicles[i].ImageLocation + '" width="100%" height="100%"></div>'
-                output += '<div class="col-md-9"><div class="col-md-4"> <p>Body Style: ' + vehicles[i].CarBody.BodyTypeName + '</p><p>Transmission: ' + transmission + '</p><p>Color: ' + vehicles[i].Color + '</p></div>'
-                output += '<div class="col-md-4"> <p>Interior: ' + vehicles[i].Interior + '</p><p>Mileage: ' + vehicles[i].Mileage + '</p><p>Vin: ' + vehicles[i].VinNumber + '</p></div>'
-                output += '<div class="col-md-4"> <p>Sale Price: $' + vehicles[i].SalePrice + '</p><p>MSRP: $' + vehicles[i].MSRP + '</p><br/><button type="button" class="btn btn-default" onclick="vehicleDetails(' +"'"+ vehicles[i].VinNumber +"'"+ ')">Purchase</button></div></div></div>'          
+                output += '<div class="col-md-12" style="height:200px; border:solid; border-color:grey; margin-bottom:8px"><div style="height:inherit" class="col-md-3"><h4>' + vehicles[i].Year + ' ' + vehicles[i].CarMake.MakeName + ' ' + vehicles[i].CarModel.ModelName + '</h4><img src="http://localhost:55632/' + vehicles[i].ImageLocation + '" height="75%"></div>'
+                output += '<div class="col-md-9"><div class="col-md-4"> <h5>Body Style: ' + vehicles[i].CarBody.BodyTypeName + '</h5><h5>Transmission: ' + transmission + '</h5><h5>Color: ' + vehicles[i].Color + '</h5></div>'
+                output += '<div class="col-md-4"> <h5>Interior: ' + vehicles[i].Interior + '</h5><h5>Mileage: ' + vehicles[i].Mileage + '</h5><h5>Vin: ' + vehicles[i].VinNumber + '</h5></div>'
+                output += '<div class="col-md-4"> <h5>Sale Price: $' + vehicles[i].SalePrice + '</h5><h5>MSRP: $' + vehicles[i].MSRP + '</h5><br/><button type="button" class="btn btn-default" onclick="vehicleDetails(' +"'"+ vehicles[i].VinNumber +"'"+ ')">Purchase</button></div></div></div>'          
             }
             $('#Results').html(output);
         },
@@ -70,13 +70,13 @@ function vehicleDetails(vin) {
                 transmission = "Manual"
             }
 
-            output += '<div class="col-md-12" style="height:200px; border:solid; border-color:grey; margin-bottom:8px"><div class="col-md-3">' + vehicle.Year + ' ' + vehicle.CarMake.MakeName + ' ' + vehicle.CarModel.ModelName + '<img src="' + vehicle.ImageLocation + '" width="100%" height="100%"></div>'
-            output += '<div class="col-md-9"><div class="col-md-4"> <p>Body Style: ' + vehicle.CarBody.BodyTypeName + '</p><p>Transmission: ' + transmission + '</p><p>Color: ' + vehicle.Color + '</p></div>'
-            output += '<div class="col-md-4"> <p>Interior: ' + vehicle.Interior + '</p><p>Mileage: ' + vehicle.Mileage + '</p><p>Vin: ' + vehicle.VinNumber + '</p></div>'
-            output += '<div class="col-md-4"> <p>Sale Price: $' + vehicle.SalePrice + '</p><p>MSRP: $' + vehicle.MSRP + '</p><br/></div></div >'
-            output += '<div class="col-md-offset-3 col-md-7"><p>Description: ' + vehicle.Description + '</p></div><div class="col-md-2"></div></div></div>'
+            output += '<div class="col-md-12" style="height:200px; border:solid; border-color:grey; margin-bottom:8px"><div style="height:inherit" class="col-md-3"><h4>' + vehicle.Year + ' ' + vehicle.CarMake.MakeName + ' ' + vehicle.CarModel.ModelName + '</h4><img src="http://localhost:55632/' + vehicle.ImageLocation + '" height="75%"></div>'
+            output += '<div class="col-md-9"><div class="col-md-4"> <h5>Body Style: ' + vehicle.CarBody.BodyTypeName + '</h5><h5>Transmission: ' + transmission + '</h5><h5>Color: ' + vehicle.Color + '</h5></div>'
+            output += '<div class="col-md-4"> <h5>Interior: ' + vehicle.Interior + '</h5><h5>Mileage: ' + vehicle.Mileage + '</h5><h5>Vin: ' + vehicle.VinNumber + '</h5></div>'
+            output += '<div class="col-md-4"> <h5>Sale Price: $' + vehicle.SalePrice + '</h5><h5>MSRP: $' + vehicle.MSRP + '</h5><br/></div>'
+            output += '<div class="col-md-12"><h5>Description: ' + vehicle.Description + '</h5></div></div></div></div>'
 
-            $('#Details').html(output);
+            $('#Details').html(output)
         },
         error: function (jqxhr, techstatus, errorthrow) {
         }

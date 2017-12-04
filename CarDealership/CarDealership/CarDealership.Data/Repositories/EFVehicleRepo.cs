@@ -41,7 +41,7 @@ namespace CarDealership.Data.Repositories
 
         public void AddPurchase(Purchase purch)
         {
-            var veh = context.Vehicles.Where(v => v.VinNumber == purch.VinNumber).SingleOrDefault();
+            var veh = context.Vehicles.FirstOrDefault(v => v.VinNumber == purch.VinNumber);
             veh.IsAvailable = false;
             veh.IsFeatured = false;
             EditVehicle(veh);
